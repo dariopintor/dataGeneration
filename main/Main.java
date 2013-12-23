@@ -21,7 +21,6 @@ public class Main {
 	static Diversos objDiversos; 
 	static Mersenne objMersenne;
 	static Central objCentral;
-	static Populacao objPopulacao;
 	static Individuo objInviduo;
 	static Ferramenta objFerramenta;
 	
@@ -32,7 +31,7 @@ public class Main {
 		objCentral = new Central();
 		//objInviduo = new Individuo();
 		objFerramenta = new Ferramenta();
-		objPopulacao = new Populacao();
+		
 
 		long inic = 0, fim = 0;
 		inic = objDiversos.getSecs();
@@ -44,15 +43,15 @@ public class Main {
 		
 		objCentral.setQuantidadeElemento(objFerramenta.obtemElementosRequeridos());
 
-		objPopulacao.geraPopulacaoInicial();
-		objPopulacao.avaliaPopulacao();
+		Populacao objPopulacao = new Populacao();
+		objPopulacao.getAptidao();
 		objCentral.backup();
 		objCentral.status();
 		objCentral.setFimPrimeiraExecucao();
 
 		for (objCentral.geracaoAtual = 1; !objCentral.paraTeste(); objCentral.geracaoAtual++) {
 			objPopulacao.evoluiPopulacao();
-			objPopulacao.avaliaPopulacao();
+			objPopulacao.getAptidao();
 			objCentral.backup();
 			objCentral.manutencaoMelhorGeracao();
 

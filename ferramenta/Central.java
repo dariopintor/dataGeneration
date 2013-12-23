@@ -33,7 +33,6 @@ public class Central {
 
 	/** Variavel de controle para pausar a execucao a cada geracao. */
 	public static int pausaGeracao;
-	/** Variavel de controle para gerar log da execucao. */
 	public static int geraLog;
 	/** Variavel de controle para indicar quantos argumentos o programa em teste
 	 * necessita*/
@@ -983,7 +982,7 @@ public class Central {
 
 	 
 	/** No descriptions */
-	public void atualizaLinhaCoberturas(String novaCobertura) {
+	public static void atualizaLinhaCoberturas(String novaCobertura) {
 	
 		setLinhaCoberturaAnterior(linhaCoberturaAtual);
 		setLinhaCoberturaAnterior(linhaCoberturaAtual);
@@ -1041,7 +1040,7 @@ public class Central {
 
 	/** Metodo usado para recalcular a quantidade de individuos gerados por
 	 * elitismo, selecao e ineditismo. */
-	public void recalculaPorcEvolucao() {
+	public static void recalculaPorcEvolucao() {
 		double total = (quantidadeElitismo + quantidadeIneditismo + quantidadeFitness);
 		quantidadeElitismo = (int) (quantidadeElitismo * tamanhoPopulacao / total);
 		quantidadeIneditismo = (int) (quantidadeIneditismo * tamanhoPopulacao / total);

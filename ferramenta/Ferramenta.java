@@ -141,7 +141,7 @@ public class Ferramenta {
 	 * @throws IOException 
 	 * @throws InterruptedException 
 	 */
-	public void evaluateIndividual(int nro) throws IOException, InterruptedException {
+	public static void evaluateIndividual(int nro) throws IOException, InterruptedException {
 		int tamFormato = objCentral.formatoIndividuo.length();
 
 		String argMascarado = "";
@@ -155,7 +155,7 @@ public class Ferramenta {
 			
 			// para cada argumento/tipo do individuo
 			inicBlock = objCentral.inicioTipo(argCont);
-			argMascarado = objIndividuo.representacao + inicBlock;
+			argMascarado = objIndividuo.genes + inicBlock;
 
 			switch (objCentral.formatoIndividuo.charAt(argCont)) {
 			
@@ -185,7 +185,7 @@ public class Ferramenta {
 	/** Metodo usado para obter linha de cobertura que contem o desempenho do
 	 * individuo perante aos elementos requeridos.
 	 * @throws IOException */
-	public void obtemCoberturaValiMPI(String linhaCobertura, int tamLinhaCobertura) throws IOException{
+	public static void obtemCoberturaValiMPI(String linhaCobertura, int tamLinhaCobertura) throws IOException{
 		
 		String[] vetorPegaElementos;
 		vetorPegaElementos = pegaElementos("arquivoElementos.elem");

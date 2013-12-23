@@ -9,6 +9,8 @@ import java.util.Formattable;
 
 
 
+import java.util.Random;
+
 import main.Diversos;
 import main.Mersenne;
 import ferramenta.*;
@@ -28,27 +30,24 @@ public class Individuo{
 	 ***************************************************************************/
 	/** Atributo que contem a representacao dos individuos. */
 	
-	public String representacao;
-	static Mersenne merseneObjeto;
+	public String genes="";
 	
 	public Individuo() {
-		// cout << "\nConstruindo individuo...";
-		merseneObjeto = new Mersenne();
-		representacao = null;
+		// cout << "\nConstruindo individuo...";		
+		genes ="";
 
 	}
 
 	/** Metodo para criar um novo individuo aleatorio. */
-	public void novo() {
-		String bloco = null;
-		int nroBloco = Central.formatoIndividuo.length();
+	public  Individuo(int numGenes) {
+		String bloco = "";
 		int blocoTam = (int) Central.tamanhoIndividuo;
 
-		for (int i = 0; i < nroBloco; i++) {
+		for (int i = 0; i < numGenes; i++) {
 
 			switch (Central.formatoIndividuo.charAt(i)) {
 			case 'I': {
-				forma_block_int_random(bloco, blocoTam);
+				bloco = forma_block_int_random(bloco, blocoTam);
 				break;
 			}
 			
@@ -58,7 +57,7 @@ public class Individuo{
 						Central.formatoIndividuo.charAt(i));
 			}
 			}// fim switch
-			representacao = bloco;
+			genes += bloco;
 		} // fim for
 
 	}
@@ -70,31 +69,24 @@ public class Individuo{
 	 * configuracao fornecida ao framework.
 	 */
 
-	public void novo(String linha) {
+	public void individuo (String linha) {
 		int numArgumentos = Central.formatoIndividuo.length();
-		int virg = -1;
-		String blocoLinha = null, bloco = null;
-		
+		String bloco = null;
+		String [] dado =null;
 		for (int cont = 0; cont < numArgumentos; cont++) {
-			if ((virg = Diversos.indexOf(linha, ',')) != -1){		
-				blocoLinha = linha;
-			}
-				else{
-					blocoLinha = linha;
-				}			
-			linha = linha.trim() + virg + 1;
+			dado = linha.split(",");
 			
 			switch (Central.formatoIndividuo.charAt(cont)) {
 			case 'I': {
-				forma_block_int(bloco, Central.tamanhoTipo(cont) + 1,
-						blocoLinha);
+				bloco =	forma_block_int(Central.tamanhoTipo(cont) + 1,
+						dado[cont]);
 				// printf("\nRecuperado Arg %d - Integer '%s'", cont, bloco);
 				break;
 			}
 
 			
 			}// fim switch
-			representacao = bloco;
+			genes += bloco;
 		}
 
 	}
@@ -130,14 +122,14 @@ public class Individuo{
 		
 		i = Diversos.indexOf(gene.trim(), ':') + 1;
 		geneAux = gene + i;
-		setRepresentacao(geneAux.trim());		
+		setGenes(geneAux.trim());		
 	}
 
 	// _________________________________________________________________
 
-	/** Metodo que atribui valor para a representacao de um individuo. */
-	public void setRepresentacao(String valor) {	
-		representacao = valor;
+	/** Metodo que atribui valor para a gene de um individuo. */
+	public void setGenes(String valor) {	
+		genes = valor;
 	}
 
 	// _________________________________________________________________
@@ -154,62 +146,62 @@ public class Individuo{
 	 * Metodo usado para formatar um bloco a partir de um valor passado por
 	 * argumento.
 	 */
-	public void forma_block_int(String res, int limite, String lido) {
+	public String forma_block_int(int limite, String entrada) {
+		String res = "";
 		int tam = 0;
-		String aux=null, numero=null;
-		if ((lido.charAt(0) == '-') || (lido.charAt(0) == '+')) {
-			aux = aux.replace(aux.charAt(0), lido.charAt(0));
-			//lido++;
+		String aux="+", numero=null;
+		if ((entrada.charAt(0) == '-') || (entrada.charAt(0) == '+')) {
+			aux = aux.replace(aux.charAt(0), entrada.charAt(0));
 		}
+	
+		numero = entrada.trim();
+		aux += numero;
 		
-		numero = lido.trim();
-		tam = numero.length();
-
-		if (limite > (int) aux.length()){
 			res = aux;
-		}
-			else{
-				Diversos.erro(
-					"Estouro de tamanho gerando inteiro randomicamente", 1);
-			}
-
+		
+		return res;
 	}
 
 	// _________________________________________________________________
 
 	/** Metodo usado para formatar um bloco aleatoriamente. */
-	public static  String  forma_block_int_random(String res, int limite){
-		int tam = 0;
-		String aux = null,  numero = null;
-		 aux = "+00000";
-		 int num = 0;
-		 if (Central.tamanhoMinimoInteiro < 0){
-			 int sinal = merseneObjeto.genrand() % 2; 
-			
-			 //[0+,1-]
-			 	if(sinal == 1){
-			 		num = ( merseneObjeto.genrand() % ( ( -1 * (Central.tamanhoMinimoInteiro ) +1 ) ));
-			 		aux = aux.replace(aux.charAt(0), '-');
-			 	}
-			 		else //+
-			 			num = (merseneObjeto.genrand());
-		 }
-		 	else{
-		 		num =  merseneObjeto.genrand();
-		 	}
-		 numero = String.format("%d", num);
-		 System.out.println(numero);
-		//strcpy(aux + (6-tam), numero);
-		 aux += numero.trim();
+	public String  forma_block_int_random(String res, int limite){	
+		int num = 0;
+		String aux = "+";
+		num = Diversos.rand(Central.tamanhoMinimoInteiro, Central.tamanhoMaximoInteiro);
+		aux  += String.valueOf(num);
+		res = aux;
 		
-		 if (limite >= (int) aux.length())
-			 res = aux;
-		 	else 
-		 		Diversos.erro("Estouro de tamanho gerando inteiro randomicamente",1);
-
-return res;
-}// fim forma_block_int_random
+		return res;
+		}// fim forma_block_int_random
 
 	// _________________________________________________________________
+	
+	/** Metodo usado para avaliar a populacao do AG. Cada individuo eh executado e
+	 * o fitness o calculado com base no numero de elementos requeridos
+	 * satisfeitos pela execucao do mesmo.
+	 * @throws IOException 
+	 * @throws InterruptedException */
+	public void getAptidao() throws IOException, InterruptedException {
+		
+		
+		 
+		geraCoberturaIndividuo();
+		Diversos.toFile("log_alocacoes.tst", "0, 0, 0, PProva");
+		Diversos.toFile("log_alocacoes.tst", "1, 0, 0, PProva");
+		geraBonusIneditismo();
+		geraIneditismoPopulacao();
 
+//		Central.geraLinhaPerda();
+//		System.out.println("\n Linha de perda:\n" << Central.linhaPerda());
+
+		geraFitness();
+		if (Central.geraLog != 0){		
+		Diversos.toFile("log_erro.log", "---saindo avaliaPopulacao");
+		}
+	}// fim avaliaPopulacao()
+	
+	public String getGenes() {
+        return genes;
+    }
 	}

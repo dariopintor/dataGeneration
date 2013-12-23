@@ -23,9 +23,16 @@ public class Teste {
 		
 
 		Central.interpretaArquivoConfiguracao();
-		System.out.println("\n"+individuoObjt.forma_block_int_random(null, 16));
+			Individuo[] individuos;
+	        individuos = new Individuo[10];
+	        for (int i = 0; i < individuos.length; i++) {
+	            individuos[i] = new Individuo(Central.formatoIndividuo.length());
+	        }
+	        
+	        for (int i = 0; i < individuos.length; i++) {
+	        	System.out.println(individuos[i].getGenes());
+	        }
+	    }
+		//System.out.println("\n" + Individuo.getGenes());
 		
-	
-
-}
 }
