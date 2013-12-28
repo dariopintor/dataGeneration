@@ -25,7 +25,6 @@ public class Central {
 	/***************************************************************************
 	 * central.cpp - description ------------------- begin : Dom Jul 6 2003
 	 * copyright : (C) 2003 by Luciano Petinati Ferreira email :
-	 * petinat@inf.ufpr.br * This program is free software; you can redistribute
 	 * it and/or modify * it under the terms of the GNU General Public License
 	 * as published by * the Free Software Foundation; either version 2 of the
 	 * License, or * (at your option) any later version. * *
@@ -211,7 +210,7 @@ public class Central {
 	/** Atributo com o tempo em segundos da execucao do sistema. */
 	public static int inicioExecucao;
 	/** Atributo com o tempo em segundo do fim de execucao do sistema */
-	public long fimExecucao;
+	public static long fimExecucao;
 	/** Atributo com o tempo em segundo do fim da primeira execucao do sistema */
 	public static long fimPrimeiraExecucao;
 	/** Atributo para manter a cobertura inicial do processo. */
@@ -303,8 +302,9 @@ public class Central {
 				else if ((parametro.equals("#CoberturaCriterio"))|| (parametro.equals("#CriterioCoverage")))
 					setCoberturaCriterio(Integer.parseInt(valor));
 				
-				else if ((parametro.equals("#Criterio"))|| (parametro.equals("#Criterium")))
+				else if ((parametro.equals("#Criterio"))|| (parametro.equals("#Criterium"))) {
 					setCriterioTeste(valor);
+							}
 				
 				else if ((parametro.equals("#TaxaMutacao"))	|| (parametro.equals("#MutationRate")))
 					setTaxaMutacao(Double.parseDouble(valor));
@@ -360,6 +360,7 @@ public class Central {
 		setArquivoObsCobertura("relCobertura");
 		setTamanhoIndividuo();
 		setArquivoMelhorPopulacao("melhorPop");
+		//setQuantidadeElemento(Ferramenta.obtemElementosRequeridos());
 		if (tamanhoMaximoString > 15)
 			tamanhoMaximoArgumento = tamanhoMaximoString;
 
@@ -372,19 +373,19 @@ public class Central {
 	 * 
 	 * @throws IOException
 	 */
-	public void backup() throws IOException {
+	public static void backup() throws IOException {
 		/*
 		 * sprintf(Comando, "tar -czf %s_GER_%0.0f.tgz %s*", funcaoATestar,
 		 * geracaoAtual, diretorio); system(Comando);
 		 */
 		File arquivoBackup;
+		File diretorioArquivos = diretorio;
 
 		arquivoBackup = new File(funcaoATestar + "_GER_" + geracaoAtual + (1)
 				+ "_");
 
-		arquivoBackup.mkdir();
-
-		Diversos.copyDirectory(diretorio, arquivoBackup);
+		arquivoBackup.mkdir();		
+		Diversos.copyDirectory(Central.diretorio, arquivoBackup );
 				
 	}
 	
@@ -395,7 +396,7 @@ public class Central {
 	 * 
 	 * @throws IOException
 	 */
-	public void status() throws IOException {
+	public static void status() throws IOException {
 
 		System.out.printf("\n###########################################");
 		System.out.printf("\nGERACAO: <%f>   COBERTURA: <%f>", geracaoAtual,
@@ -420,7 +421,7 @@ public class Central {
 
 	 
 	/** Metodo usado para apresentar o resultado da execucao do framework. */
-	public void resultado() {
+	public static void resultado() {
 		long tempo = 0;
 		java.text.DateFormat dfo = new java.text.SimpleDateFormat(
 				"HH:mm:ss.SSS");
@@ -808,14 +809,11 @@ public class Central {
 	}
 
 	 
-	/** No descriptions */
-	public static void setCriterioTeste(String valor) {
-		if (valor.length() <= 0)
-			Diversos.erro(
-					"setCriterioTeste, erro no valor passado, tam<=0...", 1);
-
+	/** No descriptions 
+	 * @throws IOException */
+	public static void setCriterioTeste(String valor) throws IOException {
 		criterioTeste = valor;
-	}
+		}
 
 	 
 	/** No descriptions */
@@ -926,7 +924,7 @@ public class Central {
 	 
 	/**** Metodo usado para verificar se o framework deve encerrar execucao ou por
 	 * ter alcancado a cobertura desejada ou por alcancar limite de geracaes.	 */
-	public boolean paraTeste() {
+	public static boolean paraTeste() {
 		if (geracaoAtual == (maximoGeracoes + 1))
 			return true;
 		if (coberturaCriterio != -1) {
@@ -1030,7 +1028,7 @@ public class Central {
 
 	 
 	/** No descriptions */
-	public void manutencaoMelhorGeracao() {
+	public static void manutencaoMelhorGeracao() {
 		if (coberturaAtual > melhorCobertura) {
 			setMelhorCobertura(coberturaAtual);
 			setIndiceMelhorGeracao(geracaoAtual);
@@ -1112,5 +1110,14 @@ public class Central {
 	
 		ccargs = valor;
 			
+	}
+	
+	/** M\E9todo usado para iniciar a execu\E7\E3o da ferramenta.
+	Apagar diret\F3rios e arquivos que possam ter sidos gerados por execu\E7\F5es anteriores. */
+	public static void prepareExecution(){
+	   
+	   System.out.println(" \n Atenção: Preparando a execução do framework. Diretórios e arquivos serão removidos...");
+	  // System.out.println(" \n removeFile.sh %s %s valimpi logerror.tes log_erro.log detalhes.log Populacao.res Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst *.gfc lixo.lxo entrada.kyb resultado.tst");
+	
 	}
 }
