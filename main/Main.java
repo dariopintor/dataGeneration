@@ -18,58 +18,46 @@ public class Main {
 	 ***************************************************************************/
 
 
-	static Diversos objDiversos; 
-	static Mersenne objMersenne;
-	static Central objCentral;
-	static Individuo objInviduo;
-	static Ferramenta objFerramenta;
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
+		public static void main(String[] args) throws IOException, InterruptedException {
 		
-		objDiversos = new Diversos(); 
-		objMersenne = new Mersenne();
-		objCentral = new Central();
-		//objInviduo = new Individuo();
-		objFerramenta = new Ferramenta();
-		
+			
 
 		long inic = 0, fim = 0;
-		inic = objDiversos.getSecs();
-		// objMersenne.initGenRand();
-		System.out.print("Iniciando a Execucao da Ferramenta");
-		objCentral.interpretaArquivoConfiguracao();
-		//objCentral.prepareExecution();
-
+		inic = Diversos.getSecs();
+		System.out.println("Iniciando a Execucao da Ferramenta");
+		Central.interpretaArquivoConfiguracao();
+		Central.prepareExecution();
+		Ferramenta.prepareTool();
+		Central.setQuantidadeElemento(Ferramenta.obtemElementosRequeridosValiMPI());
+		Populacao.geraPopulacaoInicial();	
+		Populacao.avaliaPopulacao();
 		
-		objCentral.setQuantidadeElemento(objFerramenta.obtemElementosRequeridos());
+		Central.backup();
+		Central.status();
+		Central.setFimPrimeiraExecucao();
 
-		Populacao objPopulacao = new Populacao();
-		objPopulacao.getAptidao();
-		objCentral.backup();
-		objCentral.status();
-		objCentral.setFimPrimeiraExecucao();
+		for (Central.geracaoAtual = 1; !Central.paraTeste(); Central.geracaoAtual++) {
+			Populacao.evoluiPopulacao();
+			Populacao.geraFitness();
+			Central.backup();
+			Central.manutencaoMelhorGeracao();
 
-		for (objCentral.geracaoAtual = 1; !objCentral.paraTeste(); objCentral.geracaoAtual++) {
-			objPopulacao.evoluiPopulacao();
-			objPopulacao.getAptidao();
-			objCentral.backup();
-			objCentral.manutencaoMelhorGeracao();
-
-			objCentral.status();
+			Central.status();
 		}// fim for
 		
-		fim = objDiversos.getSecs();
+		fim = Diversos.getSecs();
 		System.out.print(" \nFim do processo de evolucao...");
-		objCentral.resultado();
+		Central.resultado();
 		
-		if (objCentral.geracaoAtual > 1){
-			objPopulacao.decodificaPopulacao(objCentral.arquivoMelhorPopulacao,
+		if (Central.geracaoAtual > 1){
+			Populacao.decodificaPopulacao(Central.arquivoMelhorPopulacao,
 					"Populacao.res");
 		}
 		
-		if (objCentral.ativaTabu==1){
-			objPopulacao
-					.decodificaPopulacao(objCentral.arquivoTabu, "Tabu.res");
+		if (Central.ativaTabu==1){
+			Populacao
+					.decodificaPopulacao(Central.arquivoTabu, "Tabu.res");
 		}
 		
 		System.out.print("\nFim de execução...\n");
