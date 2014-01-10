@@ -25,14 +25,6 @@ public class Ferramenta {
 	 * License, or * (at your option) any later version. * *
 	 ***************************************************************************/
 
-	Individuo objIndividuo;
-
-	public Ferramenta() {
-		System.out.println("\nConstruindo ferramenta...");
-		objIndividuo = new Individuo();
-
-	}
-
 	/**
 	 * Metodo usado para inicar a ferramenta adequada baseado nas informacoes de
 	 * controle contidas em ctl.
@@ -40,8 +32,8 @@ public class Ferramenta {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public static void prepareTool() throws IOException, InterruptedException {
-		System.out.println("\nUtilizando ValiMPI.");
+	public static void preparaFerramenta() throws IOException, InterruptedException {
+		System.out.println("\n\nUtilizando ValiMPI.");
 
 		//ValiMPI.exeVali_inst(Central.arquivoFonte);
 		//ValiMPI.exeVali_reduce(null); // ainda nao implementadotado
@@ -58,7 +50,7 @@ public class Ferramenta {
 	 * @throws IOException
 	 */
 	public static int obtemElementosRequeridosValiMPI() throws IOException {
-		System.out.println("\n---obtemElementosValiMPI");
+		System.out.println("Obtendo Elementos Requeridos na ValiMPI");
 
 		int quantidadeElemReq = 0;
 		String dir_elem_req = "valimpi/res/";
@@ -122,7 +114,7 @@ public class Ferramenta {
 		// menos 2 são as duas primeiras linhas do arq. que n se refere aos
 		// elementos
 		quantidadeElemReq = Diversos.quantidadeLinhas(arquivoElementos) - 2;
-		System.out.print("\n--- Saindo de obtemElementosValiMPI");
+		System.out.println("Fim da Obtenção de Elementos Requeridos na ValiMPI");
 
 		return quantidadeElemReq;
 
@@ -191,7 +183,18 @@ public class Ferramenta {
 		}
 
 		String conteudo = nDadoTeste + ": " + linhaCobertura;
-
+		
+		Central.atualizaLinhaCoberturas(linhaCobertura.trim());
+		
+		Central.linhaCoberturaAtual = Populacao.sobrepoe(Central.linhaCoberturaAnterior,
+				Central.linhaCoberturaAtual);
+		
+		Central.setCoberturaAtual(Diversos.numberOf(
+				Central.linhaCoberturaAtual, 'X')
+				* 100
+				/ Central.quantidadeElemento);
+		
+		
 		Diversos.escreverArquivo("gcd/cobXIndividuo.cov", conteudo);
 
 	}
@@ -253,6 +256,7 @@ public class Ferramenta {
 				break;
 			}
 			// inicia a partir da segunda linha
+			//System.out.println(linhaArqElemcobertos);
 			if (contLinhaElementos > 0) {
 				if (Central.criterioTeste
 						.equals("Todos os Usos de Sincronismo")

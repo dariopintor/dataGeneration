@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Calendar;
 import java.util.Formatter;
 import java.util.TimeZone;
 import java.util.zip.Deflater;
@@ -24,20 +25,24 @@ import main.Mersenne;
 public class Central {
 	/***************************************************************************
 	 * central.cpp - description ------------------- begin : Dom Jul 6 2003
-	 * copyright : (C) 2003 by Luciano Petinati Ferreira email :
-	 * it and/or modify * it under the terms of the GNU General Public License
-	 * as published by * the Free Software Foundation; either version 2 of the
+	 * copyright : (C) 2003 by Luciano Petinati Ferreira email : it and/or
+	 * modify * it under the terms of the GNU General Public License as
+	 * published by * the Free Software Foundation; either version 2 of the
 	 * License, or * (at your option) any later version. * *
 	 ***************************************************************************/
 
 	/** Variavel de controle para pausar a execucao a cada geracao. */
 	public static int pausaGeracao;
 	public static int geraLog;
-	/** Variavel de controle para indicar quantos argumentos o programa em teste
-	 * necessita*/
+	/**
+	 * Variavel de controle para indicar quantos argumentos o programa em teste
+	 * necessita
+	 */
 	public static int numeroArgumentos;
-	/**Variavel de controle para indicar o tamanho manimo para o tipo string (*
-	 * String ). */
+	/**
+	 * Variavel de controle para indicar o tamanho manimo para o tipo string (*
+	 * String ).
+	 */
 	public static double tamanhoMinimoString;
 	/**
 	 * Variavel de controle para indicar o tamanho maximo para o tipo string (*
@@ -90,7 +95,7 @@ public class Central {
 	 */
 	public static String criterioTesteValiMPI;
 	/**  */
-	
+
 	/**
 	 * Variavel de controle para indicar o diretario pool, usado para entrada de
 	 * dados na execucao do programa ja instrumentado.
@@ -148,31 +153,47 @@ public class Central {
 	 * consequentemente o formato do indivaduo do AG.
 	 */
 	public static String formatoIndividuo;
-	/** * Variavel de controle para conter informacaes sobre perda de cobertura
-	 * de elementos requeridos. */
+	/**
+	 * * Variavel de controle para conter informacaes sobre perda de cobertura
+	 * de elementos requeridos.
+	 */
 	public static String linhaPerda;
-	/*** Variavel de controle para conter a cobertura atual de elementos
-	 * requeridos ( 1: para coberto, 0: para nao coberto ).	 */
+	/***
+	 * Variavel de controle para conter a cobertura atual de elementos
+	 * requeridos ( 1: para coberto, 0: para nao coberto ).
+	 */
 	public static String linhaCoberturaAtual;
-	/*** Variavel de controle para conter informacaes de cobertura de elementos
-	 * requeridos da geracao anterior. */
+	/***
+	 * Variavel de controle para conter informacaes de cobertura de elementos
+	 * requeridos da geracao anterior.
+	 */
 	public static String linhaCoberturaAnterior;
-	/*** Variavel de controle para conter informacaes a cobertura global de
-	 * elementos requeridos, independente de geracao.*/
+	/***
+	 * Variavel de controle para conter informacaes a cobertura global de
+	 * elementos requeridos, independente de geracao.
+	 */
 	public static String coberturaGlobal; // novo nome linhaCoberturaGlobal
 	/** Variavel de controle para conter o nome do arquivo da lista Tabu. */
 	public static File arquivoTabu;
-	/** Variavel de controle para conter o nome do arquivo temporario da lista
-	 * Tabu.*/
+	/**
+	 * Variavel de controle para conter o nome do arquivo temporario da lista
+	 * Tabu.
+	 */
 	public static File arquivoTabuAux;
-	/**Variavel de controle para conter o nome do arquivo fonte do programa em
-	 * teste.*/
+	/**
+	 * Variavel de controle para conter o nome do arquivo fonte do programa em
+	 * teste.
+	 */
 	public static String arquivoFonte;
-	/** Variavel de controle que identifica o tipo de string que o framework
-	 * suporta.*/
+	/**
+	 * Variavel de controle que identifica o tipo de string que o framework
+	 * suporta.
+	 */
 	public static String tipoString;
-	/** Variavel de controle que contera o comando a ser executado por chamada
-	 * system com variavel de ambiente PATH corretamente configurada.	 */
+	/**
+	 * Variavel de controle que contera o comando a ser executado por chamada
+	 * system com variavel de ambiente PATH corretamente configurada.
+	 */
 	public static String comandPath;
 	public static String enviroment;
 
@@ -197,18 +218,22 @@ public class Central {
 	public long tamComandPath;
 	/** Variavel de controle para manter o tamanho de comandPath. */
 	public static File arquivoPopulacaoTemporario2;
-	/** Atributo usado para conter o nome para um arquivo temporario para a
-	 * populacao.*/
+	/**
+	 * Atributo usado para conter o nome para um arquivo temporario para a
+	 * populacao.
+	 */
 	public static int ativaTabu = 0;
 	/** Atributo usado para controlar a ativacao do recurso de lista Tabu. */
 	public static File arquivoBonusIneditismo;
 	public static File arquivoIneditismo;
-	/**	 * Atributo usado para guardar quantas gercaes serao usadas/configuradas
+	/**
+	 * * Atributo usado para guardar quantas gercaes serao usadas/configuradas
 	 * para verificar o repositario de execucao antes de executar um determinado
-	 * caso de teste. Isto pode aumentar o desempenho do sistema.	 */
+	 * caso de teste. Isto pode aumentar o desempenho do sistema.
+	 */
 	public static double geracoesComRepositorio;
 	/** Atributo com o tempo em segundos da execucao do sistema. */
-	public static int inicioExecucao;
+	public static long inicioExecucao;
 	/** Atributo com o tempo em segundo do fim de execucao do sistema */
 	public static long fimExecucao;
 	/** Atributo com o tempo em segundo do fim da primeira execucao do sistema */
@@ -222,17 +247,20 @@ public class Central {
 	public static String ccargs;
 
 	static Diversos Diversos; // declaracao do objeto diversos
-	
+
 	static String pegaDiretorio;
 	public static File arquivoResumo;
 
 	public Central() {
-		
+
 	}
-	 
-	/**Metodo que carrega na classe central informacaes sobre a execucao da
+
+	/**
+	 * Metodo que carrega na classe central informacaes sobre a execucao da
 	 * ferramenta.
-	 * @throws IOException*/
+	 * 
+	 * @throws IOException
+	 */
 	public static void interpretaArquivoConfiguracao() throws IOException {
 
 		String nomeArq = "arqconfig.txt"; // Nome do arquivo,
@@ -243,7 +271,7 @@ public class Central {
 
 		FileReader arq = new FileReader(nomeArq);
 		BufferedReader lerArq = new BufferedReader(arq);
-	
+
 		setTipoString("alfabetico");
 
 		linha = lerArq.readLine(); // la a primeira linha
@@ -262,57 +290,69 @@ public class Central {
 
 				if (parametro.equals("#NumeroArgumentos"))
 					setNumeroArgumentos(Integer.parseInt(valor));
-				
+
 				else if (parametro.equals("#Log"))
 					setGeraLog(1);
-				
+
 				else if (parametro.equals("#PausaGeracao"))
 					setPausaGeracao(1);
-				
+
 				else if (parametro.equals("#Elitismo"))
 					setQuantidadeElitismo(Integer.parseInt(valor));
-				
+
 				else if (parametro.equals("#Ineditismo"))
 					setQuantidadeIneditismo(Integer.parseInt(valor));
-				
+
 				else if (parametro.equals("#Fitness"))
 					setQuantidadeFitness(Integer.parseInt(valor));
-				
-				else if ((parametro.equals("#ArquivoFonte"))|| (parametro.equals("#SourceFile")))
+
+				else if ((parametro.equals("#ArquivoFonte"))
+						|| (parametro.equals("#SourceFile")))
 					setArquivoFonte(valor);
-				
-				else if ((parametro.equals("#FormatoEntrada"))|| (parametro.equals("#InputFormat")))
+
+				else if ((parametro.equals("#FormatoEntrada"))
+						|| (parametro.equals("#InputFormat")))
 					setFormatoIndividuo(valor);
-				
-				else if ((parametro.equals("#VariacaoString")) || (parametro.equals("#StringRange")))
+
+				else if ((parametro.equals("#VariacaoString"))
+						|| (parametro.equals("#StringRange")))
 					setTamanhoString(valor);
-				
-				else if ((parametro.equals("#StringType")) || (parametro.equals("#TipoString")))
+
+				else if ((parametro.equals("#StringType"))
+						|| (parametro.equals("#TipoString")))
 					setTipoString(valor);
-				
-				else if ((parametro.equals("#ArquivoPopulacao"))|| (parametro.equals("#PopulationFile")))
+
+				else if ((parametro.equals("#ArquivoPopulacao"))
+						|| (parametro.equals("#PopulationFile")))
 					setArquivoPopulacaoInicial(valor);
-				
-				else if ((parametro.equals("#TamanhoPopulacao"))|| (parametro.equals("#PopulationSize")))
+
+				else if ((parametro.equals("#TamanhoPopulacao"))
+						|| (parametro.equals("#PopulationSize")))
 					setTamanhoPopulacao(Integer.parseInt(valor));
-				
-				else if ((parametro.equals("#NumeroGeracoes"))|| (parametro.equals("#GenerationNumber")))
+
+				else if ((parametro.equals("#NumeroGeracoes"))
+						|| (parametro.equals("#GenerationNumber")))
 					setMaximoGeracoes(Integer.parseInt(valor));
-				
-				else if ((parametro.equals("#CoberturaCriterio"))|| (parametro.equals("#CriterioCoverage")))
+
+				else if ((parametro.equals("#CoberturaCriterio"))
+						|| (parametro.equals("#CriterioCoverage")))
 					setCoberturaCriterio(Integer.parseInt(valor));
-				
-				else if ((parametro.equals("#Criterio"))|| (parametro.equals("#Criterium"))) {
+
+				else if ((parametro.equals("#Criterio"))
+						|| (parametro.equals("#Criterium"))) {
 					setCriterioTeste(valor);
-							}
-				
-				else if ((parametro.equals("#TaxaMutacao"))	|| (parametro.equals("#MutationRate")))
+				}
+
+				else if ((parametro.equals("#TaxaMutacao"))
+						|| (parametro.equals("#MutationRate")))
 					setTaxaMutacao(Double.parseDouble(valor));
-				
-				else if ((parametro.equals("#TaxaCrossover"))|| (parametro.equals("#CrossOverRate")))
+
+				else if ((parametro.equals("#TaxaCrossover"))
+						|| (parametro.equals("#CrossOverRate")))
 					setTaxaCrossover(Double.parseDouble(valor));
-				
-				else if ((parametro.equals("#VariacaoInt"))	|| (parametro.equals("#IntRange")))
+
+				else if ((parametro.equals("#VariacaoInt"))
+						|| (parametro.equals("#IntRange")))
 					setVariacaoInteiro(valor);
 
 				else if (parametro.equals("#NomeFuncao")) {
@@ -325,9 +365,10 @@ public class Central {
 					setArquivoBonusIneditismo(valor);
 					setArquivoVariacaoFitness(valor);
 				}// fim if-then
-				
-				else if ((parametro.equals("#AtivaTabu")) && ((valor.equals("sim")) 
-						|| (valor.equals("Sim")) || ((valor	.equals("1"))))) {
+
+				else if ((parametro.equals("#AtivaTabu"))
+						&& ((valor.equals("sim")) || (valor.equals("Sim")) || ((valor
+								.equals("1"))))) {
 					setArquivoTabu("tabu");
 					setArquivoTabuAux("tabuAux");
 				}
@@ -337,10 +378,10 @@ public class Central {
 
 				else if (parametro.equals("#NumeroProcessos"))
 					setNProcess(valor);
-				
+
 				else if (parametro.equals("#Funcoes"))
 					setFuncoes(valor);
-				
+
 				else if (parametro.equals("#CCArgs"))
 					setCCArgs(valor);
 
@@ -360,13 +401,12 @@ public class Central {
 		setArquivoObsCobertura("relCobertura");
 		setTamanhoIndividuo();
 		setArquivoMelhorPopulacao("melhorPop");
-		//setQuantidadeElemento(Ferramenta.obtemElementosRequeridos());
+		// setQuantidadeElemento(Ferramenta.obtemElementosRequeridos());
 		if (tamanhoMaximoString > 15)
 			tamanhoMaximoArgumento = tamanhoMaximoString;
 
 	}
 
-	 
 	/**
 	 * Metodo usado para gerar arquivo tar com informacaes completas para cada
 	 * geracao.
@@ -374,22 +414,15 @@ public class Central {
 	 * @throws IOException
 	 */
 	public static void backup() throws IOException {
-		/*
-		 * sprintf(Comando, "tar -czf %s_GER_%0.0f.tgz %s*", funcaoATestar,
-		 * geracaoAtual, diretorio); system(Comando);
-		 */
+
 		File arquivoBackup;
-		File diretorioArquivos = diretorio;
+		arquivoBackup = new File(funcaoATestar + "_GER_" + (geracaoAtual));
 
-		arquivoBackup = new File(funcaoATestar + "_GER_" + geracaoAtual + (1)
-				+ "_");
+		arquivoBackup.mkdir();
+		Diversos.copyDirectory(Central.diretorio, arquivoBackup);
 
-		arquivoBackup.mkdir();		
-		Diversos.copyDirectory(Central.diretorio, arquivoBackup );
-				
 	}
-	
-	
+
 	/**
 	 * Metodo usado para gerar informacaes do progresso do framework ( geracao,
 	 * cobertura ).
@@ -398,73 +431,43 @@ public class Central {
 	 */
 	public static void status() throws IOException {
 
+		String saida = "";
+		System.out.printf("GERACAO: <%.2f>   COBERTURA: <%.2f> \n",
+				geracaoAtual, coberturaAtual);
+
+		saida += String.format("GERACAO: <%.2f>   COBERTURA: <%.2f> \n",
+				geracaoAtual, coberturaAtual); // escreve no arquivo
+
+		saida += "\n###########################################";
 		System.out.printf("\n###########################################");
-		System.out.printf("\nGERACAO: <%f>   COBERTURA: <%f>", geracaoAtual,
-				coberturaAtual);
-
-		if (arquivoResumo == null) {
-			arquivoResumo = new File("resumo.tst");
-			arquivoResumo.createNewFile();
-		}
-
-		FileWriter fw = new FileWriter(arquivoResumo.getPath(), true);
-		BufferedWriter conexao = new BufferedWriter(fw);
-		
-		conexao.write("\nGERACAO:    COBERTURA: " + geracaoAtual
-				+ coberturaAtual); // escreve no arquivo
-		conexao.newLine();
-		conexao.close();
-
-		// arquivoResumo.close();
+		Diversos.escreverArquivo("resumo.tst", saida);
 
 	}
 
-	 
-	/** Metodo usado para apresentar o resultado da execucao do framework. */
-	public static void resultado() {
-		long tempo = 0;
-		java.text.DateFormat dfo = new java.text.SimpleDateFormat(
-				"HH:mm:ss.SSS");
-		dfo.setTimeZone(TimeZone.getTimeZone("UTC"));
+	/**
+	 * Metodo usado para apresentar o resultado da execucao do framework.
+	 * 
+	 * @throws IOException
+	 */
+	public static void resultado() throws IOException {
+		String tempoPrimeiraExec = "", tempoExecucaco = "", resultado = "";
+		tempoPrimeiraExec = Diversos.pegarTempo(fimPrimeiraExecucao
+				- inicioExecucao);
+		tempoExecucaco = Diversos.pegarTempo(fimExecucao - inicioExecucao);
 
-		fimExecucao = Diversos.getSecs();
-		tempo = fimPrimeiraExecucao - inicioExecucao;
-		String tempoFmt = null, tempoPrimAval = null;
+		resultado = "\n\n\nResultado \nCobertura Inicial: " + coberturaInicial
+				+ "\nTempo Avaliacao Inicial: " + tempoPrimeiraExec
+				+ "\nMelhor Cobertura: " + melhorCobertura
+				+ "\nMelhor Geração: " + indiceMelhorGeracao
+				+ "\nTempo de Execução : " + tempoExecucaco
+				+ "\nQuantidade de Gerações: " + geracaoAtual;
 
-		System.out.printf("\nResultado");
-		System.out.printf("\nPopulacao gerada em Populacao.res");
-		System.out.printf("\nCobertura Inicial: %.2f", coberturaInicial);
-		System.out.printf("\nTempo Avaliacao Inicial em segundos:",
-				dfo.format(tempo));
-		System.out.printf("\nMelhor Cobertura : %.2f", melhorCobertura);
-		System.out.printf("\nMelhor Geracao : %.0f", indiceMelhorGeracao);
-		System.out.printf("\nCobertura %.0f  Populacao: %.2f", geracaoAtual,
-				coberturaAtual);
+		System.out.printf(resultado);
 
-		tempo = fimExecucao - inicioExecucao;
-
-		System.out.printf("\nTempo de execucao: %s - em segundos: %d",
-				tempoFmt, tempo);
-
-		System.out.printf("\n\nCobertura Possivel: %.2f \n", 0.0);
-				//(double) Diversos.numberOf(coberturaGlobal, 'X')
-					//	/ quantidadeElemento);
-
-		System.out
-				.printf("\nResultado\nCobertura Inicial: %.2f\nTempo Avaliacao Inicial: %s  - em segundos: %d\nMelhor Cobertura : %.2f\nMelhor Geracao : %.0f \nTempo de execucao : %s \nTempo em segundos : %d",
-						coberturaInicial, tempoPrimAval, tempo,
-						melhorCobertura, indiceMelhorGeracao, tempoFmt, tempo);
-		// Diversos.toFile("resultado.tst", Comando);
-		System.out
-				.printf("\nCobertura %.0f Populacao: %.2f \n\nCobertura Possivel: %.2f\n",
-						geracaoAtual, coberturaAtual, 0.0);
-						//(double) Diversos.numberOf(coberturaGlobal, 'X')
-						//		/ quantidadeElemento, coberturaGlobal);
-		// Diversos.toFile("resultado.tst", Comando);
+		Diversos.escreverArquivo("resumo.tst", resultado);
 
 	}
 
-	 
 	/**
 	 * Metodo usado para atribuir valor a variavel de controle que identifica o
 	 * tipo de string que o framework suporta.
@@ -473,53 +476,55 @@ public class Central {
 		tipoString = valor;
 	}
 
-	 
-	/** Metodo usado para atribuir valor a variavel de controle que possui o
+	/**
+	 * Metodo usado para atribuir valor a variavel de controle que possui o
 	 * namero de entradas por argumentos necessario para execucao do programa em
-	 * teste. */
+	 * teste.
+	 */
 	public static void setNumeroArgumentos(int valor) {
 		numeroArgumentos = valor;
 	}
 
-	 
-	/*** Metodo usado para atribuir valor a variavel de controle responsavel pela
-	 * geracao de log de execucao do framework. 
-	 * @throws IOException */
+	/***
+	 * Metodo usado para atribuir valor a variavel de controle responsavel pela
+	 * geracao de log de execucao do framework.
+	 * 
+	 * @throws IOException
+	 */
 	public static void setGeraLog(int valor) throws IOException {
 		geraLog = valor;
 		File file = new File("log_erro.log");
 		file.createNewFile();
 	}
 
-	 
-	/** Metodo usado para atribuir valor a variavel de controle responsavel por
-	 * pausa ao fim de cada geracao.*/
+	/**
+	 * Metodo usado para atribuir valor a variavel de controle responsavel por
+	 * pausa ao fim de cada geracao.
+	 */
 	public static void setPausaGeracao(int valor) {
 		pausaGeracao = valor;
 
 	}
 
-	 
-	/** Metodo usado para atribuir valor a variavel responsavel pela quantidade
-	 * de indivaduos gerados por elitismo. */
+	/**
+	 * Metodo usado para atribuir valor a variavel responsavel pela quantidade
+	 * de indivaduos gerados por elitismo.
+	 */
 	public static void setQuantidadeElitismo(double valor) {
 		quantidadeElitismo = valor;
 
 	}
 
-	 
 	/** No descriptions */
 	public static void setQuantidadeIneditismo(double valor) {
 		quantidadeIneditismo = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setQuantidadeFitness(double valor) {
 		quantidadeFitness = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setDiretorio(String valor) {
 
@@ -529,258 +534,159 @@ public class Central {
 
 	}
 
-	 
 	/** No descriptions */
-	public static void setArquivoPopulacaoInicial(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoPopulacaoInicial, erro no valor passado, tam<=0...",
-							1);
+	public static void setArquivoPopulacaoInicial(String valor)
+			throws IOException {
 		arquivoPopulacaoInicial = new File(valor);
 		arquivoPopulacaoInicial.createNewFile();
 	}
 
-	 
-	/*** No descriptions * 
+	/***
+	 * No descriptions *
+	 * 
 	 * @throws IOException
 	 */
 	public static void setArquivoPopulacao(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setArquivoPopulacao, erro no valor passado, tam<=0...", 1);
-		
 		arquivoPopulacao = new File((pegaDiretorio + valor + ".pop"));
-		arquivoPopulacao.createNewFile();	
+		arquivoPopulacao.createNewFile();
 
 	}
 
-	 
-	/**No descriptions
+	/**
+	 * No descriptions
+	 * 
 	 * @throws IOException
 	 */
-	public static void setArquivoPopulacaoTemporario(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoPopulacaoTemporario, erro no valor passado, tam<=0...",
-							1);
-
+	public static void setArquivoPopulacaoTemporario(String valor)
+			throws IOException {
 		arquivoPopulacaoTemporario = new File(pegaDiretorio + valor + ".tmp");
 		arquivoPopulacaoTemporario.createNewFile();
 
 	}
 
-	 
 	/**
 	 * No descriptions
-	 * @throws IOException */
+	 * 
+	 * @throws IOException
+	 */
 	public static void setArquivoFitness(String valor) throws IOException {
-		int tam = valor.length();
-		
-		if (tam <= 0) {
-			Diversos.erro(
-					"setArquivoFitness, erro no valor passado, tam<=0...", 1);
-		}
-		
 		arquivoFitness = new File(pegaDiretorio + valor + ".fit");
 		arquivoFitness.createNewFile();
 	}
 
-	 
-	/** No descriptions 
-	 * @throws IOException */
+	/**
+	 * No descriptions
+	 * 
+	 * @throws IOException
+	 */
 	public static void setArquivoIneditismo(String valor) throws IOException {
 		int tam = valor.length();
-		
-		if (tam <= 0) {
-			Diversos
-					.erro("setArquivoIneditismo, erro no valor passado, tam<=0...",
-							1);
-		}
+
 		arquivoIneditismo = new File(pegaDiretorio + valor + ".ine");
 		arquivoIneditismo.createNewFile();
 
 	}
 
-	 
-	/*** No descriptions* 
-	 * @throws IOException */
-	public static void setArquivoBonusIneditismo(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivobonusIneditismo, erro no valor passado, tam<=0...",
-							1);
+	/***
+	 * No descriptions*
+	 * 
+	 * @throws IOException
+	 */
+	public static void setArquivoBonusIneditismo(String valor)
+			throws IOException {
 
 		arquivoBonusIneditismo = new File(pegaDiretorio + valor + ".bon");
 		arquivoBonusIneditismo.createNewFile();
 
 	}
 
-	 
 	/** No descriptions */
 	public static void setArquivoFonte(String valor) {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setArquivoFonte, erro no valor passado, tam<=0...", 1);
-
 		arquivoFonte = valor;
 
 	}
 
-	 
-	/** No descriptions 
-	 * @throws IOException*/
-	public static void setArquivoSemelhancaIndividuos(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoSemelhancaIndividuos, erro no valor passado, tam<=0...",
-							1);
+	/**
+	 * No descriptions
+	 * 
+	 * @throws IOException
+	 */
+	public static void setArquivoSemelhancaIndividuos(String valor)
+			throws IOException {
 
 		arquivoBonusIneditismo = new File(pegaDiretorio + valor + ".cov");
 		arquivoBonusIneditismo.createNewFile();
 
 	}
 
-	 
 	/** No descriptions */
 	public static void setFormatoIndividuo(String valor) {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setFormatoIndividuo, erro no valor passado, tam<=0...", 1);
-
 		formatoIndividuo = valor;
 
 	}
-	 
-	/** seta as funçoes serem testadas do programa em teste.*/
+
+	/** seta as funçoes serem testadas do programa em teste. */
 	public static void setFuncaoATestar(String valor) {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setFuncaoATestar, erro no valor passado, tam<=0...", 1);
 		funcaoATestar = valor;
 	}
 
-	
-	public static void setArquivoVariacaoFitness(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoVariacaoFitness, erro no valor passado, tam<=0...",
-							1);
+	public static void setArquivoVariacaoFitness(String valor)
+			throws IOException {
 
 		arquivoVariacaoFitness = new File(pegaDiretorio + valor + ".vfi");
 		arquivoVariacaoFitness.createNewFile();
 
 	}
- 
-	
-	public static void setArquivoCoberturaElemento(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoCoberturaElemento, erro no valor passado, tam<=0...",
-							1);
 
+	public static void setArquivoCoberturaElemento(String valor)
+			throws IOException {
 		arquivoCoberturaElemento = new File(pegaDiretorio + valor + ".cov");
 		arquivoCoberturaElemento.createNewFile();
 	}
 
-
-	public static void setArquivoCoberturaIndividuo(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoCoberturaIndividuo, erro no valor passado, tam<=0...",
-							1);
-
+	public static void setArquivoCoberturaIndividuo(String valor)
+			throws IOException {
 		arquivoCoberturaIndividuo = new File(pegaDiretorio + valor + ".cov");
 		arquivoCoberturaIndividuo.createNewFile();
 	}
 
-	
 	public static void setArquivoRepositorio(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setArquivoRepositorio, erro no valor passado, tam<=0...",
-					1);
-
 		arquivoRepositorio = new File(valor + ".dep");
 		arquivoRepositorio.createNewFile();
 	}
 
-	 
-	
-	public static void setArquivoAvalCobIndividuos(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoAvalCobIndividuos, erro no valor passado, tam<=0...",
-							1);
-
+	public static void setArquivoAvalCobIndividuos(String valor)
+			throws IOException {
 		arquivoAvalCobIndividuos = new File(pegaDiretorio + valor + ".cov");
 		arquivoAvalCobIndividuos.createNewFile();
 
 	}
 
-	 
 	public static void setArquivoObsCobertura(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setArquivoObsCobertura, erro no valor passado, tam<=0...",
-					1);
-
 		arquivoObsCobertura = new File(valor + ".tst");
 		arquivoObsCobertura.createNewFile();
 
 	}
 
-	 
-	public static void setArquivoMelhorPopulacao(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setArquivoMelhorPopulacao, erro no valor passado, tam<=0...",
-							1);
-
+	public static void setArquivoMelhorPopulacao(String valor)
+			throws IOException {
 		arquivoMelhorPopulacao = new File(valor + ".pop");
 		arquivoMelhorPopulacao.createNewFile();
 	}
 
-	 
 	public static void setArquivoTabu(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setArquivoTabu, erro no valor passado, tam<=0...", 1);
-
 		arquivoTabu = new File(valor + ".pop");
 		arquivoTabu.createNewFile();
 
 	}
 
-	 
 	public static void setArquivoTabuAux(String valor) throws IOException {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos.erro(
-					"setArquivoTabuAux, erro no valor passado, tam<=0...", 1);
-
 		arquivoTabuAux = new File(valor + ".pop");
 		arquivoTabuAux.createNewFile();
 
 	}
 
-	 
-	/** Metodo para indicar o tamanho manimo para o tipo string  */
+	/** Metodo para indicar o tamanho manimo para o tipo string */
 	public static void setTamanhoString(String valor) {
 
 		String quebra[];
@@ -790,44 +696,40 @@ public class Central {
 
 	}
 
-	 
 	/** No descriptions */
 	public static void setTamanhoPopulacao(double valor) {
 		tamanhoPopulacao = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setMaximoGeracoes(double valor) {
 		maximoGeracoes = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setCoberturaCriterio(double valor) {
 		coberturaCriterio = valor;
 	}
 
-	 
-	/** No descriptions 
-	 * @throws IOException */
+	/**
+	 * No descriptions
+	 * 
+	 * @throws IOException
+	 */
 	public static void setCriterioTeste(String valor) throws IOException {
 		criterioTeste = valor;
-		}
+	}
 
-	 
 	/** No descriptions */
 	public static void setTaxaMutacao(double valor) {
 		taxaMutacao = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setTaxaCrossover(double valor) {
 		taxaCrossover = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setVariacaoInteiro(String valor) {
 		String quebra[];
@@ -835,22 +737,19 @@ public class Central {
 		tamanhoMinimoInteiro = Integer.parseInt(quebra[0].trim());
 		tamanhoMaximoInteiro = Integer.parseInt(quebra[1].trim());
 		variacaoInteiro = tamanhoMaximoInteiro - tamanhoMinimoInteiro;
-		
+
 	}
 
-	 
 	/** No descriptions */
 	public static void setMelhorCobertura(double valor) {
 		melhorCobertura = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setIndiceMelhorGeracao(double valor) {
 		indiceMelhorGeracao = valor;
 	}
 
-	 
 	/** determina o tamanho do individuo */
 	public static void setTamanhoIndividuo() {
 		int tam = formatoIndividuo.length();
@@ -858,9 +757,10 @@ public class Central {
 			tamanhoIndividuo += tamanhoTipo(pos);
 	}
 
-	 
-	/** Metodo usado para setar  o formato da entrada
-	 *  do programa, consequentemente o formato do  indivaduo do AG. */
+	/**
+	 * Metodo usado para setar o formato da entrada do programa,
+	 * consequentemente o formato do indivaduo do AG.
+	 */
 	public static int tamanhoTipo(int pos) {
 		switch (formatoIndividuo.charAt(pos)) {
 		case 'I':
@@ -877,14 +777,12 @@ public class Central {
 		return 0; // zero nao influencia no tamanho do outros tipos.
 	}
 
-	 
 	/** No descriptions */
 	public static void setQuantidadeElemento(int valor) {
 		quantidadeElemento = valor;
 
 	}
 
-	 
 	/** No descriptions */
 	public static void setCoberturaAtual(double valor) {
 		coberturaAtual = valor;
@@ -893,151 +791,81 @@ public class Central {
 
 	}
 
-	 
 	/** No descriptions */
 	public static void setSomatoriaFitness(double valor) {
 		somatoriaFitness = valor;
 	}
 
-	 
 	/** No descriptions */
 	public static void setCriterioTesteValiMPI(String valor) {
-		int tam = valor.length();
-		if (tam <= 0)
-			Diversos
-					.erro("setCriterioTesteValiMPI, erro no valor passado, tam<=0...",
-							1);
-
 		criterioTesteValiMPI = valor;
 
 	}
 
-	 
 	/** No descriptions */
 	public static int inicioTipo(int pos) {
 		int res = 0;
 		for (int i = 0; i != pos; i++)
 			res += tamanhoTipo(i);
+		
 		return res;
 	}
 
-	 
-	/**** Metodo usado para verificar se o framework deve encerrar execucao ou por
-	 * ter alcancado a cobertura desejada ou por alcancar limite de geracaes.	 */
+	/****
+	 * Metodo usado para verificar se o framework deve encerrar execucao ou por
+	 * ter alcancado a cobertura desejada ou por alcancar limite de geracaes.
+	 */
 	public static boolean paraTeste() {
 		if (geracaoAtual == (maximoGeracoes + 1))
 			return true;
-		if (coberturaCriterio != -1) {
-			double x = Diversos.numberOf(coberturaGlobal, 'X')
-					* (100 / quantidadeElemento);
-			if (x >= coberturaCriterio * 100)
+		
+		if (coberturaAtual >= 100) {
 				return true;
 		}
+		
 		return false;
 	}
 
-		 
-	/** Metodo para geracao aleataria de um double, simulacao de sorteio.	 */
+	/** Metodo para geracao aleataria de um double, simulacao de sorteio. */
 	public static double geraSorteio(double maximo) {
 		/**/
-		int num1 = (int) Math.random() * 100;
+		double num1 = Math.random() * 100;
 		return Diversos.modulo(num1, maximo);
 	}
 
-	 
-	/** Metodo para avaliar a cobertura de cada indivaduo na populacao do AG. */
-	public void avaliacaoCobertura() throws IOException {
-		Diversos.toFile("log_erro.log", "---avaliacaoCobertura");
-		
-		String linha1 = null, linha = null;
-		if (arquivoObsCobertura == null) {
-			Diversos.erro("avaliacaoCobertura: erro abrir arquivo :", 1);
-		}
-		
-		FileReader arq = new FileReader(arquivoObsCobertura);
-		BufferedReader lerArq = new BufferedReader(arq);
-
-		linha = lerArq.readLine();
-		for (int i = 0; (linha != null); i++) {
-			System.out.printf("\n cont: %d, <%s>", i, linha);
-			linha = linha.trim();
-			
-			if (linha != "") {
-
-				for (int j = 0; j < quantidadeElemento; j++) {
-					if (linha.charAt(j) != linha1.charAt(j))
-						if (linha.charAt(j) == 'X')
-							linha.replace(linha.charAt(j), 'N');
-						else if (i != 0)
-							linha.replace(linha.charAt(j), 'p');
-				}
-				linha1 = linha;
-				Diversos.escreverArquivo("avalCoberturas.tst", linha);
-			}
-		}
-		lerArq.close();
-	}
-
-	 
 	/** No descriptions */
 	public static void atualizaLinhaCoberturas(String novaCobertura) {
-	
-		setLinhaCoberturaAnterior(linhaCoberturaAtual);
 		setLinhaCoberturaAnterior(linhaCoberturaAtual);
 		setLinhaCoberturaAtual(novaCobertura);
 		// setCoberturaAtual(0);
 	}
 
-	 
-	/**
-	 * Metodo usado para verificar se um determinado individuo ja foi executado
-	 * anteriormente, caso positivo, copia o desempenho armazenado no
-	 * repositorio para a variavel desempenho.
-	 */
-	public static String inRepositorio(String strIndiv, String desempenho)
-			throws IOException {
-
-		String linha = null;
-		FileReader arq = new FileReader(arquivoRepositorio);
-		BufferedReader lerArq = new BufferedReader(arq);
-
-		linha = lerArq.readLine();
-		while (linha != null) {
-			if (linha.equals(strIndiv)) {
-				desempenho = linha;
-			}
-
-		}
-
-		lerArq.close();
-		return desempenho;
-	}
-
-	 
 	/** No descriptions */
 	public void atualizaPerda(String desempenho) {
-		int indice = -1;		
+		int indice = -1;
 		while ((indice = Diversos.indexOf(linhaPerda, 'P')) > 0) {
-			if (desempenho.charAt(indice) == 'X')				
+			if (desempenho.charAt(indice) == 'X')
 				linhaPerda = linhaPerda.replace(linhaPerda.charAt(indice),
 						linhaPerda.charAt('-'));
-			
+
 		}
 
 	}
 
-	 
-	/** No descriptions */
-	public static void manutencaoMelhorGeracao() {
+	/** No descriptions 
+	 * @throws IOException */
+	public static void manutencaoMelhorGeracao() throws IOException {
 		if (coberturaAtual > melhorCobertura) {
 			setMelhorCobertura(coberturaAtual);
 			setIndiceMelhorGeracao(geracaoAtual);
-			arquivoMelhorPopulacao = arquivoPopulacao;
+			Diversos.copyFile(arquivoPopulacao.getPath(), arquivoMelhorPopulacao);
 		}
 	}
 
-	/** Metodo usado para recalcular a quantidade de individuos gerados por
-	 * elitismo, selecao e ineditismo. */
+	/**
+	 * Metodo usado para recalcular a quantidade de individuos gerados por
+	 * elitismo, selecao e ineditismo.
+	 */
 	public static void recalculaPorcEvolucao() {
 		double total = (quantidadeElitismo + quantidadeIneditismo + quantidadeFitness);
 		quantidadeElitismo = (int) (quantidadeElitismo * tamanhoPopulacao / total);
@@ -1047,24 +875,21 @@ public class Central {
 
 	}
 
-	/**Metodo usado para atribuir valor para variavel de controle
-	 * linhaCoberturaAnterior */
+	/**
+	 * Metodo usado para atribuir valor para variavel de controle
+	 * linhaCoberturaAnterior
+	 */
 	public static void setLinhaCoberturaAnterior(String valor) {
-		int tam = valor.length();
-		valor.length();
-		if (tam <= 0) {
-			Diversos
-					.erro("setLinhaCoberturaAnterior, erro no valor passado, tam<=0...",
-							1);
-		}
 		linhaCoberturaAnterior = valor;
 
 	}
 
-	/** Metodo usado para atribuir valor para variavel de controle
-	 * linhaCoberturaAtual. */
+	/**
+	 * Metodo usado para atribuir valor para variavel de controle
+	 * linhaCoberturaAtual.
+	 */
 	public static void setLinhaCoberturaAtual(String valor) {
-		
+
 		linhaCoberturaAtual = valor;
 
 	}
@@ -1082,10 +907,11 @@ public class Central {
 	/** Atualiza a coberturaGlobal com a cobertura passada por argumento. */
 	public void atualizaCoberturaGlobal(String novaCobertura) {
 		int tam = (int) quantidadeElemento;
-		
+
 		for (int i = 0; i < tam; i++)
-			if ((novaCobertura + i).equals('X')) {
-				//coberturaGlobal = coberturaGlobal.replace(coberturaGlobal + i) "X");
+			if ((novaCobertura).equals('X')) {
+				coberturaGlobal = coberturaGlobal.replace(
+						coberturaGlobal.charAt(i), 'X');
 			}
 
 	}
@@ -1102,22 +928,36 @@ public class Central {
 
 	/** Metodo que seta o argumento de funcoes necessario para ValiMPI. */
 	public static void setFuncoes(String valor) {
-		
+
 		funcoes = valor;
 	}
 
 	public static void setCCArgs(String valor) {
-	
+
 		ccargs = valor;
-			
+
 	}
-	
-	/** M\E9todo usado para iniciar a execu\E7\E3o da ferramenta.
-	Apagar diret\F3rios e arquivos que possam ter sidos gerados por execu\E7\F5es anteriores. */
-	public static void prepareExecution(){
-	   
-	   System.out.println(" \n Atenção: Preparando a execução do framework. Diretórios e arquivos serão removidos...");
-	  // System.out.println(" \n removeFile.sh %s %s valimpi logerror.tes log_erro.log detalhes.log Populacao.res Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst *.gfc lixo.lxo entrada.kyb resultado.tst");
-	
+
+	/**
+	 * M\E9todo usado para iniciar a execu\E7\E3o da ferramenta. Apagar
+	 * diret\F3rios e arquivos que possam ter sidos gerados por execu\E7\F5es
+	 * anteriores.
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	public static void prepareExecution() throws IOException,
+			InterruptedException {
+
+		System.out
+				.println(" \n Atenção: Preparando a execução do framework. Diretórios e arquivos serão removidos...");
+
+		String cmd = "rm logerror.tes log_erro.log detalhes.log Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst lixo.lxo resultado.tst popManejo.pop repositorio.dep evolucao.fil arquivoElementos.elem";
+
+		Process proc = Runtime.getRuntime().exec(cmd);
+		proc.waitFor();
+
+		// System.out.println(" \n removeFile.sh %s %s valimpi logerror.tes log_erro.log detalhes.log Populacao.res Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst *.gfc lixo.lxo entrada.kyb resultado.tst");
+
 	}
 }

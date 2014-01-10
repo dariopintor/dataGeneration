@@ -1,0 +1,50 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of argc at 1 */ 
+/* definition of argv at 1 */ 
+node [shape = doublecircle] 15;
+node [shape = circle] 2;
+/* pusage of argc at 2 */ 
+node [shape = circle] 14;
+node [shape = circle] 3;
+/* derefdefinition of argc at 3 */ 
+/* derefdefinition of argv at 3 */ 
+node [shape = circle] 4;
+/* derefdefinition of myRank at 4 */ 
+node [shape = circle] 5;
+/* pusage of myRank at 5 */ 
+node [shape = circle] 10;
+node [shape = circle] 6;
+/* definition of x at 6 */ 
+/* cusage of argv at 6 */ 
+node [shape = circle] 7;
+/* definition of y at 7 */ 
+/* cusage of argv at 7 */ 
+node [shape = circle] 8;
+/* definition of z at 8 */ 
+/* cusage of argv at 8 */ 
+node [shape = circle] 9;
+/* cusage of x at 9 */ 
+/* cusage of y at 9 */ 
+/* cusage of z at 9 */ 
+node [shape = circle] 12;
+node [shape = circle] 11;
+/* cusage of myRank at 11 */ 
+node [shape = circle] 13;
+1 -> 2;
+2 -> 3;
+2 -> 14;
+14 -> 15;
+3 -> 4;
+4 -> 5;
+5 -> 6;
+5 -> 11;
+10 -> 13;
+12 -> 13;
+6 -> 7;
+7 -> 8;
+8 -> 9;
+9 -> 10;
+11 -> 12;
+13 -> 15;
+ } 

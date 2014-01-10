@@ -1,0 +1,43 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of rank at 1 */ 
+node [shape = doublecircle] 12;
+node [shape = circle] 2;
+/* m_recv of buf,2,MPI_INT,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status at 2 */ 
+/* definition of buf at 2 */
+/* derefdefinition of status at 2 */ 
+node [shape = circle] 3;
+node [shape = circle] 10;
+node [shape = circle] 5;
+/* pusage of buf at 5 */ 
+/* pusage of buf at 5 */ 
+node [shape = circle] 6;
+/* definition of buf at 6 */ 
+/* cusage of buf at 6 */ 
+/* cusage of buf at 6 */ 
+node [shape = circle] 7;
+node [shape = circle] 8;
+/* definition of buf at 8 */ 
+/* cusage of buf at 8 */ 
+/* cusage of buf at 8 */ 
+node [shape = circle] 9;
+node [shape = circle] 11;
+/* m_send of buf,1,MPI_INT,0,2,MPI_COMM_WORLD at 11 */ 
+/* susage of buf at 11 */
+node [shape = circle] 4;
+/* pusage of buf at 4 */ 
+/* pusage of buf at 4 */ 
+1 -> 2;
+2 -> 3;
+3 -> 4;
+4 -> 5;
+10 -> 4;
+4 -> 11;
+5 -> 6;
+5 -> 8;
+7 -> 10;
+9 -> 10;
+6 -> 7;
+8 -> 9;
+11 -> 12;
+ } 

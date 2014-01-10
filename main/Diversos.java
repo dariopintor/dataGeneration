@@ -48,14 +48,27 @@ public class Diversos {
  
 
 	/** Funcao usada para obter segundos referentes a data e hora atuais. */
-	public long getSecs() {
+	public static long getSecs() {
 
 		Calendar dataFinal = Calendar.getInstance();
+	//	dataFinal.getTime();
 		long hora = dataFinal.getTimeInMillis();
 		return hora;
 
 	}
-
+	
+	public static String pegarTempo( long mili){
+		long ms = mili ;  
+		long segundos = ms / 1000;  
+		long minutos = segundos / 60;  
+		segundos = segundos % 60;  
+		long horas = minutos / 60;  
+		minutos = minutos % 60;  
+		String tempo = String.format ("%02d:%02d:%02d", horas, minutos, segundos); // Exemplo: "12:34:56" 
+		
+		return tempo;
+	}
+	
  
 	/**	 * Funçao usada para enviar conteudo no final de um arquivo com informacao
 	 * da hora.
@@ -168,11 +181,11 @@ public class Diversos {
 
 	/** Funcaoo usada para gerar um caracter aleatoriamente, com base no string
 	 * seletivo.*/
-	public static  char generateChar(String seletivo) {
+	public static  String generateChar(String seletivo) {
 		int somatoria = 0, sorteio = 0;
 		int entraEspaco = 0, entraLETRA = 0, entraLetra = 0, entraNumero = 0;
 		for (int i = 0; i < (int) seletivo.length(); i++) {
-			switch ((seletivo + i)) {
+			switch ((seletivo)) {
 			case "s":
 				somatoria++;
 				entraEspaco = 1;
@@ -217,7 +230,7 @@ public class Diversos {
 		if ((entraLetra == 0) && (sorteio >= 97))
 			sorteio += 26;
 
-		return (char) sorteio;
+		return String.valueOf(sorteio);
 	} // fim generateChar
 
 	
@@ -242,7 +255,7 @@ public class Diversos {
 	
 	/*** Metodo usado para contar a quantidade de linhas dentro de um aquivo
 	 * @throws IOException	 */
-	public int quantidadeLinhas(File arquivo) throws IOException {
+	public static int quantidadeLinhas(File arquivo) throws IOException {
 		String linha = "";
 		int quantidadeDeLinhas = 0;
 		FileReader arq = new FileReader(arquivo);
@@ -293,7 +306,7 @@ public class Diversos {
 	
 	/** Metodo usado copiar um diretorio ( na verdade faz um backup do diretorio
 	 * atual, pois este vai ser sobscrito na proxima geracao*/
-	public void copyDirectory(File sourceLocation, File targetLocation)
+	public static void copyDirectory(File sourceLocation, File targetLocation)
 			throws IOException {
 		if (sourceLocation.isDirectory()) {
 			if (!targetLocation.exists()) {
@@ -322,14 +335,14 @@ public class Diversos {
 	}
 	
 	/** Metodo para calculo do madulo entre dois doubles. */
-	public double modulo(double a, double b) {
-		if (a < 0)
-			a *= -1;
-		if (b < 0)
-			b *= -1;
-		for (; a >= b; a -= b)
-			;
-		return a;
+	public static double modulo(double a, double b) {		
+		if(a < 0) a*= -1;
+		
+		if(b < 0) b*= -1;
+	 
+		  for(; a >= b; a -= b);
+		  
+		  return a;
 	}
 	
 	/** Metodo para gerar um número aleatório com intevalos de números. */

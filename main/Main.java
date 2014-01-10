@@ -23,37 +23,37 @@ public class Main {
 		
 			
 
-		long inic = 0, fim = 0;
-		inic = Diversos.getSecs();
-		System.out.println("Iniciando a Execucao da Ferramenta");
-		Central.interpretaArquivoConfiguracao();
+		Central.inicioExecucao = Diversos.getSecs();
+		
 		Central.prepareExecution();
-		Ferramenta.prepareTool();
+		Central.interpretaArquivoConfiguracao();
+		Ferramenta.preparaFerramenta();
 		Central.setQuantidadeElemento(Ferramenta.obtemElementosRequeridosValiMPI());
 		Populacao.geraPopulacaoInicial();	
 		Populacao.avaliaPopulacao();
 		
 		Central.backup();
 		Central.status();
-		Central.setFimPrimeiraExecucao();
+		
+		Central.fimPrimeiraExecucao = Diversos.getSecs();
 
 		for (Central.geracaoAtual = 1; !Central.paraTeste(); Central.geracaoAtual++) {
 			Populacao.evoluiPopulacao();
-			Populacao.geraFitness();
+			Populacao.avaliaPopulacao();
 			Central.backup();
 			Central.manutencaoMelhorGeracao();
-
 			Central.status();
+			
 		}// fim for
 		
-		fim = Diversos.getSecs();
+		Central.fimExecucao = Diversos.getSecs();
 		System.out.print(" \nFim do processo de evolucao...");
 		Central.resultado();
 		
-		if (Central.geracaoAtual > 1){
-			Populacao.decodificaPopulacao(Central.arquivoMelhorPopulacao,
-					"Populacao.res");
-		}
+//		if (Central.geracaoAtual > 1){
+//			Populacao.decodificaPopulacao(Central.arquivoMelhorPopulacao,
+//			"Populacao.res");
+//		}
 		
 		if (Central.ativaTabu==1){
 			Populacao

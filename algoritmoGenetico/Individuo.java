@@ -69,12 +69,19 @@ public class Individuo{
 	 * configuracao fornecida ao framework.
 	 */
 
-	public void individuo (String linha) {
+	public Individuo (String linha) {
 		int numArgumentos = Central.formatoIndividuo.length();
 		String bloco = null;
 		String [] dado =null;
 		for (int cont = 0; cont < numArgumentos; cont++) {
-			dado = linha.split(",");
+			
+			if(linha.charAt(0)== '+' || linha.charAt(0)== '-'){
+				genes = linha.trim();
+				break;
+			} else {
+				dado = linha.split(",");	
+			
+			
 			
 			switch (Central.formatoIndividuo.charAt(cont)) {
 			case 'I': {
@@ -87,44 +94,12 @@ public class Individuo{
 			
 			}// fim switch
 			genes += bloco;
+			}
 		}
 
 	}
 
-	/**
-	 * * Metodo para recuperar o pos-esimo individuo da populacao. pos deve
-	 * variar de 0 ate tamanho da populacao - 1.
-	 * @throws IOException 
-	 */
-	public void load(int pos) throws IOException {
-		int i = 0;
-		String gene = null, geneAux = null;
-		String saida = null, linha = null;
-		
-		FileReader fr = new FileReader(Central.arquivoPopulacao);
-		BufferedReader br = new BufferedReader(fr);	
-		
-		if (pos >= Central.tamanhoPopulacao) {
-			 saida = String.format("Pos, %d, extrapolou tamanho da populacao %f", pos, Central.tamanhoPopulacao);
-			 Diversos.erro(saida,1);
-		}
-
-		linha = br.readLine();
-		for (i = 0; i <= pos; i++) {
-			// cout << "\n ind nro " << i;
-			if (pos == 14){
-				pos += 0;
-			}	
-			gene = linha;
-			linha = br.readLine();	
-		}// fim for	
-		br.close();
-		
-		i = Diversos.indexOf(gene.trim(), ':') + 1;
-		geneAux = gene + i;
-		setGenes(geneAux.trim());		
-	}
-
+	
 	// _________________________________________________________________
 
 	/** Metodo que atribui valor para a gene de um individuo. */
@@ -135,7 +110,7 @@ public class Individuo{
 	// _________________________________________________________________
 
 	/** Metodo que recupera o respectivo valor do bloco passado como argumento. */
-	public int decode_block_int(String bloco) {
+	public static int decode_block_int(String bloco) {
 
 		return Integer.parseInt(bloco);
 	}
@@ -177,29 +152,6 @@ public class Individuo{
 
 	// _________________________________________________________________
 	
-	/** Metodo usado para avaliar a populacao do AG. Cada individuo eh executado e
-	 * o fitness o calculado com base no numero de elementos requeridos
-	 * satisfeitos pela execucao do mesmo.
-	 * @throws IOException 
-	 * @throws InterruptedException */
-	public void getAptidao() throws IOException, InterruptedException {
-		
-		
-		 
-		geraCoberturaIndividuo();
-		Diversos.toFile("log_alocacoes.tst", "0, 0, 0, PProva");
-		Diversos.toFile("log_alocacoes.tst", "1, 0, 0, PProva");
-		geraBonusIneditismo();
-		geraIneditismoPopulacao();
-
-//		Central.geraLinhaPerda();
-//		System.out.println("\n Linha de perda:\n" << Central.linhaPerda());
-
-		geraFitness();
-		if (Central.geraLog != 0){		
-		Diversos.toFile("log_erro.log", "---saindo avaliaPopulacao");
-		}
-	}// fim avaliaPopulacao()
 	
 	public String getGenes() {
         return genes;

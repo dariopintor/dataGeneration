@@ -1,0 +1,101 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of x at 1 */ 
+/* definition of y at 1 */ 
+/* definition of z at 1 */ 
+node [shape = doublecircle] 26;
+node [shape = circle] 2;
+/* definition of buf at 2 */ 
+/* cusage of x at 2 */ 
+node [shape = circle] 3;
+/* definition of buf at 3 */ 
+/* cusage of y at 3 */ 
+node [shape = circle] 4;
+/* m_send of buf,2,MPI_INT,1,1,MPI_COMM_WORLD at 4 */ 
+/* susage of buf at 4 */
+node [shape = circle] 5;
+/* definition of buf at 5 */ 
+/* cusage of y at 5 */ 
+node [shape = circle] 6;
+/* definition of buf at 6 */ 
+/* cusage of z at 6 */ 
+node [shape = circle] 7;
+/* m_send of buf,2,MPI_INT,2,1,MPI_COMM_WORLD at 7 */ 
+/* susage of buf at 7 */
+node [shape = circle] 8;
+/* m_recv of buf,1,MPI_INT,MPI_ANY_SOURCE,2,MPI_COMM_WORLD,&status at 8 */ 
+/* definition of buf at 8 */
+/* derefdefinition of status at 8 */ 
+node [shape = circle] 9;
+/* definition of x at 9 */ 
+/* cusage of buf at 9 */ 
+node [shape = circle] 10;
+/* m_recv of buf,1,MPI_INT,MPI_ANY_SOURCE,2,MPI_COMM_WORLD,&status at 10 */ 
+/* definition of buf at 10 */
+/* derefdefinition of status at 10 */ 
+node [shape = circle] 11;
+/* definition of y at 11 */ 
+/* cusage of buf at 11 */ 
+node [shape = circle] 12;
+/* pusage of x at 12 */ 
+/* pusage of y at 12 */ 
+node [shape = circle] 18;
+node [shape = circle] 13;
+/* definition of buf at 13 */ 
+/* cusage of x at 13 */ 
+node [shape = circle] 14;
+/* definition of buf at 14 */ 
+/* cusage of y at 14 */ 
+node [shape = circle] 15;
+/* m_send of buf,2,MPI_INT,3,1,MPI_COMM_WORLD at 15 */ 
+/* susage of buf at 15 */
+node [shape = circle] 16;
+/* m_recv of buf,1,MPI_INT,MPI_ANY_SOURCE,2,MPI_COMM_WORLD,&status at 16 */ 
+/* definition of buf at 16 */
+/* derefdefinition of status at 16 */ 
+node [shape = circle] 17;
+/* definition of z at 17 */ 
+/* cusage of buf at 17 */ 
+node [shape = circle] 24;
+node [shape = circle] 19;
+/* definition of buf at 19 */ 
+node [shape = circle] 20;
+/* definition of buf at 20 */ 
+node [shape = circle] 21;
+/* m_send of buf,2,MPI_INT,3,1,MPI_COMM_WORLD at 21 */ 
+/* susage of buf at 21 */
+node [shape = circle] 22;
+/* m_recv of buf,1,MPI_INT,3,2,MPI_COMM_WORLD,&status at 22 */ 
+/* definition of buf at 22 */
+/* derefdefinition of status at 22 */ 
+node [shape = circle] 23;
+/* definition of z at 23 */ 
+node [shape = circle] 25;
+/* cusage of z at 25 */ 
+1 -> 2;
+2 -> 3;
+3 -> 4;
+4 -> 5;
+5 -> 6;
+6 -> 7;
+7 -> 8;
+8 -> 9;
+9 -> 10;
+10 -> 11;
+11 -> 12;
+12 -> 13;
+12 -> 19;
+18 -> 25;
+24 -> 25;
+13 -> 14;
+14 -> 15;
+15 -> 16;
+16 -> 17;
+17 -> 18;
+19 -> 20;
+20 -> 21;
+21 -> 22;
+22 -> 23;
+23 -> 24;
+25 -> 26;
+ } 

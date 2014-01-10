@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Formatter;
+import java.util.Random;
 
 import main.Diversos;
 import main.Mersenne;
@@ -34,6 +35,24 @@ public class Populacao {
 	public static Individuo[] individuos;
 	private int tamPopulacao;
 
+	// cria uma população com indivíduos sem valor, será composto posteriormente
+	public Populacao(int tamPop) {
+		tamPopulacao = tamPop;
+		individuos = new Individuo[tamPop];
+		for (int i = 0; i < individuos.length; i++) {
+			individuos[i] = null;
+		}
+	}
+	/** coloca um indivíduo na próxima posição disponível da população */
+	public void setIndividuo(Individuo individuo) {
+		for (int i = 0; i < individuos.length; i++) {
+			if (individuos[i] == null) {
+				individuos[i] = individuo;
+				return;
+			}
+		}
+	}
+
 	public static void geraPopulacaoInicial() throws IOException {
 
 		Diversos.toFile("log_erro.log", "---geraPopulacaoInicial");
@@ -52,15 +71,20 @@ public class Populacao {
 	 */
 	public static void geraPopulacaoInicialAleatoria(int numGenes, int tamPop)
 			throws IOException {
-		System.out.println("\nGerando pop.inic.aleatoria");
-
+		System.out.println("Gerando População inicial Aleatória");
+		String saida = "";
 		individuos = new Individuo[tamPop];
 		Diversos.limpaArquivo(Central.arquivoPopulacao.getPath());
 		for (int contador = 0; contador < individuos.length; contador++) {
 			individuos[contador] = new Individuo(numGenes);
-			Diversos.escreverArquivo(Central.arquivoPopulacao,
+
+			saida = String.format("%d : %s", contador + 1,
 					individuos[contador].getGenes());
+			Diversos.escreverArquivo(Central.arquivoPopulacao, saida);
+
 		} // fim for
+		
+		System.out.println("Fim da Geração da População inicial Aleatória \n\n");
 	}
 
 	/**
@@ -69,96 +93,38 @@ public class Populacao {
 	 * @throws IOException
 	 */
 	public static void geraPopulacaoInicialArquivo() throws IOException {
+		
+		System.out.println("Gerando População inicial Arquivo");
+		
 		individuos = new Individuo[(int) Central.tamanhoPopulacao];
 		Diversos.limpaArquivo(Central.arquivoPopulacao.getPath());
 
-		System.out.printf("\nGerando pop.inic.arquivo %s",
-				Central.arquivoPopulacaoInicial);
-
+		String linha = null, saida = "";
+		int contador = 0;		
 		FileReader arq = new FileReader(Central.arquivoPopulacaoInicial);
 		BufferedReader lerArq = new BufferedReader(arq);
 
-		String linha = null;
-		int contador = 0;
 		linha = lerArq.readLine();
 		for (contador = 0; linha != null;) {
 			linha = linha.trim();
 			individuos[contador] = new Individuo(linha);
 
-			Diversos.escreverArquivo(Central.arquivoPopulacao,
+			saida = String.format("%d : %s", contador + 1,
 					individuos[contador].getGenes());
+			Diversos.escreverArquivo(Central.arquivoPopulacao, saida);
+
 			if (linha != ("")) {
 				contador++;
 			}
 			linha = lerArq.readLine();
 		} // fim for
-			// Central.setTamanhoPopulacao(contador);
-		Central.recalculaPorcEvolucao();
+			 Central.setTamanhoPopulacao(contador);
+			 
+			 System.out.println("Fim População Inicial Arquivo \n\n");
+	//	Central.recalculaPorcEvolucao();
 	}
 
-	/**
-	 * Metodo usado para incluir um novo individuo no arquivo de populacao. Caso
-	 * o individuo ja exista na populacao a insercao nao sera realizada.
-	 * 
-	 * @throws IOException
-	 */
-	static boolean toPopulacao(int nro, String strIndividuo, File arquivo)
-			throws IOException {
-
-		String saida = "";
-
-		if ((strIndividuo.equals("")) || (strIndividuo.equals(216)))
-			System.out
-					.println(" to erro, tentando salvar individuo vazio ou 216,216");
-
-		if (nro != 0) {
-			if (inPopulacao(strIndividuo, arquivo)) {
-				return false;
-			}
-		}
-
-		saida += String.format("%5d : %s\n", nro, strIndividuo);
-		Diversos.escreverArquivo(arquivo, saida);
-
-		return true;
-	}
-
-	/**
-	 * Metodo usado para verificar se um individuo esta na populacao
-	 * representada pelo arquivo passado por argumento.
-	 * 
-	 * @throws IOException
-	 */
-	public static boolean inPopulacao(String strIndividuo, File arquivo)
-			throws IOException {
-		String linhaArquivo = null;
-		String pegaQuebra = null;
-		String[] quebraLinhaArq = null;
-
-		if (arquivo == null) {
-			return false;
-		}
-
-		FileReader fr = new FileReader(arquivo);
-		BufferedReader br = new BufferedReader(fr);
-
-		linhaArquivo = br.readLine();
-
-		while (linhaArquivo != null) {
-			quebraLinhaArq = linhaArquivo.split(":");
-			pegaQuebra = quebraLinhaArq[1].trim();
-
-			if (pegaQuebra.equals(strIndividuo)) {
-				br.close();
-				return true;
-			}
-
-			linhaArquivo = br.readLine();
-		}
-
-		br.close();
-		return false;
-	}
+	
 
 	/**
 	 * Metodo usado para avaliar a populacao do AG. Cada individuo eh executado
@@ -176,8 +142,7 @@ public class Populacao {
 		}
 
 		geraCoberturaIndividuoValiMPI();
-		Diversos.toFile("log_alocacoes.tst", "0, 0, 0, PProva");
-		Diversos.toFile("log_alocacoes.tst", "1, 0, 0, PProva");
+
 
 		if (Central.geraLog != 0) {
 			Diversos.toFile("log_erro.log", "---saindo avaliaPopulacao");
@@ -202,32 +167,46 @@ public class Populacao {
 	 */
 	public static void geraCoberturaIndividuoValiMPI() throws IOException,
 			InterruptedException {
-
+		
+		System.out.println("Avaliando Individuos da População " + Central.geracaoAtual);
 		String dado = "";
 		String[] quebra = null;
-
-		System.out.println("Avaliando os Individuos:\n");
 		Diversos.limpaArquivo(Central.arquivoCoberturaIndividuo.getPath());
 
 		for (int contador = 0; contador < Central.tamanhoPopulacao; contador++) {
+			
+			 System.out.println(individuos[contador].getGenes());
 			quebra = individuos[contador].getGenes().split("\\+");
 
+			
 			for (String b : quebra) {
 				dado += b + " ";
 			}
-			// System.out.println(Central.nProcess);
 			Ferramenta.usaValiMPI(dado, contador + 1);
 			dado = "";
 		} // fim for contador
-		System.out.println("Saindo avaliação dos Individuos:\n");
+		
+		System.out.println("Fim Avaliação Individuo da População " + Central.geracaoAtual);
 
 		geraCoberturaElementos();
 	} // fim geraCoberturaIndividuoValiMPI()
 
 	public static void evoluiPopulacao() throws IOException {
-
-		if (Central.quantidadeFitness > 0)
-			evolucaoPorFitness();
+		System.out.printf("\n\n###########################################");
+		System.out.println("\nEvoluindo População "+Central.geracaoAtual);
+		
+		if (Central.quantidadeFitness > 0){
+			individuos = evolucaoPorFitness(Central.tamanhoPopulacao);
+			String saida = "";
+			Diversos.limpaArquivo(Central.arquivoPopulacao.getPath());
+			//escreve a populacao em arquivo
+			for ( int contador = 0; contador < individuos.length; contador ++){
+				saida = String.format("%d : %s", contador + 1,
+						individuos[contador].getGenes());
+				Diversos.escreverArquivo(Central.arquivoPopulacao, saida);
+			}
+				
+		}
 
 		/*
 		 * Para recuperar individuos que foram perdidos da geracao passada e nao
@@ -249,6 +228,8 @@ public class Populacao {
 
 		if (Central.geraLog != 0)
 			Diversos.toFile("log_erro.log", "---saindo EvoluiPopulacao");
+		
+		System.out.println("Fim evolução da População " +Central.geracaoAtual);
 
 	}
 
@@ -260,8 +241,8 @@ public class Populacao {
 	public static void geraFitness() throws IOException {
 
 		String saida = null, linha = "";
-		String [] quebra = null;
-		
+		String[] quebra = null;
+
 		if (Central.geraLog != 0) {
 			Diversos.toFile("log_erro.log", "------geraFitness");
 		}
@@ -278,17 +259,19 @@ public class Populacao {
 		FileReader fr = new FileReader(Central.arquivoCoberturaIndividuo);
 		BufferedReader br = new BufferedReader(fr);
 		linha = br.readLine();
-
+		Diversos.limpaArquivo(Central.arquivoFitness.getPath());
 		for (int i = 0; i < Central.tamanhoPopulacao; i++) {
 			quebra = linha.split(":");
 			desempenho = quebra[1].trim();
+			linhaCobertura = sobrepoe(linhaCobertura, desempenho);
 			fitness = ((double) Diversos.numberOf(desempenho, 'X') * 100)
 					/ (double) (Central.quantidadeElemento);
-			saida = String.format("%5d : %10.2f\n", i+1, fitness);
+			saida = i + 1 + ": " + fitness;
+		//	System.out.println(saida);
 			Diversos.escreverArquivo(Central.arquivoFitness, saida);
 
 			linha = br.readLine();
-			somatoriaFitness +=fitness;
+			somatoriaFitness += fitness;
 		}// fim for
 			// rastro("PONTO1.7");*/
 
@@ -302,108 +285,49 @@ public class Populacao {
 	 * 
 	 * @throws IOException
 	 */
-	public static void evolucaoPorFitness() throws IOException {
+	public static Individuo [] evolucaoPorFitness(double tamPopulacao) throws IOException {
+		Individuo[] novosIndividuos = new Individuo[(int) tamPopulacao];
 		Diversos.toFile("log_erro.log", "------evolucaoFitness");
 		int cross = 0, mut = 0;
 		double sorteio = 0;
 		int contador = 0;
-
-		// Apagar o arquivo evolucaio.fil caso seja a primeira evolucao da
-		// populacao, retirando assim,
-		// informaces de execucoes anteriores.
-		if (Central.geracaoAtual == 0) {
-			Diversos.limpaArquivo("evolucao.fil");
-		}
-		Diversos.toFile("evolucao.fil", "");
-		Diversos.toFile("evolucao.fil",
-				"##############################################################");
+		Individuo pai1;
+		Individuo pai2;
+		String filho1 = "";
+		String filho2="";
+		String [] quebra;
 		String saida = null;
-		Diversos.toFile("evolucao.fil", String.format("Evolucao Geracao :%d",
-				(int) Central.geracaoAtual));
-
-		Diversos.toFile("evolucao.fil",
-				"==============================================================");
-
-		saida = String.format(
-				"EVOLUCAO POR FITNESS (%.0f) / somatoriaFitness = %.0f",
-				(int) Central.quantidadeFitness, Central.somatoriaFitness);
-		Diversos.toFile("evolucao.fil", saida);
-		/**/
-
-		// contador possui a quantidade de individuos gerados e aceitos na
-		// proxima geracao.
-		// Iteracao para gerar novo individuo enquanto contador for menr que a
-		// quantidade configurada.
-		for (contador = 0; contador < Central.quantidadeFitness;) {
+		
+		for (contador = 0; contador < Central.tamanhoPopulacao; contador ++) {
 			sorteio = Central.geraSorteio(Central.somatoriaFitness);
-
-			objIndividuo.load((int) indiceIndividuoSorteado(sorteio));
-
-			Diversos.toFile("evolucao.fil",
-					"--------------------------------------------------------------");
-			saida = String.format("1 Sorteio : %f : %s", sorteio,
-					objIndividuo.genes);
-			Diversos.toFile("evolucao.fil", saida);
-			/**/
-
+			pai1 = individuos[indiceIndividuoSorteado(sorteio)];
 			sorteio = Central.geraSorteio(Central.somatoriaFitness);
-			objIndividuo.load((int) indiceIndividuoSorteado(sorteio));
-			saida = String.format("2 Sorteio : %f : %s", sorteio,
-					objIndividuo.genes);
-			Diversos.toFile("evolucao.fil", saida);
-			/**/
-
+			pai2 = individuos[indiceIndividuoSorteado(sorteio)];
+			
+			// aplica a taxa de crossover
 			cross = Mersenne.genrand() % 100;
-
 			if (cross <= Central.taxaCrossover * 100) {
-				crossover((objIndividuo.genes), (objIndividuo.genes));
-				saida = String.format("  op CROSSOVER : %s / %s",
-						objIndividuo.genes, objIndividuo.genes);
-
-				Diversos.toFile("evolucao.fil", saida);
+				quebra = crossover(pai1.getGenes(), pai2.getGenes()).trim().split("\\&");
+				filho1=quebra[0]; 
+				filho2=quebra[1];
 			}
 
-			mut = Mersenne.genrand() % 100;
-
+			// aplica a taxa de mutacao
+			mut = (int) Math.random() * 100;
 			if (mut <= Central.taxaMutacao * 100) {
-				mutacao(objIndividuo.genes);
-				saida = String
-						.format(" op MUTACAO 1  : %s", objIndividuo.genes);
+				filho1 = mutacao(filho1);
+				saida = String.format(" op MUTACAO 1  : %s", filho1);
+				Diversos.toFile("evolucao.fil", saida);
+				
+				filho2= mutacao(pai2.getGenes());
+				saida = String.format("    op MUTACAO 2  : %s",	filho2);
 				Diversos.toFile("evolucao.fil", saida);
 			}
-
-			if (toPopulacao(contador, objIndividuo.genes,
-					Central.arquivoPopulacaoTemporario)) {
-				contador++;
-				saida = String.format(" ** %d INDIVIDUO   : %s", contador,
-						objIndividuo.genes);
-				Diversos.toFile("evolucao.fil", saida);
-			}
-
-			if (contador < Central.quantidadeFitness) {
-				mut = Mersenne.genrand() % 100;
-				if (mut <= Central.taxaMutacao * 100) {
-					mutacao(objIndividuo.genes);
-					/* prova */
-					saida = String.format("    op MUTACAO 2  : %s",
-							objIndividuo.genes);
-					Diversos.toFile("evolucao.fil", saida);
-					/**/
-				}
-				if (toPopulacao(contador, objIndividuo.genes,
-						Central.arquivoPopulacaoTemporario)) {
-					contador++;
-					/* prova */
-					saida = String.format(" ** %d INDIVIDUO   : %s", contador,
-							objIndividuo.genes);
-					Diversos.toFile("evolucao.fil", saida);
-					/**/
-				}
-			}// fim if
+			novosIndividuos[contador] = new Individuo(filho1);					
 		} // fim for fitness
-
 		if (Central.geraLog != 0)
 			Diversos.toFile("log_erro.log", "------saindo evolucaoFitness");
+		return novosIndividuos;
 
 	}
 
@@ -415,7 +339,8 @@ public class Populacao {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unused")
-	public int indiceIndividuoSorteado(double sorteio) throws IOException {
+	public static int indiceIndividuoSorteado(double sorteio)
+			throws IOException {
 		double superior = 0;
 		String saida = null;
 		// int tamLinha = nroEspacos( (int) Central.tamanhoPopulacao ) + 30;
@@ -434,12 +359,13 @@ public class Populacao {
 		linha = br.readLine();
 		for (int i = 0; (i < Central.tamanhoPopulacao); i++) {
 			quebra = linha.split(":");
-			linha = quebra[0].trim();
+			linha = quebra[1].trim();
 			superior += Double.parseDouble(linha);
 			if (sorteio <= superior) {
 				br.close();
 				return i;
 			} // fim if
+			linha = br.readLine();
 		}// fim for
 
 		br.close();
@@ -447,16 +373,16 @@ public class Populacao {
 	}
 
 	/** Metodo usado para aplicar mutacao em um individuo. */
-	public void mutacao(String indiv) {
+	public static String mutacao(String indiv) {
 		int i = 0, mudou = 0, posMut = (int) (Math.random() * indiv.length());
 		for (; mudou == 0;) {
 			switch (indiv.charAt(posMut)) {
 			case '+':
-				indiv = indiv.replace(indiv.charAt(posMut), '-');
+				indiv = indiv.replace(indiv.charAt(posMut), '+');
 				mudou = 1;
 				break;
 			case '-':
-				indiv = indiv.replace(indiv.charAt(posMut), '+');
+				indiv = indiv.replace(indiv.charAt(posMut), '-');
 				mudou = 1;
 				break;
 			// case '#': posMut = rand() % strlen( indiv ); break; //escolhe
@@ -471,71 +397,52 @@ public class Populacao {
 					;
 				if ((Central.formatoIndividuo.charAt(i - 1) == 'C')
 						|| (Central.formatoIndividuo.charAt(i - 1) == 'S')) {
-					indiv = indiv.replace(indiv.charAt(posMut),
-							Diversos.generateChar(Central.tipoString));
+					indiv = indiv.replace(indiv.charAt(posMut), Diversos
+							.generateChar(Central.tipoString).charAt(0));
 				} // fim if
 				else {
-					indiv = indiv.replace(indiv.charAt(posMut),
-							Diversos.generateChar("n"));
+					indiv = indiv.replace(indiv.charAt(posMut), Diversos
+							.generateChar("n").charAt(0));
 				} // fim else
 			}// fim default
 			}// fim switch
-		}// fim for
 
+		}// fim for
+		return indiv;
 	}
 
-	/**
-	 * Metodo que aplica operador crossover nos individuos representados por
-	 * indiv1 e indiv2
-	 */
-	public void crossover(String indiv1, String indiv2) {
-		int i = 0, ocorre = 0, posCross = 0, tamTipo = 0, inicTipo = 0, tamFormat = 0;
-		String block = null, indivAux = null;
+	public static String crossover(String individuo1, String individuo2) {
+        Random r = new Random();
 
-		indivAux = indiv1;
+        //sorteia o ponto de corte
+        int pontoCorte1 = r.nextInt((individuo1.length()/2) -2) + 1;
+        int pontoCorte2 = r.nextInt((individuo1.length()/2) -2) + individuo1.length()/2;
 
-		tamFormat = Central.formatoIndividuo.length();
-		for (i = 0; i < tamFormat; i++) {
-			ocorre = (int) (Math.random() * 2);
-			if (ocorre != 0) { // ocorre crossover no tipo chance de 50%
-				inicTipo = Central.inicioTipo(i);
-				tamTipo = Central.tamanhoTipo(i);
-				posCross = ((int) (Math.random() * tamTipo));
-				switch (Central.formatoIndividuo.charAt(i)) {
-				case 'S': {
+        String filho1 = "";
+        String filho2 = "";
 
-					int maxTam = 0, maxTam2 = 0;
-					block = indiv1 + inicTipo;
-					// maxTam = Diversos.indexOf(block, '#');
-					maxTam = Diversos.indexOf(block, (char) 216);
-					if (maxTam == -1)
-						maxTam = tamTipo;
-					block = indiv2 + inicTipo;
-					// maxTam2 = Diversos.indexOf(block, '#');
-					maxTam2 = Diversos.indexOf(block, (char) 216);
-					if (maxTam2 == -1)
-						maxTam2 = tamTipo;
-					if (maxTam > maxTam2)
-						maxTam = maxTam2;
-					if (maxTam == 0)
-						posCross = 0;
-					else
-						posCross = ((int) (Math.random() * maxTam));
-					break;
-				}// case
-				case 'C': {
-					posCross = 0;
-					break;
-				}// case
-				}// fim switch
-				indiv1 = indiv2 + (posCross + inicTipo);
-				indiv2 = indivAux + (posCross + inicTipo);
-			}// fim if
-		}// fim for
-			// rastro("saiu -  crossover");
+        //pega os genes dos pais
+        String genePai1 = individuo1;
+        String genePai2 = individuo2;
 
-	}
+        String geneFilho1;
+        String geneFilho2;
 
+        //realiza o corte, 
+        geneFilho1 = genePai1.substring(0, pontoCorte1);
+        geneFilho1 += genePai2.substring(pontoCorte1, pontoCorte2);
+        geneFilho1 += genePai1.substring(pontoCorte2, genePai1.length());
+        
+        geneFilho2 = genePai2.substring(0, pontoCorte1);
+        geneFilho2 += genePai1.substring(pontoCorte1, pontoCorte2);
+        geneFilho2 += genePai2.substring(pontoCorte2, genePai2.length());
+
+        //cria o novo indivíduo com os genes dos pais
+        filho1 = geneFilho1;
+        filho2= geneFilho2;
+
+        return filho1  +"&"+ filho2;
+    }
 	/**
 	 * Metodo usado para obter o indice do individuo a ser mantido
 	 * 
@@ -549,13 +456,6 @@ public class Populacao {
 		FileReader fr = new FileReader(Central.arquivoIneditismo);
 		BufferedReader br = new BufferedReader(fr);
 
-		if (br == null) {
-			saida = String.format(
-					"nao abriu o arquivo de Ineditismo corretamente : %s",
-					Central.arquivoIneditismo);
-			Diversos.erro(saida, 1);
-		}
-
 		int pos2p = 0;
 		double posMelhor = -1, pos = 0, ineditismo = 0, ineditismoMelhor = -1;
 		int tamLinha = 100;
@@ -567,9 +467,9 @@ public class Populacao {
 				linha = linha + pos2p + 1;
 				linha = linha.trim();
 				ineditismo = Double.parseDouble(linha);
-				objIndividuo.load(cont);
 				if ((ineditismo > ineditismoMelhor)
-						&& (inPopulacao(objIndividuo.genes, arquivoAuxiliar))) {
+						&& (inPopulacao(individuos[cont].getGenes(),
+								arquivoAuxiliar))) {
 					posMelhor = cont;
 					ineditismoMelhor = ineditismo;
 				}
@@ -594,12 +494,6 @@ public class Populacao {
 
 		FileReader fr = new FileReader(Central.arquivoFitness);
 		BufferedReader br = new BufferedReader(fr);
-		if (br == null) {
-			saida = String.format(
-					"nao abriu o arquivo de Fitness corretamente : %s",
-					Central.arquivoFitness);
-			Diversos.erro(saida, 1);
-		}
 
 		linha = br.readLine();
 		for (int cont = 0; cont < Central.tamanhoPopulacao; cont++) {
@@ -608,9 +502,9 @@ public class Populacao {
 				linha = linha + pos2p + 1;
 				linha = linha.trim();
 				fit = Double.parseDouble(linha);
-				objIndividuo.load(cont);
 				if ((fit > fitMelhor)
-						&& (!inPopulacao(objIndividuo.genes, arquivoAuxiliar))) {
+						&& (!inPopulacao(individuos[cont].getGenes(),
+								arquivoAuxiliar))) {
 					posMelhor = cont;
 					fitMelhor = fit;
 				}
@@ -703,7 +597,7 @@ public class Populacao {
 					switch (Central.formatoIndividuo.charAt(i)) {
 					case 'I':
 						block_aux = String.format("%d",
-								objIndividuo.decode_block_int(block));
+								Individuo.decode_block_int(block));
 						break;
 					}// fim switch
 					Diversos.escreverArquivo(destino, block_aux);
@@ -721,4 +615,89 @@ public class Populacao {
 		}
 	}
 
+	/** Metodo usado para sobrepor duas linhas de coberturas. */
+	public static String sobrepoe(String cobAnterior, String cobAtual) {
+		int i = 0;
+		String novaCobertura = "";
+
+		if (cobAnterior == null) {
+			novaCobertura = cobAtual;
+		}
+		else {
+			
+			char charsNovaCobertura[] = cobAnterior.toCharArray(); 
+			char charsCobAtual[] = cobAtual.toCharArray(); 
+			
+			for (i = 0; i < charsCobAtual.length; i++) {
+				if (charsNovaCobertura[i] == '-') {
+					charsNovaCobertura[i] = charsCobAtual[i];
+				}
+				
+				novaCobertura+=charsNovaCobertura[i];
+			}
+		}
+		// fim els
+		return novaCobertura;
+	}// fim sobrepoe
+	/**
+	 * Metodo usado para incluir um novo individuo no arquivo de populacao. Caso
+	 * o individuo ja exista na populacao a insercao nao sera realizada.
+	 * 
+	 * @throws IOException
+	 */
+	public static boolean toPopulacao(int nro, String strIndividuo, File arquivo)
+			throws IOException {
+
+		String saida = "";
+
+		if ((strIndividuo.equals("")) || (strIndividuo.equals(216)))
+			System.out
+					.println(" to erro, tentando salvar individuo vazio ou 216,216");
+
+		if (inPopulacao(strIndividuo, arquivo)) {
+			return false;
+		}
+
+		saida += String.format("%d : %s", nro, strIndividuo);
+		Diversos.escreverArquivo(arquivo, saida);
+
+		return true;
+	}
+
+	/**
+	 * Metodo usado para verificar se um individuo esta na populacao
+	 * representada pelo arquivo passado por argumento.
+	 * 
+	 * @throws IOException
+	 */
+	public static boolean inPopulacao(String strIndividuo, File arquivo)
+			throws IOException {
+
+		if (strIndividuo.length() <= 0)
+			return false;
+
+		if (arquivo == null) {
+			return false;
+		}
+
+		String linhaArquivo = null;
+		String[] quebraLinhaArq = null;
+
+		FileReader fr = new FileReader(arquivo);
+		BufferedReader br = new BufferedReader(fr);
+
+		linhaArquivo = br.readLine();
+		while (linhaArquivo != null) {
+			quebraLinhaArq = linhaArquivo.split(":");
+			if (quebraLinhaArq[1].trim().equals(strIndividuo)) {
+				br.close();
+				return true;
+			}
+
+			linhaArquivo = br.readLine();
+		}
+
+		br.close();
+		return false;
+	}
 }
