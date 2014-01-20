@@ -1,0 +1,108 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of i at 1 */ 
+/* definition of fome at 1 */ 
+node [shape = doublecircle] 11;
+node [shape = circle] 2;
+/* definition of esq at 2 */ 
+/* cusage of i at 2 */ 
+node [shape = circle] 3;
+/* definition of dir at 3 */ 
+/* cusage of i at 3 */ 
+node [shape = circle] 4;
+node [shape = circle] 30;
+node [shape = circle] 6;
+/* cusage of i at 6 */ 
+node [shape = circle] 7;
+/* definition of peguei_esq at 7 */ 
+node [shape = circle] 8;
+/* definition of peguei_dir at 8 */ 
+node [shape = circle] 9;
+node [shape = circle] 25;
+node [shape = circle] 13;
+/* m_send of &esq,1,MPI_INT,TASK_GARFOS,TAG_PEGA,MPI_COMM_WORLD at 13 */ 
+/* susage of esq at 13 */
+node [shape = circle] 14;
+/* m_recv of &peguei_esq,1,MPI_INT,TASK_GARFOS,TAG_PEGA,MPI_COMM_WORLD,&status at 14 */ 
+/* definition of peguei_esq at 14 */
+/* derefdefinition of status at 14 */ 
+node [shape = circle] 15;
+/* m_send of &dir,1,MPI_INT,TASK_GARFOS,TAG_PEGA,MPI_COMM_WORLD at 15 */ 
+/* susage of dir at 15 */
+node [shape = circle] 16;
+/* m_recv of &peguei_dir,1,MPI_INT,TASK_GARFOS,TAG_PEGA,MPI_COMM_WORLD,&status at 16 */ 
+/* definition of peguei_dir at 16 */
+/* derefdefinition of status at 16 */ 
+node [shape = circle] 17;
+/* pusage of peguei_esq at 17 */ 
+/* pusage of peguei_dir at 17 */ 
+node [shape = circle] 20;
+node [shape = circle] 18;
+/* m_send of &esq,1,MPI_INT,TASK_GARFOS,TAG_LIBERA,MPI_COMM_WORLD at 18 */ 
+/* susage of esq at 18 */
+node [shape = circle] 19;
+/* definition of peguei_esq at 19 */ 
+node [shape = circle] 21;
+/* pusage of peguei_esq at 21 */ 
+/* pusage of peguei_dir at 21 */ 
+node [shape = circle] 24;
+node [shape = circle] 22;
+/* m_send of &dir,1,MPI_INT,TASK_GARFOS,TAG_LIBERA,MPI_COMM_WORLD at 22 */ 
+/* susage of dir at 22 */
+node [shape = circle] 23;
+/* definition of peguei_dir at 23 */ 
+node [shape = circle] 26;
+/* definition of fome at 26 */ 
+/* cusage of fome at 26 */ 
+/* cusage of i at 26 */ 
+node [shape = circle] 27;
+/* m_send of &esq,1,MPI_INT,TASK_GARFOS,TAG_LIBERA,MPI_COMM_WORLD at 27 */ 
+/* susage of esq at 27 */
+node [shape = circle] 28;
+/* m_send of &dir,1,MPI_INT,TASK_GARFOS,TAG_LIBERA,MPI_COMM_WORLD at 28 */ 
+/* susage of dir at 28 */
+node [shape = circle] 29;
+/* cusage of i at 29 */ 
+/* cusage of fome at 29 */ 
+node [shape = circle] 10;
+/* m_send of &i,1,MPI_INT,TASK_GARFOS,TAG_FIM,MPI_COMM_WORLD at 10 */ 
+/* susage of i at 10 */
+node [shape = circle] 5;
+/* pusage of fome at 5 */ 
+node [shape = circle] 12;
+/* pusage of peguei_esq at 12 */ 
+/* pusage of peguei_dir at 12 */ 
+1 -> 2;
+2 -> 3;
+3 -> 4;
+4 -> 5;
+5 -> 6;
+30 -> 5;
+5 -> 10;
+6 -> 7;
+7 -> 8;
+8 -> 9;
+9 -> 12;
+12 -> 13;
+25 -> 12;
+12 -> 26;
+13 -> 14;
+14 -> 15;
+15 -> 16;
+16 -> 17;
+17 -> 21;
+17 -> 18;
+20 -> 21;
+18 -> 19;
+19 -> 20;
+21 -> 25;
+21 -> 22;
+24 -> 25;
+22 -> 23;
+23 -> 24;
+26 -> 27;
+27 -> 28;
+28 -> 29;
+29 -> 30;
+10 -> 11;
+ } 

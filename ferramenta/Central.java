@@ -64,6 +64,8 @@ public class Central {
 	public static double tamanhoMaximoArgumento;
 	/** Variavel de controle para indicar a variacao do tipo inteiro. */
 	public static int variacaoInteiro;
+	/** Variavel de controle para indicar quantidade de casas decimais. */
+	public static String variacaoInteiroTam;
 	/**
 	 * Variavel de controle para indicar a quantidade de elementos requeridos
 	 * para o programa em teste.
@@ -614,8 +616,8 @@ public class Central {
 	public static void setArquivoSemelhancaIndividuos(String valor)
 			throws IOException {
 
-		arquivoBonusIneditismo = new File(pegaDiretorio + valor + ".cov");
-		arquivoBonusIneditismo.createNewFile();
+		arquivoSemelhancaIndividuos = new File(pegaDiretorio + valor + ".cov");
+		arquivoSemelhancaIndividuos.createNewFile();
 
 	}
 
@@ -737,6 +739,7 @@ public class Central {
 		tamanhoMinimoInteiro = Integer.parseInt(quebra[0].trim());
 		tamanhoMaximoInteiro = Integer.parseInt(quebra[1].trim());
 		variacaoInteiro = tamanhoMaximoInteiro - tamanhoMinimoInteiro;
+		variacaoInteiroTam = String.valueOf(variacaoInteiro);
 
 	}
 
@@ -807,7 +810,7 @@ public class Central {
 		int res = 0;
 		for (int i = 0; i != pos; i++)
 			res += tamanhoTipo(i);
-		
+
 		return res;
 	}
 
@@ -818,11 +821,11 @@ public class Central {
 	public static boolean paraTeste() {
 		if (geracaoAtual == (maximoGeracoes + 1))
 			return true;
-		
+
 		if (coberturaAtual >= 100) {
-				return true;
+			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -852,13 +855,17 @@ public class Central {
 
 	}
 
-	/** No descriptions 
-	 * @throws IOException */
+	/**
+	 * No descriptions
+	 * 
+	 * @throws IOException
+	 */
 	public static void manutencaoMelhorGeracao() throws IOException {
 		if (coberturaAtual > melhorCobertura) {
 			setMelhorCobertura(coberturaAtual);
 			setIndiceMelhorGeracao(geracaoAtual);
-			Diversos.copyFile(arquivoPopulacao.getPath(), arquivoMelhorPopulacao);
+			Diversos.copyFile(arquivoPopulacao.getPath(),
+					arquivoMelhorPopulacao);
 		}
 	}
 
@@ -905,7 +912,7 @@ public class Central {
 	}
 
 	/** Atualiza a coberturaGlobal com a cobertura passada por argumento. */
-	public void atualizaCoberturaGlobal(String novaCobertura) {
+	public static void atualizaCoberturaGlobal(String novaCobertura) {
 		int tam = (int) quantidadeElemento;
 
 		for (int i = 0; i < tam; i++)
@@ -952,12 +959,42 @@ public class Central {
 		System.out
 				.println(" \n Atenção: Preparando a execução do framework. Diretórios e arquivos serão removidos...");
 
-		String cmd = "rm logerror.tes log_erro.log detalhes.log Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst lixo.lxo resultado.tst popManejo.pop repositorio.dep evolucao.fil arquivoElementos.elem";
+		String cmd = "rm  logerror.tes log_erro.log *.log *.dot "
+				+ "Tabu.res *.pop  *.tst *.dot " + " *.tst  lixo.lxo  "
+				+ "repositorio.dep evolucao.fil arquivoElementos.elem";
 
 		Process proc = Runtime.getRuntime().exec(cmd);
 		proc.waitFor();
 
 		// System.out.println(" \n removeFile.sh %s %s valimpi logerror.tes log_erro.log detalhes.log Populacao.res Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst *.gfc lixo.lxo entrada.kyb resultado.tst");
 
+	}
+
+	// _________________________________________________________________
+	/**
+	 * M\E9todo usado para verificar se um determinado indiv\EDduo j\E1 foi
+	 * executado anteriormente, caso positivo, copia o desempenho armazenado no
+	 * reposit\F3rio parra a vari\E1vel desempenho.
+	 * @throws IOException 
+	 */
+	public static String inRepositorio(String strIndiv, String desempenho)
+			throws IOException {
+		FileReader arq = new FileReader(arquivoRepositorio);
+		BufferedReader lerArq = new BufferedReader(arq);
+
+		String linha = null, representacao = null;
+
+		linha = lerArq.readLine();
+		while (linha != null) {
+
+			representacao = linha.trim();
+			linha = linha.trim();
+
+			if (strIndiv.equals(representacao)) {
+				desempenho = linha;
+			} // fim if
+		}// fim while
+
+		return desempenho;
 	}
 }

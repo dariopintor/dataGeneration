@@ -1,0 +1,34 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of producao at 1 */ 
+/* definition of size at 1 */ 
+node [shape = doublecircle] 9;
+node [shape = circle] 2;
+node [shape = circle] 8;
+node [shape = circle] 4;
+/* derefdefinition of data at 4 */ 
+/* derefdefinition of data_size at 4 */ 
+node [shape = circle] 5;
+/* definition of produzido at 5 */ 
+/* cusage of produzido at 5 */ 
+node [shape = circle] 6;
+/* m_send of data,data_size,MPI_CHAR,size-1,0,MPI_COMM_WORLD at 6 */ 
+/* susage of data at 6 */
+/* cusage of data_size at 6 */ 
+/* cusage of size at 6 */ 
+node [shape = circle] 7;
+/* cusage of size at 7 */ 
+/* cusage of data at 7 */ 
+node [shape = circle] 3;
+/* pusage of produzido at 3 */ 
+/* pusage of producao at 3 */ 
+1 -> 2;
+2 -> 3;
+3 -> 4;
+8 -> 3;
+3 -> 9;
+4 -> 5;
+5 -> 6;
+6 -> 7;
+7 -> 8;
+ } 

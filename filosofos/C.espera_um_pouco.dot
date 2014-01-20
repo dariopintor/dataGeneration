@@ -1,0 +1,3 @@
+digraph gfc { 
+node [shape = doublecircle] 1;
+ } 

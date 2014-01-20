@@ -205,7 +205,7 @@ public class Diversos {
 			} 
 		}
 		// Obtive quantos podem ser os numeros a serem sorteados.
-		sorteio = (r.genrand() % somatoria);
+		sorteio = (r.genrand() * somatoria);
 		// Tirar caracteres invalidos, joga para espaço
 		sorteio += 32;
 		// Se espaço fora soma 1
@@ -237,13 +237,13 @@ public class Diversos {
 	/**
 	 * Funcao usada para calcular tamanho usado pelos numeros na linha do
 	 * arquivo*/
-	int nroEspacos(int tamPopulacao) {
+	public static int nroEspacos(int tamPopulacao) {
 		int nroEspacos = 0;
 		for (int base = 10; tamPopulacao >= base; base *= 10, nroEspacos++);
 		return nroEspacos + 10;
 	}
 
-	boolean cobre(String cobertura1, String cobertura2) {
+	public static boolean cobre(String cobertura1, String cobertura2) {
 		int tam = cobertura2.length();
 		for (int i = 0; i < tam; i++) {
 			if ((cobertura2.charAt(i) == 'X') && (cobertura1.charAt(i) != 'X'))

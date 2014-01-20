@@ -1,27 +1,23 @@
----geraPopulacaoInicial	10:21:42
----saindo geraPopulacaoInicial	10:21:42
----avaliaPopulacao	10:21:42
----saindo avaliaPopulacao	10:21:59
-------geraFitness	10:21:59
-------saindo geraFitness	10:21:59
-------evolucaoFitness	10:21:59
-------saindo evolucaoFitness	10:21:59
----saindo EvoluiPopulacao	10:21:59
----avaliaPopulacao	10:21:59
----saindo avaliaPopulacao	10:22:16
-------geraFitness	10:22:16
-------saindo geraFitness	10:22:16
-------evolucaoFitness	10:22:16
-------saindo evolucaoFitness	10:22:16
----saindo EvoluiPopulacao	10:22:16
----avaliaPopulacao	10:22:16
----saindo avaliaPopulacao	10:22:34
-------geraFitness	10:22:34
-------saindo geraFitness	10:22:34
-------evolucaoFitness	10:22:34
-------saindo evolucaoFitness	10:22:34
----saindo EvoluiPopulacao	10:22:34
----avaliaPopulacao	10:22:34
----saindo avaliaPopulacao	10:22:54
-------geraFitness	10:22:54
-------saindo geraFitness	10:22:54
+---geraPopulacaoInicial	09:31:25
+---saindo geraPopulacaoInicial	09:31:25
+---avaliaPopulacao	09:31:25
+------geraIneditismo	09:31:29
+------saindo geraIneditismo	09:31:30
+---------geraIneditismoPopulacao	09:31:30
+---------saindo geraIneditismoPopulacao	09:31:30
+------geraFitness	09:31:30
+------saindo geraFitness	09:31:30
+---saindo avaliaPopulacao	09:31:30
+------evolucaoFitness	09:31:30
+------saindo evolucaoFitness	09:31:30
+------evolucaoIneditismo	09:31:30
+------saindo evolucaoIneditismo	09:31:30
+---saindo EvoluiPopulacao	09:31:30
+---avaliaPopulacao	09:31:30
+------geraIneditismo	09:31:34
+------saindo geraIneditismo	09:31:34
+---------geraIneditismoPopulacao	09:31:34
+---------saindo geraIneditismoPopulacao	09:31:34
+------geraFitness	09:31:34
+------saindo geraFitness	09:31:34
+---saindo avaliaPopulacao	09:31:34

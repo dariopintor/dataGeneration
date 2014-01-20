@@ -1,0 +1,9 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of i at 1 */ 
+node [shape = doublecircle] 3;
+node [shape = circle] 2;
+/* cusage of i at 2 */ 
+1 -> 2;
+2 -> 3;
+ } 

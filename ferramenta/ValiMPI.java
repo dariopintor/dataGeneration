@@ -1,5 +1,18 @@
 package ferramenta;
 
+/**
+ *Instruções para usar a VALIMPI junto com esta classe java.
+ *Para todos os métodos é necessário colocar o caminho onde 
+ *se encontra a ferramenta no sistema. Por exemplo, para o método
+ *que usa a vali_inst: "/home/labs/Software/ValiMPI_mmr_tds/vali_inst/vali_inst ".
+ *Somente o módulo vali_inst precisa de modificação direta no arquivo.
+ *. No arquivo vali_inst dentro da pasta vali_inst é necessário 
+ *colocar corretamente o caminho da VALIMPI (nessa versão nas linhas 23, 27, 32, 42 e 47).
+ *Ainda nessa mesma pasta fazer o mesmo nos arquivos def_uses (nessa versão linha 5)
+ * e strip_macros (nessa versão linha 5).
+ */
+
+
 import java.io.IOException;
 
 /**
@@ -22,8 +35,8 @@ public class ValiMPI {
 				"-x",
 				"bash",
 				"-c",
-				"/home/labs/Software/ValiMPI_mmr/vali_inst/vali_inst "
-						+ nomeArqFonte + ";  echo '<enter>'; read" };
+				"/home/labs/Software/ValiMPI_mmr_tds/vali_inst/vali_inst "
+						+ nomeArqFonte + ">> valimpi.log; exit echo '<enter>'; read" };
 
 		Process proc = Runtime.getRuntime().exec(cmd, null, null);
 		proc.waitFor();
@@ -51,8 +64,8 @@ public class ValiMPI {
 				"-x",
 				"bash",
 				"-c",
-				"/home/labs/Software/ValiMPI_mmr/vali_elem/vali_elem " + nProcess
-						+ " " + nomefuncoes + "; exit echo '<enter>'; read" };
+				"/home/labs/Software/ValiMPI_mmr_tds/vali_elem/vali_elem " + nProcess
+						+ " " + nomefuncoes + ">> valimpi.log; exit echo '<enter>'; read" };
 
 		Process proc = Runtime.getRuntime().exec(cmd, null, null);
 		proc.waitFor();
@@ -72,9 +85,9 @@ public class ValiMPI {
 				"-x",
 				"bash",
 				"-c",
-				"/home/labs/Software/ValiMPI_mmr/vali_exec/vali_cc -o exe"
+				"/home/labs/Software/ValiMPI_mmr_tds/vali_exec/vali_cc -o exe "
 						+ nomePrograma
-						+ ".c_instrumentado.c " + ";  echo '<enter>'; read" };
+						+ ".c_instrumentado.c " + ">> valimpi.log; exit  echo '<enter>'; read" };
 
 		Process proc = Runtime.getRuntime().exec(cmd, null, null);
 		proc.waitFor();
@@ -96,9 +109,9 @@ public class ValiMPI {
 				"-x",
 				"bash",
 				"-c",
-				"/home/labs/Software/ValiMPI_mmr/vali_exec/vali_exec " + ndadoTeste
+				"/home/labs/Software/ValiMPI_mmr_tds/vali_exec/vali_exec " + ndadoTeste
 						+ " run " + nProcessos + " exe " +  " \""
-						+ dadoTeste + "\"" + "; exit echo '<enter>'; read" };
+						+ dadoTeste + "\"" + ">> valimpi.log; exit echo '<enter>'; read" };
 		
 		return cmd;
 	}
@@ -117,9 +130,9 @@ public class ValiMPI {
 				"-x",
 				"bash",
 				"-c",
-				"/home/labs/Software/ValiMPI_mmr/vali_eval/vali_eval " + criterio
+				"/home/labs/Software/ValiMPI_mmr_tds/vali_eval/vali_eval " + criterio
 						+ " " + nProcess + " " + nomefuncoes
-						+ " > gcd/vali_eval.out; exit  echo '<enter>'; read" };
+						+ " > " + Central.diretorio.getPath()+"/vali_eval.out; exit echo '<enter>'; read" };
 
 		return cmd;
 

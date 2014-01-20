@@ -1,0 +1,1857 @@
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+mpiexec -n 6 exe  00002 00010 00019 00014 00012 
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -488
+filósofo 5 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -481
+filósofo 3 terminou de comer.
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -498
+filósofo 1 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -490
+filósofo 4 devolveu os garfos, fome = -486
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00004 00008 00019 00007 00016 
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -493
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -481
+filósofo 5 devolveu os garfos, fome = -484
+filósofo 3 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -492
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -496
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00003 00014 00002 00008 00006 
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -494
+filósofo 3 devolveu os garfos, fome = -498
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 3 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -486
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -492
+filósofo 1 devolveu os garfos, fome = -497
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00014 00007 00011 00010 00009 
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -491
+filósofo 2 devolveu os garfos, fome = -493
+filósofo 5 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 1 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -486
+filósofo 4 devolveu os garfos, fome = -490
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00015 00020 00015 00015 00010 
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -485
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -480
+filósofo 4 devolveu os garfos, fome = -485
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -485
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -490
+filósofo 5 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00014 00013 00005 00008 00011 
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -492
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -486
+filósofo 3 comendo
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -495
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -487
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00010 00014 00012 00011 00012 
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -488
+filósofo 1 devolveu os garfos, fome = -490
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -488
+filósofo 5 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -486
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00009 00015 00009 00017 00010 
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -491
+filósofo 1 devolveu os garfos, fome = -491
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -485
+filósofo 2 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -490
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -483
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00015 00007 00015 00012 00017 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -493
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -488
+filósofo 1 devolveu os garfos, fome = -485
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -485
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -483
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00019 00011 00017 00002 00020 
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -498
+filósofo 1 devolveu os garfos, fome = -481
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -483
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -480
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00009 00011 00008 00009 00005 
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -491
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -495
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -491
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -492
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00009 00001 00006 00015 00002 
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -485
+filósofo 4 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -499
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -491
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -494
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -498
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00018 00008 00005 00017 00014 
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -495
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -492
+filósofo 4 devolveu os garfos, fome = -483
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -486
+filósofo 5 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -482
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00012 00013 00017 00014 00010 
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -487
+filósofo 4 devolveu os garfos, fome = -486
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -483
+filósofo 1 devolveu os garfos, fome = -488
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -490
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00014 00009 00013 00020 00018 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -491
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -480
+filósofo 1 devolveu os garfos, fome = -486
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -487
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -482
+filósofo 5 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00009 00012 00018 00011 00015 
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -482
+filósofo 5 devolveu os garfos, fome = -485
+filósofo 3 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -488
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -491
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00002 00005 00006 00020 00018 
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -498
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -494
+filósofo 3 terminou de comer.
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -480
+filósofo 2 devolveu os garfos, fome = -495
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 5 comendo
+filósofo 5 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -482
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00008 00001 00015 00012 00018 
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -499
+filósofo 4 devolveu os garfos, fome = -488
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -492
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -485
+filósofo 5 devolveu os garfos, fome = -482
+filósofo 3 terminou de comer.
+filósofo 5 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00015 00010 00017 00016 00014 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -484
+filósofo 2 devolveu os garfos, fome = -490
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -486
+filósofo 5 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -483
+filósofo 3 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -485
+filósofo 1 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00002 00017 00014 00019 00006 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -481
+filósofo 4 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -483
+filósofo 2 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -494
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -486
+filósofo 3 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -498
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00007 00006 00008 00010 00016 
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -494
+filósofo 2 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -490
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -493
+filósofo 3 devolveu os garfos, fome = -492
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -484
+filósofo 5 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00012 00011 00013 00019 00001 
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -487
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -481
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -488
+filósofo 1 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00009 00002 00015 00016 00004 
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -498
+filósofo 4 devolveu os garfos, fome = -484
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -491
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -485
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -496
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00009 00011 00001 00013 00018 
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 1 devolveu os garfos, fome = -491
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -482
+filósofo 5 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -487
+filósofo 4 terminou de comer.
+Stripping comments
+Removing blank lines
+Starting IDeL
+Fixing s-uses, definitions and dereference definitions in .dot files
+Removing usage of MACROS in .dot files
+Replacing "MPI_*Recv" -> "ValiMPI_*Recv_trace"
+Replacing "MPI_*Send" -> "ValiMPI_*Send_trace"
+Replacing "MPI_Test*" -> "ValiMPI_Test*"
+Replacing "MPI_Wait*" -> "ValiMPI_Wait*"
+Replacing "#include <mpi.h>" -> "#include <valimpi.h>"
+indenting "filosofos.c_instrumentado.c"
+/usr/bin/mpicc -o exe filosofos.c_instrumentado.c -I/usr/include -I/home/labs/Software/ValiMPI_mmr_tds/include -L/home/labs/Software/ValiMPI_mmr_tds/lib -lvalimpi -lpmpi
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00007 00014 00009 00014 00006 
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -493
+filósofo 3 devolveu os garfos, fome = -491
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -486
+filósofo 2 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -494
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -486
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00020 00020 00013 00015 00002 
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -480
+filósofo 2 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -487
+filósofo 1 devolveu os garfos, fome = -480
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -498
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -485
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00010 00006 00014 00018 00014 
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 3 comendo
+filósofo 5 pensando
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -486
+filósofo 3 terminou de comer.
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -490
+filósofo 1 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -482
+filósofo 4 terminou de comer.
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -494
+filósofo 5 devolveu os garfos, fome = -486
+filósofo 5 terminou de comer.
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00004 00016 00018 00011 
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -484
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -496
+filósofo 5 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -482
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00013 00015 00001 00014 00008 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 4 comendo
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -486
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 1 pensando
+filósofo 2 devolveu os garfos, fome = -485
+filósofo 2 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -492
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 1 devolveu os garfos, fome = -487
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00021 00001 00011 00001 
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 2 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00017 00011 00001 00014 00016 
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -484
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -483
+filósofo 4 devolveu os garfos, fome = -486
+filósofo 1 terminou de comer.
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00021 00021 00013 00011 00012 
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -479
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -488
+filósofo 5 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -487
+filósofo 3 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00014 00001 00014 00001 
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -486
+filósofo 4 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -486
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00021 00010 00013 00015 00001 
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -485
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -487
+filósofo 3 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -479
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -490
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00021 00001 00011 00001 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 5 pensando
+filósofo 2 comendo
+filósofo 3 pensando
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 2 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00001 
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00001 00011 00001 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 4 comendo
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 5 pensando
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00017 00021 00011 00011 00001 
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -483
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00001 00011 00016 
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -484
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00021 00001 00011 00001 
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -499
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 comendo
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00021 00001 00011 00011 
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 comendo
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00021 00001 00011 00011 
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 5 comendo
+filósofo 4 pensando
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -499
+filósofo 3 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 4 comendo
+filósofo 1 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00021 00011 00011 00011 
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -479
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 2 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 5 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 3 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 5 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 3 pensando
+filósofo 4 comendo
+filósofo 5 pensando
+filósofo 2 comendo
+filósofo 1 pensando
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 4 pensando
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 comendo
+filósofo 3 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 comendo
+filósofo 3 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 3 comendo
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 3 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 4 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 3 comendo
+filósofo 5 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 1 comendo
+filósofo 4 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 3 comendo
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 2 comendo
+filósofo 5 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00001 00011 00011 00011 00011 
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -499
+filósofo 4 comendo
+filósofo 1 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 2 comendo
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 2 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 5 pensando
+filósofo 2 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 comendo
+filósofo 1 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 3 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 3 pensando
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 2 pensando
+filósofo 4 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 3 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 comendo
+filósofo 2 comendo
+filósofo 3 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 1 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 3 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 4 pensando
+filósofo 2 pensando
+filósofo 3 comendo
+filósofo 1 comendo
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 terminou de comer.
+filósofo 1 terminou de comer.
+filósofo 2 comendo
+filósofo 4 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 5 comendo
+filósofo 5 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 5 pensando
+filósofo 1 pensando
+filósofo 3 pensando
+filósofo 2 pensando
+filósofo 4 pensando
+filósofo 5 comendo
+filósofo 3 comendo
+filósofo 5 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 5 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 comendo
+filósofo 1 comendo
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 4 terminou de comer.
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+Caso de teste 1 já existe, sobreescrevendo...
+mpiexec -n 6 exe  00011 00011 00011 00011 00011 
+filósofo 4 pensando
+filósofo 1 pensando
+filósofo 5 pensando
+filósofo 2 pensando
+filósofo 3 pensando
+filósofo 4 comendo
+filósofo 2 comendo
+filósofo 2 devolveu os garfos, fome = -489
+filósofo 4 devolveu os garfos, fome = -489
+filósofo 2 terminou de comer.
+filósofo 4 terminou de comer.
+filósofo 1 comendo
+filósofo 3 comendo
+filósofo 1 devolveu os garfos, fome = -489
+filósofo 3 devolveu os garfos, fome = -489
+filósofo 1 terminou de comer.
+filósofo 3 terminou de comer.
+filósofo 5 comendo
+filósofo 5 terminou de comer.
+filósofo 5 devolveu os garfos, fome = -489

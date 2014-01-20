@@ -1,5 +1,6 @@
 package algoritmoGenetico;
 
+import java.awt.image.DirectColorModel;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,15 +8,13 @@ import java.io.IOException;
 import java.rmi.server.ObjID;
 import java.util.Formattable;
 
-
-
 import java.util.Random;
 
 import main.Diversos;
 import main.Mersenne;
 import ferramenta.*;
 
-public class Individuo{
+public class Individuo {
 	/***************************************************************************
 	 * individuo.cpp - description ------------------- begin : Dom Jul 6 2003
 	 * copyright : (C) 2003 by Luciano Petinati Ferreira email :
@@ -29,17 +28,17 @@ public class Individuo{
 	 * your option) any later version. * *
 	 ***************************************************************************/
 	/** Atributo que contem a representacao dos individuos. */
-	
-	public String genes="";
-	
+
+	public String genes = "";
+
 	public Individuo() {
-		// cout << "\nConstruindo individuo...";		
-		genes ="";
+		// cout << "\nConstruindo individuo...";
+		genes = "";
 
 	}
 
 	/** Metodo para criar um novo individuo aleatorio. */
-	public  Individuo(int numGenes) {
+	public Individuo(int numGenes) {
 		String bloco = "";
 		int blocoTam = (int) Central.tamanhoIndividuo;
 
@@ -50,7 +49,7 @@ public class Individuo{
 				bloco = forma_block_int_random(bloco, blocoTam);
 				break;
 			}
-			
+
 			default: {
 				System.out.printf(
 						"\nFormato : %c\nFormato de tipo invalido\n\r",
@@ -69,41 +68,38 @@ public class Individuo{
 	 * configuracao fornecida ao framework.
 	 */
 
-	public Individuo (String linha) {
+	public Individuo(String linha) {
 		int numArgumentos = Central.formatoIndividuo.length();
 		String bloco = null;
-		String [] dado =null;
+		String[] dado = null;
 		for (int cont = 0; cont < numArgumentos; cont++) {
-			
-			if(linha.charAt(0)== '+' || linha.charAt(0)== '-'){
+
+			if (linha.charAt(0) == '+' || linha.charAt(0) == '-') {
 				genes = linha.trim();
 				break;
 			} else {
-				dado = linha.split(",");	
-			
-			
-			
-			switch (Central.formatoIndividuo.charAt(cont)) {
-			case 'I': {
-				bloco =	forma_block_int(Central.tamanhoTipo(cont) + 1,
-						dado[cont]);
-				// printf("\nRecuperado Arg %d - Integer '%s'", cont, bloco);
-				break;
-			}
+				dado = linha.split(",");
 
-			
-			}// fim switch
-			genes += bloco;
+				switch (Central.formatoIndividuo.charAt(cont)) {
+				case 'I': {
+					bloco = forma_block_int(Central.tamanhoTipo(cont) + 1,
+							dado[cont]);
+					// printf("\nRecuperado Arg %d - Integer '%s'", cont,
+					// bloco);
+					break;
+				}
+
+				}// fim switch
+				genes += bloco;
 			}
 		}
 
 	}
 
-	
 	// _________________________________________________________________
 
 	/** Metodo que atribui valor para a gene de um individuo. */
-	public void setGenes(String valor) {	
+	public void setGenes(String valor) {
 		genes = valor;
 	}
 
@@ -121,39 +117,44 @@ public class Individuo{
 	 * Metodo usado para formatar um bloco a partir de um valor passado por
 	 * argumento.
 	 */
-	public String forma_block_int(int limite, String entrada) {
+	public static String forma_block_int(int limite, String entrada) {
 		String res = "";
+		String num = "";
+		String aux = "+00000";
+		int diferenca = 0;
+
 		int tam = 0;
-		String aux="+", numero=null;
+		String numero = null;
+
 		if ((entrada.charAt(0) == '-') || (entrada.charAt(0) == '+')) {
 			aux = aux.replace(aux.charAt(0), entrada.charAt(0));
 		}
-	
-		numero = entrada.trim();
-		aux += numero;
-		
-			res = aux;
-		
+
+		diferenca = aux.length() - entrada.length();
+		res = aux.substring(0, diferenca);
+		res += entrada.substring(0, entrada.length());
+
 		return res;
 	}
 
 	// _________________________________________________________________
 
 	/** Metodo usado para formatar um bloco aleatoriamente. */
-	public String  forma_block_int_random(String res, int limite){	
-		int num = 0;
-		String aux = "+";
-		num = Diversos.rand(Central.tamanhoMinimoInteiro, Central.tamanhoMaximoInteiro);
-		aux  += String.valueOf(num);
-		res = aux;
-		
+	public static String forma_block_int_random(String res, int limite) {
+		String num = "";
+		String aux = "+00000";
+		int diferenca = 0;
+		num = String.valueOf(Diversos.rand(Central.tamanhoMinimoInteiro,
+				Central.tamanhoMaximoInteiro));
+		diferenca = aux.length() - num.length();
+		res = aux.substring(0, diferenca);
+		res += num.substring(0, num.length());
 		return res;
-		}// fim forma_block_int_random
+	}// fim forma_block_int_random
 
 	// _________________________________________________________________
-	
-	
+
 	public String getGenes() {
-        return genes;
-    }
+		return genes;
 	}
+}

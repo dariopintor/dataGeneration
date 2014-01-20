@@ -43,6 +43,7 @@ public class Populacao {
 			individuos[i] = null;
 		}
 	}
+
 	/** coloca um indivíduo na próxima posição disponível da população */
 	public void setIndividuo(Individuo individuo) {
 		for (int i = 0; i < individuos.length; i++) {
@@ -83,8 +84,9 @@ public class Populacao {
 			Diversos.escreverArquivo(Central.arquivoPopulacao, saida);
 
 		} // fim for
-		
-		System.out.println("Fim da Geração da População inicial Aleatória \n\n");
+
+		System.out
+				.println("Fim da Geração da População inicial Aleatória \n\n");
 	}
 
 	/**
@@ -93,14 +95,14 @@ public class Populacao {
 	 * @throws IOException
 	 */
 	public static void geraPopulacaoInicialArquivo() throws IOException {
-		
+
 		System.out.println("Gerando População inicial Arquivo");
-		
+
 		individuos = new Individuo[(int) Central.tamanhoPopulacao];
 		Diversos.limpaArquivo(Central.arquivoPopulacao.getPath());
 
 		String linha = null, saida = "";
-		int contador = 0;		
+		int contador = 0;
 		FileReader arq = new FileReader(Central.arquivoPopulacaoInicial);
 		BufferedReader lerArq = new BufferedReader(arq);
 
@@ -118,13 +120,11 @@ public class Populacao {
 			}
 			linha = lerArq.readLine();
 		} // fim for
-			 Central.setTamanhoPopulacao(contador);
-			 
-			 System.out.println("Fim População Inicial Arquivo \n\n");
-	//	Central.recalculaPorcEvolucao();
-	}
+		Central.setTamanhoPopulacao(contador);
 
-	
+		System.out.println("Fim População Inicial Arquivo \n\n");
+		// Central.recalculaPorcEvolucao();
+	}
 
 	/**
 	 * Metodo usado para avaliar a populacao do AG. Cada individuo eh executado
@@ -142,13 +142,15 @@ public class Populacao {
 		}
 
 		geraCoberturaIndividuoValiMPI();
+		geraBonusIneditismo();
+		geraIneditismoPopulacao();
 
+		geraFitness();
 
 		if (Central.geraLog != 0) {
 			Diversos.toFile("log_erro.log", "---saindo avaliaPopulacao");
 		}
 
-		geraFitness();
 	}// fim avaliaPopulacao()
 
 	/**
@@ -167,47 +169,51 @@ public class Populacao {
 	 */
 	public static void geraCoberturaIndividuoValiMPI() throws IOException,
 			InterruptedException {
-		
-		System.out.println("Avaliando Individuos da População " + Central.geracaoAtual);
+
+		System.out.println("Avaliando Individuos da População "
+				+ Central.geracaoAtual);
 		String dado = "";
 		String[] quebra = null;
 		Diversos.limpaArquivo(Central.arquivoCoberturaIndividuo.getPath());
 
 		for (int contador = 0; contador < Central.tamanhoPopulacao; contador++) {
-			
-			 System.out.println(individuos[contador].getGenes());
+
+			System.out.println(individuos[contador].getGenes());
 			quebra = individuos[contador].getGenes().split("\\+");
 
-			
 			for (String b : quebra) {
 				dado += b + " ";
 			}
 			Ferramenta.usaValiMPI(dado, contador + 1);
 			dado = "";
 		} // fim for contador
-		
-		System.out.println("Fim Avaliação Individuo da População " + Central.geracaoAtual);
+
+		System.out.println("Fim Avaliação Individuo da População "
+				+ Central.geracaoAtual);
 
 		geraCoberturaElementos();
 	} // fim geraCoberturaIndividuoValiMPI()
 
 	public static void evoluiPopulacao() throws IOException {
 		System.out.printf("\n\n###########################################");
-		System.out.println("\nEvoluindo População "+Central.geracaoAtual);
-		
-		if (Central.quantidadeFitness > 0){
+		System.out.println("\nEvoluindo População " + Central.geracaoAtual);
+
+		if (Central.quantidadeFitness > 0) {
 			individuos = evolucaoPorFitness(Central.tamanhoPopulacao);
 			String saida = "";
 			Diversos.limpaArquivo(Central.arquivoPopulacao.getPath());
-			//escreve a populacao em arquivo
-			for ( int contador = 0; contador < individuos.length; contador ++){
+			// escreve a populacao em arquivo
+			for (int contador = 0; contador < individuos.length; contador++) {
 				saida = String.format("%d : %s", contador + 1,
 						individuos[contador].getGenes());
 				Diversos.escreverArquivo(Central.arquivoPopulacao, saida);
 			}
-				
 		}
+		if (Central.quantidadeElitismo > 0)
+			evolucaoPorElitismo();
 
+		if (Central.quantidadeIneditismo > 0)
+			evolucaoPorIneditismo();
 		/*
 		 * Para recuperar individuos que foram perdidos da geracao passada e nao
 		 * poderiam ser pois era um individuo que cobria um elemento nao coberto
@@ -228,9 +234,80 @@ public class Populacao {
 
 		if (Central.geraLog != 0)
 			Diversos.toFile("log_erro.log", "---saindo EvoluiPopulacao");
-		
-		System.out.println("Fim evolução da População " +Central.geracaoAtual);
 
+		System.out.println("Fim evolução da População " + Central.geracaoAtual);
+
+	}
+
+	/**
+	 * Metodo usado para realizar evolucao por elitismo.
+	 * 
+	 * @throws IOException
+	 */
+	public static void evolucaoPorElitismo() throws IOException {
+		Diversos.toFile("log_erro.log", "------evolucaoIneditismo");
+		int contador = 0;
+		int posicao = 0;
+		
+		System.out.printf("EVOLUCAO POR INEDITISMO (%.0f)",
+				Central.quantidadeIneditismo);
+
+		for (contador = (int) (Central.quantidadeFitness); contador < (int) (Central.quantidadeFitness + Central.quantidadeElitismo);) {
+			posicao = melhorFitAntNaoEm(Central.arquivoPopulacaoTemporario);
+			if (posicao != -1) {				
+				System.out.printf(" Ineditismo do indiv pos %d : %s",
+						posicao, individuos[posicao].getGenes());
+			} else {
+				individuos[contador] = new Individuo(Central.formatoIndividuo.length());
+			}
+
+			if (toPopulacao(contador, individuos[posicao].getGenes(),
+					Central.arquivoPopulacaoTemporario)) {
+				contador++;
+					}
+		} // fim for ineditismo
+		Diversos.toFile("log_erro.log", "------saindo evolucaoIneditismo");
+	}
+
+	/**
+	 * Metodo usado para evoluir populacao com base no indice de ineditismo do
+	 * individuo.
+	 * 
+	 * @throws IOException
+	 */
+	public static void evolucaoPorIneditismo() throws IOException {
+
+		if (Central.geraLog != 0) {
+			Diversos.toFile("log_erro.log", "------evolucaoIneditismo");
+		}
+		int contador = 0;
+		int posicao = 0;
+
+		System.out.printf("EVOLUCAO POR INEDITISMO (%.0f)",
+				Central.quantidadeIneditismo);
+
+		for (contador = (int) (Central.quantidadeFitness + Central.quantidadeElitismo); contador < (int) (Central.quantidadeFitness
+				+ Central.quantidadeElitismo + Central.quantidadeIneditismo);) {
+			posicao = melhorInedAntNaoEm(Central.arquivoPopulacaoTemporario);
+			
+			if (posicao != -1) {				
+				System.out.printf("Ineditismo do indiv pos %0.0f : %s",
+						posicao, individuos[posicao].getGenes());
+			} else {
+				individuos[contador] = new Individuo(Central.formatoIndividuo.length());
+				}
+
+			if (toPopulacao(contador, individuos[posicao].getGenes(),
+					Central.arquivoPopulacaoTemporario)) {
+				contador++;
+				
+			}
+		} // fim for ineditismo
+
+		if (Central.geraLog != 0) {
+			Diversos.toFile("log_erro.log",
+					"------saindo evolucaoIneditismo");
+		}
 	}
 
 	/**
@@ -267,7 +344,7 @@ public class Populacao {
 			fitness = ((double) Diversos.numberOf(desempenho, 'X') * 100)
 					/ (double) (Central.quantidadeElemento);
 			saida = i + 1 + ": " + fitness;
-		//	System.out.println(saida);
+			// System.out.println(saida);
 			Diversos.escreverArquivo(Central.arquivoFitness, saida);
 
 			linha = br.readLine();
@@ -285,7 +362,8 @@ public class Populacao {
 	 * 
 	 * @throws IOException
 	 */
-	public static Individuo [] evolucaoPorFitness(double tamPopulacao) throws IOException {
+	public static Individuo[] evolucaoPorFitness(double tamPopulacao)
+			throws IOException {
 		Individuo[] novosIndividuos = new Individuo[(int) tamPopulacao];
 		Diversos.toFile("log_erro.log", "------evolucaoFitness");
 		int cross = 0, mut = 0;
@@ -294,22 +372,23 @@ public class Populacao {
 		Individuo pai1;
 		Individuo pai2;
 		String filho1 = "";
-		String filho2="";
-		String [] quebra;
+		String filho2 = "";
+		String[] quebra;
 		String saida = null;
-		
-		for (contador = 0; contador < Central.tamanhoPopulacao; contador ++) {
+
+		for (contador = 0; contador < Central.tamanhoPopulacao; contador++) {
 			sorteio = Central.geraSorteio(Central.somatoriaFitness);
 			pai1 = individuos[indiceIndividuoSorteado(sorteio)];
 			sorteio = Central.geraSorteio(Central.somatoriaFitness);
 			pai2 = individuos[indiceIndividuoSorteado(sorteio)];
-			
+
 			// aplica a taxa de crossover
 			cross = Mersenne.genrand() % 100;
 			if (cross <= Central.taxaCrossover * 100) {
-				quebra = crossover(pai1.getGenes(), pai2.getGenes()).trim().split("\\&");
-				filho1=quebra[0]; 
-				filho2=quebra[1];
+				quebra = crossover(pai1.getGenes(), pai2.getGenes()).trim()
+						.split("\\&");
+				filho1 = quebra[0];
+				filho2 = quebra[1];
 			}
 
 			// aplica a taxa de mutacao
@@ -318,12 +397,12 @@ public class Populacao {
 				filho1 = mutacao(filho1);
 				saida = String.format(" op MUTACAO 1  : %s", filho1);
 				Diversos.toFile("evolucao.fil", saida);
-				
-				filho2= mutacao(pai2.getGenes());
-				saida = String.format("    op MUTACAO 2  : %s",	filho2);
+
+				filho2 = mutacao(pai2.getGenes());
+				saida = String.format("    op MUTACAO 2  : %s", filho2);
 				Diversos.toFile("evolucao.fil", saida);
 			}
-			novosIndividuos[contador] = new Individuo(filho1);					
+			novosIndividuos[contador] = new Individuo(filho1);
 		} // fim for fitness
 		if (Central.geraLog != 0)
 			Diversos.toFile("log_erro.log", "------saindo evolucaoFitness");
@@ -373,91 +452,101 @@ public class Populacao {
 	}
 
 	/** Metodo usado para aplicar mutacao em um individuo. */
-	public static String mutacao(String indiv) {
-		int i = 0, mudou = 0, posMut = (int) (Math.random() * indiv.length());
+	public static String mutacao(String individuo) {
+
+		char[] indiv = individuo.toCharArray();
+
+		int mudou = 0, posMut = (int) (Math.random() * indiv.length);
+		int posicao = 0, posicaoFato = 0, tamTipo = 0, inicTipo = 0, tamFormat = 0, aleatorio = 0;
+
 		for (; mudou == 0;) {
-			switch (indiv.charAt(posMut)) {
+			switch (indiv[posMut]) {
 			case '+':
-				indiv = indiv.replace(indiv.charAt(posMut), '+');
+				indiv[posMut] = '+';
 				mudou = 1;
 				break;
 			case '-':
-				indiv = indiv.replace(indiv.charAt(posMut), '-');
+				indiv[posMut] = '-';
 				mudou = 1;
 				break;
-			// case '#': posMut = rand() % strlen( indiv ); break; //escolhe
-			// outra posicao
 			case ((char) 216):
-				posMut = (int) (Math.random() * indiv.length());
+				posMut = (int) (Math.random() * indiv.length);
 				break; // escolhe outra posicao
 			default: {
-				int pos = 0;
 				mudou = 1;
-				for (i = 1; posMut >= Central.inicioTipo(i); i++)
-					;
-				if ((Central.formatoIndividuo.charAt(i - 1) == 'C')
-						|| (Central.formatoIndividuo.charAt(i - 1) == 'S')) {
-					indiv = indiv.replace(indiv.charAt(posMut), Diversos
-							.generateChar(Central.tipoString).charAt(0));
-				} // fim if
-				else {
-					indiv = indiv.replace(indiv.charAt(posMut), Diversos
-							.generateChar("n").charAt(0));
-				} // fim else
+				for (int i = 0; i < Central.formatoIndividuo.length(); i++) {
+					inicTipo = Central.inicioTipo(i);
+					tamTipo = Central.tamanhoTipo(i);
+					posicao = tamTipo - Central.variacaoInteiroTam.length();
+					aleatorio = (int) (Math.random() * Central.variacaoInteiroTam
+							.length());
+					posicaoFato = inicTipo + posicao + aleatorio;
+
+					if ((Central.formatoIndividuo.charAt(i) == 'C')
+							|| (Central.formatoIndividuo.charAt(i) == 'S')) {
+						indiv[posicaoFato] = Diversos.generateChar(
+								Central.tipoString).charAt(0);
+					} // fim if
+					else {
+
+						indiv[posicaoFato] = Diversos.generateChar(
+								Central.tipoString).charAt(0);
+					}
+				}
 			}// fim default
 			}// fim switch
 
 		}// fim for
-		return indiv;
+		individuo = "";
+
+		for (int j = 0; j < indiv.length; j++) {
+			individuo += indiv[j];
+		}
+		return individuo;
 	}
 
 	public static String crossover(String individuo1, String individuo2) {
-        Random r = new Random();
+		int posCross = 0, tamTipo = 0, inicTipo = 0, tamFormat = 0;
 
-        //sorteia o ponto de corte
-        int pontoCorte1 = r.nextInt((individuo1.length()/2) -2) + 1;
-        int pontoCorte2 = r.nextInt((individuo1.length()/2) -2) + individuo1.length()/2;
+		String geneFilho1 = "";
+		String geneFilho2 = "";
+		String genePai1 = individuo1;
+		String genePai2 = individuo2;
 
-        String filho1 = "";
-        String filho2 = "";
+		tamFormat = Central.formatoIndividuo.length();
+		for (int i = 0; i < tamFormat; i++) {
 
-        //pega os genes dos pais
-        String genePai1 = individuo1;
-        String genePai2 = individuo2;
+			inicTipo = Central.inicioTipo(i);
+			tamTipo = Central.tamanhoTipo(i);
+			posCross = (int) (Math.random() * tamTipo) + 1;
 
-        String geneFilho1;
-        String geneFilho2;
+			geneFilho1 += genePai2.substring(inicTipo, (posCross + inicTipo));
+			geneFilho1 += genePai1.substring((posCross + inicTipo),
+					(tamTipo + inicTipo));
+			geneFilho2 += genePai1.substring(inicTipo, (posCross + inicTipo));
+			geneFilho2 += genePai2.substring((posCross + inicTipo),
+					(tamTipo + inicTipo));
 
-        //realiza o corte, 
-        geneFilho1 = genePai1.substring(0, pontoCorte1);
-        geneFilho1 += genePai2.substring(pontoCorte1, pontoCorte2);
-        geneFilho1 += genePai1.substring(pontoCorte2, genePai1.length());
-        
-        geneFilho2 = genePai2.substring(0, pontoCorte1);
-        geneFilho2 += genePai1.substring(pontoCorte1, pontoCorte2);
-        geneFilho2 += genePai2.substring(pontoCorte2, genePai2.length());
+		}// fim for
 
-        //cria o novo indivíduo com os genes dos pais
-        filho1 = geneFilho1;
-        filho2= geneFilho2;
+		return geneFilho1 + "&" + geneFilho2;
+	}
 
-        return filho1  +"&"+ filho2;
-    }
 	/**
 	 * Metodo usado para obter o indice do individuo a ser mantido
 	 * 
 	 * @throws IOException
 	 * @throws NumberFormatException
 	 */
-	public double melhorInedAntNaoEm(File arquivoAuxiliar)
+	public static int melhorInedAntNaoEm(File arquivoAuxiliar)
 			throws NumberFormatException, IOException {
 		String saida = null;
 		String linha = null;
 		FileReader fr = new FileReader(Central.arquivoIneditismo);
 		BufferedReader br = new BufferedReader(fr);
 
-		int pos2p = 0;
-		double posMelhor = -1, pos = 0, ineditismo = 0, ineditismoMelhor = -1;
+		int posMelhor = -1, pos2p = 0;
+		double  pos = 0, ineditismo = 0, ineditismoMelhor = -1;
 		int tamLinha = 100;
 
 		linha = br.readLine();
@@ -482,15 +571,56 @@ public class Populacao {
 	}
 
 	/**
+	 * Metodo usado para calcular o ineditismo da populacao.
+	 * 
+	 * @throws IOException
+	 */
+	public static void geraBonusIneditismo() throws IOException {
+
+		Diversos.toFile("log_erro.log", "------geraIneditismo");
+		String saida = null, linhaBrPtrCobertura = null;
+		String elemCobertura = null;
+		String[] ponto2 = null;
+		int contador = 0, quantCob = 0;
+		double bonificacao = 0;
+
+		FileReader frPtrCobertura = new FileReader(
+				Central.arquivoCoberturaElemento);
+		BufferedReader brPtrCobertura = new BufferedReader(frPtrCobertura);
+
+		Diversos.limpaArquivo(Central.arquivoBonusIneditismo.getPath());
+
+		linhaBrPtrCobertura = brPtrCobertura.readLine();
+		for (contador = 0; contador < Central.quantidadeElemento; contador++) {
+			ponto2 = linhaBrPtrCobertura.split(":");
+			elemCobertura = ponto2[1].trim();
+			bonificacao = 0;
+			quantCob = Diversos.numberOf(elemCobertura, 'X');
+
+			if (quantCob != 0)
+				bonificacao = 100 * (1 - (quantCob / Central.tamanhoPopulacao));
+			saida = contador + ": " + bonificacao;
+			Diversos.escreverArquivo(Central.arquivoBonusIneditismo, saida);
+
+			linhaBrPtrCobertura = brPtrCobertura.readLine();
+		}// fim for
+
+		brPtrCobertura.close();
+
+		if (Central.geraLog != 0)
+			Diversos.toFile("log_erro.log", "------saindo geraIneditismo");
+	}
+
+	/**
 	 * Metodo usado para obter o indice do individuo a ser mantido
 	 * 
 	 * @throws IOException
 	 */
-	public double melhorFitAntNaoEm(File arquivoAuxiliar) throws IOException {
-		String saida = null;
+	public static int melhorFitAntNaoEm(File arquivoAuxiliar) throws IOException {
 		String linha = null;
-		int pos2p = 0;
-		double posMelhor = -1, pos = 0, fit = 0, fitMelhor = -1;
+		String [] quebra = null;
+		int posMelhor = -1, pos2p = 0;
+		double  pos = 0, fit = 0, fitMelhor = -1;
 
 		FileReader fr = new FileReader(Central.arquivoFitness);
 		BufferedReader br = new BufferedReader(fr);
@@ -499,8 +629,8 @@ public class Populacao {
 		for (int cont = 0; cont < Central.tamanhoPopulacao; cont++) {
 			pos2p = Diversos.indexOf(linha, ':');
 			if (pos2p != -1) {
-				linha = linha + pos2p + 1;
-				linha = linha.trim();
+				quebra = linha.split(":");
+				linha = quebra[1].trim();
 				fit = Double.parseDouble(linha);
 				if ((fit > fitMelhor)
 						&& (!inPopulacao(individuos[cont].getGenes(),
@@ -579,13 +709,6 @@ public class Populacao {
 		FileReader frPtrPopulacao = new FileReader(origem);
 		BufferedReader brPtrPopulacao = new BufferedReader(frPtrPopulacao);
 
-		if (brPtrPopulacao == null) {
-			saida = String.format(
-					"nao abriu o arquivo de populacao corretamente : %s",
-					origem);
-			Diversos.erro(saida, 1);
-		}
-
 		linhaPtrPopulacao = brPtrPopulacao.readLine();
 		for (int contador = 1; brPtrPopulacao != null; contador++) {
 			gene = linhaPtrPopulacao.trim();
@@ -622,23 +745,23 @@ public class Populacao {
 
 		if (cobAnterior == null) {
 			novaCobertura = cobAtual;
-		}
-		else {
-			
-			char charsNovaCobertura[] = cobAnterior.toCharArray(); 
-			char charsCobAtual[] = cobAtual.toCharArray(); 
-			
+		} else {
+
+			char charsNovaCobertura[] = cobAnterior.toCharArray();
+			char charsCobAtual[] = cobAtual.toCharArray();
+
 			for (i = 0; i < charsCobAtual.length; i++) {
 				if (charsNovaCobertura[i] == '-') {
 					charsNovaCobertura[i] = charsCobAtual[i];
 				}
-				
-				novaCobertura+=charsNovaCobertura[i];
+
+				novaCobertura += charsNovaCobertura[i];
 			}
 		}
 		// fim els
 		return novaCobertura;
 	}// fim sobrepoe
+
 	/**
 	 * Metodo usado para incluir um novo individuo no arquivo de populacao. Caso
 	 * o individuo ja exista na populacao a insercao nao sera realizada.
@@ -699,5 +822,79 @@ public class Populacao {
 
 		br.close();
 		return false;
+	}
+
+	/**
+	 * Este metodo retorna o valor do bonus para os individuos que cobriram o
+	 * elemento informado por pos.
+	 * 
+	 * @throws IOException
+	 */
+	public static double getBonusElemento(int pos) throws IOException {
+
+		int i = 0;
+		String gene = null, bonificacaoStr = null, linha = null;
+		String[] quebra = null;
+		double bonificacao = 0;
+
+		FileReader fr = new FileReader(Central.arquivoBonusIneditismo);
+		BufferedReader br = new BufferedReader(fr);
+
+		linha = br.readLine();
+		for (i = 0; i <= pos; i++) {
+			gene = linha;
+			linha = br.readLine();
+		}// fim for
+		br.close();
+
+		quebra = gene.split(":");
+		bonificacaoStr = quebra[1].trim();
+		bonificacao = Double.parseDouble(bonificacaoStr.trim());
+
+		return bonificacao;
+	}
+
+	/**
+	 * Gera o arquivo com a bonificacao final por ineditismo.
+	 * 
+	 * @throws IOException
+	 */
+	public static void geraIneditismoPopulacao() throws IOException {
+
+		if (Central.geraLog != 0) {
+			Diversos.toFile("log_erro.log", "---------geraIneditismoPopulacao");
+		}
+
+		String linhaCobInd = null, saida = null;
+		String[] quebra = null;
+		int cont = 0;
+		double ineditismo = 0;
+
+		Diversos.limpaArquivo(Central.arquivoIneditismo.getPath());
+		FileReader fr = new FileReader(Central.arquivoCoberturaIndividuo);
+		BufferedReader brPtrCobInd = new BufferedReader(fr);
+
+		linhaCobInd = brPtrCobInd.readLine();
+		for (cont = 0; cont < (int) (Central.tamanhoPopulacao); cont++) {
+			quebra = linhaCobInd.split(":");
+			linhaCobInd = quebra[1].trim();
+			ineditismo = 0;
+
+			for (int i = 0; i < Central.quantidadeElemento; i++) {
+				if (linhaCobInd.charAt(i) == 'X')
+					ineditismo += getBonusElemento(i);
+			}// fim for
+
+			saida = cont + ": " + ineditismo;
+			Diversos.escreverArquivo(Central.arquivoIneditismo.getPath(), saida);
+			linhaCobInd = brPtrCobInd.readLine();
+		}// fim for
+		brPtrCobInd.close();
+
+		if (Central.geraLog != 0) {
+			Diversos.toFile("log_erro.log",
+					"---------saindo geraIneditismoPopulacao");
+		}
+
 	}
 }

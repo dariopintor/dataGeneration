@@ -1,0 +1,20 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of data at 1 */ 
+/* definition of data_size at 1 */ 
+node [shape = doublecircle] 5;
+node [shape = circle] 2;
+/* derefdefinition of rank at 2 */ 
+node [shape = circle] 3;
+/* cusage of data at 3 */ 
+/* cusage of rank at 3 */ 
+/* definition of x at 3 */ 
+/* cusage of x at 3 */ 
+node [shape = circle] 4;
+/* cusage of data_size at 4 */ 
+/* cusage of data at 4 */ 
+1 -> 2;
+2 -> 3;
+3 -> 4;
+4 -> 5;
+ } 

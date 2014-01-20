@@ -35,10 +35,10 @@ public class Ferramenta {
 	public static void preparaFerramenta() throws IOException, InterruptedException {
 		System.out.println("\n\nUtilizando ValiMPI.");
 
-		//ValiMPI.exeVali_inst(Central.arquivoFonte);
+		ValiMPI.exeVali_inst(Central.arquivoFonte);
 		//ValiMPI.exeVali_reduce(null); // ainda nao implementadotado
 		ValiMPI.exeVali_elem(Central.nProcess, Central.funcoes);
-		//ValiMPI.exeVali_cc(Central.funcaoATestar);
+		ValiMPI.exeVali_cc(Central.funcaoATestar);
 
 		System.out.println("Termina uso da ValiMPI.");
 	}
@@ -164,10 +164,11 @@ public class Ferramenta {
 		vetorPegaElementos = pegaElementos("arquivoElementos.elem");
 
 		String[] vetorPegaElementosCobertos;
-		vetorPegaElementosCobertos = pegaElementosCobertos("gcd/vali_eval.out");
+		vetorPegaElementosCobertos = pegaElementosCobertos(Central.diretorio.getPath()+"/vali_eval.out");
 		String[] saida = new String[vetorPegaElementos.length];
 
 		for (int i = 0; i < vetorPegaElementos.length; i++) {
+			//System.out.println( vetorPegaElementos [i]);
 			for (int j = 0; j < vetorPegaElementosCobertos.length; j++) {
 				if (vetorPegaElementos[i].equals(vetorPegaElementosCobertos[j])) {
 					saida[i] = "X";
@@ -176,14 +177,16 @@ public class Ferramenta {
 		}// termina for para j
 
 		for (int i = 0; i < saida.length; i++) {
+			//System.out.println( vetorPegaElementosCobertos[i]);
 			if (saida[i] != "X") {
 				saida[i] = "-";
 			}
 			linhaCobertura += saida[i];
+			
 		}
 
 		String conteudo = nDadoTeste + ": " + linhaCobertura;
-		
+		//System.out.println(conteudo);
 		Central.atualizaLinhaCoberturas(linhaCobertura.trim());
 		
 		Central.linhaCoberturaAtual = Populacao.sobrepoe(Central.linhaCoberturaAnterior,
@@ -195,7 +198,7 @@ public class Ferramenta {
 				/ Central.quantidadeElemento);
 		
 		
-		Diversos.escreverArquivo("gcd/cobXIndividuo.cov", conteudo);
+		Diversos.escreverArquivo(Central.arquivoCoberturaIndividuo.getPath(), conteudo);
 
 	}
 

@@ -1,0 +1,69 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of argc at 1 */ 
+/* definition of argv at 1 */ 
+node [shape = doublecircle] 21;
+node [shape = circle] 2;
+/* derefdefinition of argc at 2 */ 
+/* derefdefinition of argv at 2 */ 
+node [shape = circle] 3;
+/* derefdefinition of rank at 3 */ 
+node [shape = circle] 4;
+/* derefdefinition of size at 4 */ 
+node [shape = circle] 5;
+/* pusage of argc at 5 */ 
+/* pusage of size at 5 */ 
+node [shape = circle] 9;
+node [shape = circle] 6;
+/* pusage of rank at 6 */ 
+node [shape = circle] 8;
+node [shape = circle] 7;
+/* cusage of argv at 7 */ 
+node [shape = circle] 10;
+/* definition of producao at 10 */ 
+/* cusage of argv at 10 */ 
+node [shape = circle] 11;
+/* pusage of producao at 11 */ 
+node [shape = circle] 15;
+node [shape = circle] 12;
+/* pusage of rank at 12 */ 
+node [shape = circle] 14;
+node [shape = circle] 13;
+/* cusage of producao at 13 */ 
+node [shape = circle] 16;
+/* pusage of rank at 16 */ 
+/* pusage of size at 16 */ 
+node [shape = circle] 17;
+/* cusage of producao at 17 */ 
+/* cusage of size at 17 */ 
+node [shape = circle] 18;
+node [shape = circle] 19;
+/* cusage of producao at 19 */ 
+/* cusage of size at 19 */ 
+node [shape = circle] 20;
+1 -> 2;
+2 -> 3;
+3 -> 4;
+4 -> 5;
+5 -> 10;
+5 -> 6;
+9 -> 10;
+6 -> 9;
+6 -> 7;
+8 -> 9;
+7 -> 8;
+10 -> 11;
+11 -> 16;
+11 -> 12;
+15 -> 16;
+12 -> 15;
+12 -> 13;
+14 -> 15;
+13 -> 14;
+16 -> 17;
+16 -> 19;
+18 -> 21;
+20 -> 21;
+17 -> 18;
+19 -> 20;
+ } 

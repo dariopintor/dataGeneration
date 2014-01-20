@@ -1,0 +1,143 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of producao at 1 */ 
+/* definition of size at 1 */ 
+node [shape = doublecircle] 18;
+node [shape = circle] 2;
+/* definition of req at 2 */ 
+/* cusage of size at 2 */ 
+/* cusage of MPI_Request at 2 */ 
+node [shape = circle] 5;
+/* definition of data at 5 */ 
+/* cusage of i at 5 */ 
+node [shape = circle] 9;
+/* m_recv of data[i],MAX_SIZE,MPI_CHAR,i,0,MPI_COMM_WORLD,&req[i] at 9 */ 
+/* definition of data at 9 */
+/* cusage of i at 9 */ 
+/* cusage of i at 9 */ 
+/* derefdefinition of req at 9 */ 
+/* cusage of i at 9 */ 
+node [shape = circle] 10;
+/* definition of qtde_produzida at 10 */ 
+/* cusage of i at 10 */ 
+node [shape = circle] 12;
+/* cusage of necessidade at 12 */ 
+node [shape = circle] 13;
+node [shape = circle] 33;
+node [shape = circle] 15;
+/* definition of i at 15 */ 
+node [shape = circle] 16;
+/* definition of flag at 16 */ 
+node [shape = circle] 17;
+node [shape = circle] 19;
+/* definition of i at 19 */ 
+/* cusage of i at 19 */ 
+/* cusage of size at 19 */ 
+node [shape = circle] 20;
+/* pusage of qtde_produzida at 20 */ 
+/* pusage of i at 20 */ 
+/* pusage of producao at 20 */ 
+node [shape = circle] 22;
+node [shape = circle] 21;
+/* derefdefinition of req at 21 */ 
+/* cusage of i at 21 */ 
+/* derefdefinition of flag at 21 */ 
+/* derefdefinition of status at 21 */ 
+node [shape = circle] 24;
+/* cusage of qtde_produzida at 24 */ 
+/* cusage of i at 24 */ 
+node [shape = circle] 25;
+/* derefdefinition of status at 25 */ 
+/* derefdefinition of data_size at 25 */ 
+/* cusage of i at 25 */ 
+node [shape = circle] 26;
+/* cusage of i at 26 */ 
+/* cusage of i at 26 */ 
+/* cusage of qtde_produzida at 26 */ 
+/* cusage of i at 26 */ 
+/* cusage of data at 26 */ 
+/* cusage of i at 26 */ 
+/* cusage of data_size at 26 */ 
+/* cusage of i at 26 */ 
+node [shape = circle] 27;
+/* definition of satisfeito at 27 */ 
+/* derefdefinition of necessidade at 27 */ 
+/* cusage of data at 27 */ 
+/* cusage of i at 27 */ 
+/* cusage of data_size at 27 */ 
+/* cusage of i at 27 */ 
+node [shape = circle] 28;
+/* pusage of satisfeito at 28 */ 
+node [shape = circle] 29;
+/* pusage of qtde_produzida at 29 */ 
+/* pusage of i at 29 */ 
+/* pusage of producao at 29 */ 
+node [shape = circle] 32;
+node [shape = circle] 30;
+/* m_recv of data[i],MAX_SIZE,MPI_CHAR,i,0,MPI_COMM_WORLD,&req[i] at 30 */ 
+/* definition of data at 30 */
+/* cusage of i at 30 */ 
+/* cusage of i at 30 */ 
+/* derefdefinition of req at 30 */ 
+/* cusage of i at 30 */ 
+node [shape = circle] 31;
+node [shape = circle] 3;
+/* definition of i at 3 */ 
+node [shape = circle] 4;
+/* pusage of i at 4 */ 
+/* pusage of size at 4 */ 
+node [shape = circle] 6;
+/* definition of i at 6 */ 
+/* cusage of i at 6 */ 
+node [shape = circle] 7;
+/* definition of i at 7 */ 
+node [shape = circle] 8;
+/* pusage of i at 8 */ 
+/* pusage of size at 8 */ 
+node [shape = circle] 11;
+/* definition of i at 11 */ 
+/* cusage of i at 11 */ 
+node [shape = circle] 14;
+/* pusage of satisfeito at 14 */ 
+node [shape = circle] 23;
+/* pusage of flag at 23 */ 
+1 -> 2;
+2 -> 3;
+3 -> 4;
+4 -> 5;
+4 -> 7;
+6 -> 4;
+5 -> 6;
+7 -> 8;
+8 -> 9;
+8 -> 12;
+11 -> 8;
+9 -> 10;
+10 -> 11;
+12 -> 13;
+13 -> 14;
+14 -> 15;
+33 -> 14;
+14 -> 18;
+15 -> 16;
+16 -> 17;
+17 -> 19;
+23 -> 19;
+23 -> 24;
+19 -> 20;
+20 -> 23;
+20 -> 21;
+22 -> 23;
+21 -> 22;
+24 -> 25;
+25 -> 26;
+26 -> 27;
+27 -> 28;
+28 -> 33;
+28 -> 29;
+32 -> 33;
+29 -> 32;
+29 -> 30;
+31 -> 32;
+30 -> 31;
+ } 

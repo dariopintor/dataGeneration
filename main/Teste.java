@@ -22,19 +22,18 @@ import ferramenta.Ferramenta;
 import ferramenta.ValiMPI;
 
 public class Teste {
-	/** Método que aplica operador crossover nos indivíduos representados por indiv1 e indiv2 */
-	
-	
+
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-		 Central.interpretaArquivoConfiguracao();
+		Central.interpretaArquivoConfiguracao();
 		// Populacao.geraPopulacaoInicialArquivo();
 		// System.out.println(Populacao.toPopulacao(0, "+34+25+25",
 		// Central.arquivoPopulacaoTemporario));
-		
 		// System.out.println( Central.inicioTipo(1));
-		// System.out.println( Central.tamanhoTipo(1));
+		// prepareExecution();
 		
-		
-	}
+			}
+
 }
+
+

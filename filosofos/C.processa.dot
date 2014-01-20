@@ -1,0 +1,9 @@
+digraph gfc { 
+node [shape = doublecircle] 3;
+node [shape = circle] 1;
+/* cusage of x at 1 */ 
+node [shape = circle] 2;
+/* cusage of x at 2 */ 
+1 -> 2;
+2 -> 3;
+ } 

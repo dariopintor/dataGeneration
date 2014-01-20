@@ -1,0 +1,86 @@
+digraph gfc { 
+node [shape = doublecircle] 26;
+node [shape = circle] 3;
+/* definition of v_garfos at 3 */ 
+/* cusage of i at 3 */ 
+node [shape = circle] 5;
+node [shape = circle] 25;
+node [shape = circle] 7;
+/* m_recv of &i,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status at 7 */ 
+/* definition of i at 7 */
+/* derefdefinition of status at 7 */ 
+node [shape = circle] 8;
+/* definition of tag at 8 */ 
+/* cusage of status at 8 */ 
+node [shape = circle] 9;
+/* pusage of tag at 9 */ 
+node [shape = circle] 17;
+node [shape = circle] 10;
+/* pusage of v_garfos at 10 */ 
+/* pusage of i at 10 */ 
+node [shape = circle] 13;
+node [shape = circle] 11;
+/* definition of v_garfos at 11 */ 
+/* cusage of i at 11 */ 
+node [shape = circle] 12;
+/* definition of pegou at 12 */ 
+node [shape = circle] 14;
+/* definition of pegou at 14 */ 
+node [shape = circle] 15;
+node [shape = circle] 16;
+/* m_send of &pegou,1,MPI_INT,status.MPI_SOURCE,TAG_PEGA,MPI_COMM_WORLD at 16 */ 
+/* susage of pegou at 16 */
+/* cusage of status at 16 */ 
+node [shape = circle] 18;
+/* pusage of tag at 18 */ 
+node [shape = circle] 24;
+node [shape = circle] 20;
+node [shape = circle] 19;
+/* definition of v_garfos at 19 */ 
+/* cusage of i at 19 */ 
+node [shape = circle] 23;
+node [shape = circle] 21;
+/* cusage of i at 21 */ 
+node [shape = circle] 22;
+/* definition of comeram at 22 */ 
+/* cusage of comeram at 22 */ 
+node [shape = circle] 1;
+/* definition of i at 1 */ 
+node [shape = circle] 2;
+/* pusage of i at 2 */ 
+node [shape = circle] 4;
+/* definition of i at 4 */ 
+/* cusage of i at 4 */ 
+node [shape = circle] 6;
+/* pusage of comeram at 6 */ 
+1 -> 2;
+2 -> 3;
+2 -> 5;
+4 -> 2;
+3 -> 4;
+5 -> 6;
+6 -> 7;
+25 -> 6;
+6 -> 26;
+7 -> 8;
+8 -> 9;
+9 -> 10;
+9 -> 18;
+17 -> 25;
+24 -> 25;
+10 -> 11;
+10 -> 14;
+13 -> 16;
+15 -> 16;
+11 -> 12;
+12 -> 13;
+14 -> 15;
+16 -> 17;
+18 -> 19;
+18 -> 21;
+20 -> 24;
+23 -> 24;
+19 -> 20;
+21 -> 22;
+22 -> 23;
+ } 

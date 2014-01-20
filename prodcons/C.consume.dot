@@ -1,0 +1,19 @@
+digraph gfc { 
+node [shape = circle] 1;
+/* definition of necessidade at 1 */ 
+/* definition of data at 1 */ 
+/* definition of data_size at 1 */ 
+node [shape = doublecircle] 6;
+node [shape = circle] 2;
+/* cusage of necessidade at 2 */ 
+node [shape = circle] 3;
+/* pusage of necessidade at 3 */ 
+node [shape = circle] 5;
+node [shape = circle] 4;
+1 -> 2;
+2 -> 3;
+3 -> 4;
+3 -> 5;
+5 -> 6;
+4 -> 6;
+ } 
