@@ -1,23 +1,65 @@
----geraPopulacaoInicial	09:31:25
----saindo geraPopulacaoInicial	09:31:25
----avaliaPopulacao	09:31:25
-------geraIneditismo	09:31:29
-------saindo geraIneditismo	09:31:30
----------geraIneditismoPopulacao	09:31:30
----------saindo geraIneditismoPopulacao	09:31:30
-------geraFitness	09:31:30
-------saindo geraFitness	09:31:30
----saindo avaliaPopulacao	09:31:30
-------evolucaoFitness	09:31:30
-------saindo evolucaoFitness	09:31:30
-------evolucaoIneditismo	09:31:30
-------saindo evolucaoIneditismo	09:31:30
----saindo EvoluiPopulacao	09:31:30
----avaliaPopulacao	09:31:30
-------geraIneditismo	09:31:34
-------saindo geraIneditismo	09:31:34
----------geraIneditismoPopulacao	09:31:34
----------saindo geraIneditismoPopulacao	09:31:34
-------geraFitness	09:31:34
-------saindo geraFitness	09:31:34
----saindo avaliaPopulacao	09:31:34
+---geraPopulacaoInicial	16:48:11:
+---saindo geraPopulacaoInicial	16:48:11:
+---avaliaPopulacao	16:48:11:
+------entrando em geraCoberturaIndividuo	16:48:11:
+------saindo geraCoberturaIndividuo	16:48:21:
+------geraIneditismo	16:48:21:
+------saindo geraIneditismo	16:48:21:
+---------geraIneditismoPopulacao	16:48:21:
+---------saindo geraIneditismoPopulacao	16:48:21:
+------geraFitness	16:48:21:
+------saindo geraFitness	16:48:21:
+---saindo avaliaPopulacao	16:48:21:
+------evolucaoFitness	16:48:21:
+------saindo evolucaoFitness	16:48:21:
+------evolucaoIneditismo	16:48:21:
+------saindo evolucaoIneditismo	16:48:21:
+------evolucaoIneditismo	16:48:21:
+------saindo evolucaoIneditismo	16:48:21:
+---saindo EvoluiPopulacao	16:48:21:
+---avaliaPopulacao	16:48:21:
+------entrando em geraCoberturaIndividuo	16:48:21:
+------saindo geraCoberturaIndividuo	16:48:30:
+------geraIneditismo	16:48:30:
+------saindo geraIneditismo	16:48:30:
+---------geraIneditismoPopulacao	16:48:30:
+---------saindo geraIneditismoPopulacao	16:48:30:
+------geraFitness	16:48:30:
+------saindo geraFitness	16:48:30:
+---saindo avaliaPopulacao	16:48:30:
+------evolucaoFitness	16:48:30:
+------saindo evolucaoFitness	16:48:30:
+------evolucaoIneditismo	16:48:30:
+------saindo evolucaoIneditismo	16:48:30:
+------evolucaoIneditismo	16:48:30:
+------saindo evolucaoIneditismo	16:48:30:
+---saindo EvoluiPopulacao	16:48:30:
+---avaliaPopulacao	16:48:30:
+------entrando em geraCoberturaIndividuo	16:48:30:
+------saindo geraCoberturaIndividuo	16:48:39:
+------geraIneditismo	16:48:39:
+------saindo geraIneditismo	16:48:39:
+---------geraIneditismoPopulacao	16:48:39:
+---------saindo geraIneditismoPopulacao	16:48:39:
+------geraFitness	16:48:39:
+------saindo geraFitness	16:48:39:
+---saindo avaliaPopulacao	16:48:39:
+------evolucaoFitness	16:48:39:
+------saindo evolucaoFitness	16:48:39:
+------evolucaoIneditismo	16:48:39:
+------saindo evolucaoIneditismo	16:48:39:
+------evolucaoIneditismo	16:48:39:
+------saindo evolucaoIneditismo	16:48:39:
+---saindo EvoluiPopulacao	16:48:39:
+---avaliaPopulacao	16:48:39:
+------entrando em geraCoberturaIndividuo	16:48:39:
+------saindo geraCoberturaIndividuo	16:48:47:
+------geraIneditismo	16:48:47:
+------saindo geraIneditismo	16:48:47:
+---------geraIneditismoPopulacao	16:48:47:
+---------saindo geraIneditismoPopulacao	16:48:47:
+------geraFitness	16:48:47:
+------saindo geraFitness	16:48:48:
+---saindo avaliaPopulacao	16:48:48:
+---decodificaPopulacao	16:48:48:
+---decodificaPopulacao	16:48:48:

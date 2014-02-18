@@ -2,8 +2,6 @@
 // máximo divisor comum entre 3 números
 // versao em MPI
 //
-// E' preciso 4 processos do programa!
-// $ mpirun -np 4 gcd
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +12,8 @@ void Master(int, int, int);
 void Slave(int rank);
 
 //
+// E' preciso 4 processos do programa!
+// $ mpirun -np 4 gcd
 //
 int main(int argc, char** argv)
 {
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 
     if (argc != 4)
     {
-	
+	// fazer 2 sends só para testar, FUNCIONOU!
 	// MPI_Send(buf);
 	puts("argc != 4");
 	// MPI_Send(buf);

@@ -203,7 +203,7 @@ public class Central {
 	public static File arquivoPopulacaoInicial;
 	public static File arquivoPopulacao;
 	public static File arquivoMelhorPopulacao;
-	public static File arquivoPopulacaoTemporario;
+	public static File arquivoPopulacaoAnterior;
 	public static File arquivoFitness;
 	public static File arquivoVariacaoFitness;
 	public static File arquivoCoberturaIndividuo;
@@ -365,14 +365,15 @@ public class Central {
 					setArquivoFitness(valor);
 					setArquivoIneditismo(valor);
 					setArquivoBonusIneditismo(valor);
-					setArquivoVariacaoFitness(valor);
 				}// fim if-then
 
 				else if ((parametro.equals("#AtivaTabu"))
 						&& ((valor.equals("sim")) || (valor.equals("Sim")) || ((valor
 								.equals("1"))))) {
+					setAtivaTabu(1);
 					setArquivoTabu("tabu");
 					setArquivoTabuAux("tabuAux");
+
 				}
 
 				else if (parametro.equals("#GeracoesComRepositorio"))
@@ -394,11 +395,10 @@ public class Central {
 			}
 		}
 		arq.close();
-
+		// quebra de linha
+		System.out.println();
 		setArquivoCoberturaElemento("cobXElemento");
 		setArquivoCoberturaIndividuo("cobXIndividuo");
-		setArquivoSemelhancaIndividuos("semelhancaIndividuos");
-		setArquivoAvalCobIndividuos("avalCobIndividuos");
 		setArquivoRepositorio("repositorio");
 		setArquivoObsCobertura("relCobertura");
 		setTamanhoIndividuo();
@@ -457,12 +457,14 @@ public class Central {
 				- inicioExecucao);
 		tempoExecucaco = Diversos.pegarTempo(fimExecucao - inicioExecucao);
 
-		resultado = "\n\n\nResultado \nCobertura Inicial: " + coberturaInicial
+		resultado = String.format("\n\n\nResultado \nCobertura Inicial: " + coberturaInicial
 				+ "\nTempo Avaliacao Inicial: " + tempoPrimeiraExec
 				+ "\nMelhor Cobertura: " + melhorCobertura
 				+ "\nMelhor Geração: " + indiceMelhorGeracao
+				+ "\nCobertura Possivel: " + 
+				(double) (Diversos.numberOf(coberturaGlobal, 'X') *  100 / quantidadeElemento)
 				+ "\nTempo de Execução : " + tempoExecucaco
-				+ "\nQuantidade de Gerações: " + geracaoAtual;
+				+ "\nQuantidade de Gerações: " + geracaoAtual);
 
 		System.out.printf(resultado);
 
@@ -561,8 +563,8 @@ public class Central {
 	 */
 	public static void setArquivoPopulacaoTemporario(String valor)
 			throws IOException {
-		arquivoPopulacaoTemporario = new File(pegaDiretorio + valor + ".tmp");
-		arquivoPopulacaoTemporario.createNewFile();
+		arquivoPopulacaoAnterior = new File(pegaDiretorio + valor + ".tmp");
+		arquivoPopulacaoAnterior.createNewFile();
 
 	}
 
@@ -608,19 +610,6 @@ public class Central {
 
 	}
 
-	/**
-	 * No descriptions
-	 * 
-	 * @throws IOException
-	 */
-	public static void setArquivoSemelhancaIndividuos(String valor)
-			throws IOException {
-
-		arquivoSemelhancaIndividuos = new File(pegaDiretorio + valor + ".cov");
-		arquivoSemelhancaIndividuos.createNewFile();
-
-	}
-
 	/** No descriptions */
 	public static void setFormatoIndividuo(String valor) {
 		formatoIndividuo = valor;
@@ -630,14 +619,6 @@ public class Central {
 	/** seta as funçoes serem testadas do programa em teste. */
 	public static void setFuncaoATestar(String valor) {
 		funcaoATestar = valor;
-	}
-
-	public static void setArquivoVariacaoFitness(String valor)
-			throws IOException {
-
-		arquivoVariacaoFitness = new File(pegaDiretorio + valor + ".vfi");
-		arquivoVariacaoFitness.createNewFile();
-
 	}
 
 	public static void setArquivoCoberturaElemento(String valor)
@@ -655,13 +636,6 @@ public class Central {
 	public static void setArquivoRepositorio(String valor) throws IOException {
 		arquivoRepositorio = new File(valor + ".dep");
 		arquivoRepositorio.createNewFile();
-	}
-
-	public static void setArquivoAvalCobIndividuos(String valor)
-			throws IOException {
-		arquivoAvalCobIndividuos = new File(pegaDiretorio + valor + ".cov");
-		arquivoAvalCobIndividuos.createNewFile();
-
 	}
 
 	public static void setArquivoObsCobertura(String valor) throws IOException {
@@ -913,14 +887,23 @@ public class Central {
 
 	/** Atualiza a coberturaGlobal com a cobertura passada por argumento. */
 	public static void atualizaCoberturaGlobal(String novaCobertura) {
-		int tam = (int) quantidadeElemento;
-
-		for (int i = 0; i < tam; i++)
-			if ((novaCobertura).equals('X')) {
-				coberturaGlobal = coberturaGlobal.replace(
-						coberturaGlobal.charAt(i), 'X');
+		int tam = (int) Central.quantidadeElemento;
+		
+		String globalTemp = "";
+		if (coberturaGlobal == null) {
+			coberturaGlobal = novaCobertura;
+			return;
+		} else {
+			char[] charNovaCobertura = novaCobertura.toCharArray();
+			char[] coberturaGlobalLocal = coberturaGlobal.toCharArray();
+			for (int i = 0; i < tam; i++) {
+				if ((charNovaCobertura[i] == 'X')) {
+					coberturaGlobalLocal[i] = 'X';
+				}
+				globalTemp += coberturaGlobalLocal[i];
 			}
-
+			coberturaGlobal = globalTemp;
+		}
 	}
 
 	/** Metodo que configura o final da primeira execucao. */
@@ -960,11 +943,14 @@ public class Central {
 				.println(" \n Atenção: Preparando a execução do framework. Diretórios e arquivos serão removidos...");
 
 		String cmd = "rm  logerror.tes log_erro.log *.log *.dot "
-				+ "Tabu.res *.pop  *.tst *.dot " + " *.tst  lixo.lxo  "
+				+ "Tabu.res Populacao.res melhorPop.pop popManejo.pop tabu.pop tabuAux.pop *.tst *.dot "
+				+ " relCobertura.tst resumo.tst exe valimpi.log lsHeaders "
+				+ " lixo.lxo -rf valimpi "
 				+ "repositorio.dep evolucao.fil arquivoElementos.elem";
 
 		Process proc = Runtime.getRuntime().exec(cmd);
 		proc.waitFor();
+		;
 
 		// System.out.println(" \n removeFile.sh %s %s valimpi logerror.tes log_erro.log detalhes.log Populacao.res Tabu.res tabu.pop melhorPop.pop resumo.tst resultado.tst relCobertura.tst avalCoberturas.tst *.gfc lixo.lxo entrada.kyb resultado.tst");
 
@@ -975,26 +961,31 @@ public class Central {
 	 * M\E9todo usado para verificar se um determinado indiv\EDduo j\E1 foi
 	 * executado anteriormente, caso positivo, copia o desempenho armazenado no
 	 * reposit\F3rio parra a vari\E1vel desempenho.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public static String inRepositorio(String strIndiv, String desempenho)
 			throws IOException {
 		FileReader arq = new FileReader(arquivoRepositorio);
 		BufferedReader lerArq = new BufferedReader(arq);
+		String[] quebra = null;
 
-		String linha = null, representacao = null;
+		String linha = null, dadoLocal = null, desempenhoLocal = null;
 
 		linha = lerArq.readLine();
 		while (linha != null) {
-
-			representacao = linha.trim();
-			linha = linha.trim();
-
-			if (strIndiv.equals(representacao)) {
-				desempenho = linha;
+			quebra = linha.split(":");
+			dadoLocal = quebra[0].trim();
+			desempenhoLocal = quebra[1].trim();
+			;
+			if (strIndiv.equals(dadoLocal)) {
+				desempenho = desempenhoLocal;
+				break;
 			} // fim if
-		}// fim while
 
-		return desempenho;
+			linha = lerArq.readLine();
+		}// fim while
+		lerArq.close();
+		return desempenho.trim();
 	}
 }

@@ -1,5 +1,6 @@
 package ferramenta;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -130,7 +131,7 @@ public class Ferramenta {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public static void usaValiMPI(String dado, int nDado) throws IOException,
+	public static void usaValiMPI(String dado) throws IOException,
 			InterruptedException {
 		// executa dado na valimpi
 
@@ -146,7 +147,7 @@ public class Ferramenta {
 
 		// gera cobertura em arquivos
 		Thread.sleep(1000);
-		obtemCoberturaValiMPI(nDado);
+	
 		// Thread.sleep(1000);
 
 	}
@@ -154,10 +155,39 @@ public class Ferramenta {
 	/**
 	 * Metodo usado para obter linha de cobertura que contem o desempenho do
 	 * individuo perante aos elementos requeridos.
+	 * @throws InterruptedException 
 	 * 
 	 * @throws IOException
 	 */
-	public static void obtemCoberturaValiMPI(int nDadoTeste) throws IOException {
+	
+	public static void evaluateIndividual(int nro) throws IOException, InterruptedException{
+		int tamFormato = Central.formatoIndividuo.length();
+		int inicBlock;
+		int fimBlock;
+		String gene = "";
+		String block_aux = "", linhaCobertura = "", block = "", linhaCoberturaCriterio = "";
+		
+		// recupera individuo da populacao e inicializa a linha de cobertura
+		System.out.println(Populacao.individuos[nro].getGenes());
+		
+		gene = Populacao.individuos[nro].getGenes();
+		for (int i = 0; i < tamFormato; i++) {
+			inicBlock = Central.inicioTipo(i);
+			fimBlock = Central.tamanhoTipo(i);
+			block = gene.substring(inicBlock, (inicBlock + fimBlock));
+			switch (Central.formatoIndividuo.charAt(i)) {
+
+			case 'I':
+				block_aux += String.format("%d ",
+						Individuo.decode_block_int(block));
+				break;
+			}//
+		}
+		Ferramenta.usaValiMPI(block_aux);
+	}
+	
+	
+	public static String obtemCoberturaValiMPI(int nDadoTeste) throws IOException {
 
 		String linhaCobertura = "";
 		String[] vetorPegaElementos;
@@ -168,10 +198,11 @@ public class Ferramenta {
 		String[] saida = new String[vetorPegaElementos.length];
 
 		for (int i = 0; i < vetorPegaElementos.length; i++) {
-			//System.out.println( vetorPegaElementos [i]);
+			//System.out.println( vetorPegaElementos [i]);		
 			for (int j = 0; j < vetorPegaElementosCobertos.length; j++) {
 				if (vetorPegaElementos[i].equals(vetorPegaElementosCobertos[j])) {
 					saida[i] = "X";
+					break;
 				}
 			}// termina for para i
 		}// termina for para j
@@ -184,22 +215,11 @@ public class Ferramenta {
 			linhaCobertura += saida[i];
 			
 		}
-
-		String conteudo = nDadoTeste + ": " + linhaCobertura;
-		//System.out.println(conteudo);
-		Central.atualizaLinhaCoberturas(linhaCobertura.trim());
 		
-		Central.linhaCoberturaAtual = Populacao.sobrepoe(Central.linhaCoberturaAnterior,
-				Central.linhaCoberturaAtual);
-		
-		Central.setCoberturaAtual(Diversos.numberOf(
-				Central.linhaCoberturaAtual, 'X')
-				* 100
-				/ Central.quantidadeElemento);
-		
-		
-		Diversos.escreverArquivo(Central.arquivoCoberturaIndividuo.getPath(), conteudo);
-
+		if ( Central.ativaTabu == 1 ) {
+	        Tabu.manutencaoTabu(linhaCobertura, nDadoTeste);
+	        }		
+		return linhaCobertura;
 	}
 
 	/**
@@ -287,10 +307,43 @@ public class Ferramenta {
 	}
 
 	/**
-	 * Metodo usado para obter linha de cobertura que contem o desempenho do
-	 * individuo perante aos elementos requeridos.
-	 * 
+	 * le o aquivo de entrada com os dados de teste e mostra cobertura obtida
+	 * pelo diretorio valimpi inteiro	 
 	 * @throws IOException
+	 * @throws InterruptedException
 	 */
+	public static void lerArquivo(String nomeArq, String criterioValiMPI)
+			throws IOException, InterruptedException {
+
+		String linha = "", dadoComAspas = "";
+		 int nDado = 1;
+		FileReader arq = new FileReader(nomeArq);
+		BufferedReader lerArq = new BufferedReader(arq);
+		
+
+		linha = lerArq.readLine(); // le a primeira linha
+		while (linha != null) {
+			// System.out.print("Passei aqui: "+ nDadoTeste);
+																// dado
+			Process proc1 = Runtime.getRuntime().exec(
+					ValiMPI.exeVali_exec(String.valueOf(nDado), Central.nProcess, linha));
+			proc1.waitFor();
+																	// formato
+
+			linha = lerArq.readLine(); // le da segunda linha em diante
+			
+			nDado++;
+		}
+
+		Process proc2 = Runtime.getRuntime().exec(
+				ValiMPI.exeVali_eval(criterioValiMPI,
+						Central.nProcess, Central.funcoes));
+		proc2.waitFor();
+
+		// this.backup();
+		lerArq.close();
+
+		// System.out.print("Cobertura: "+ coberturaDoDado);
+	}
 	
 }

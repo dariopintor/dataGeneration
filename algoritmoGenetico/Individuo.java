@@ -30,7 +30,8 @@ public class Individuo {
 	/** Atributo que contem a representacao dos individuos. */
 
 	public String genes = "";
-
+	double aptidao = 0;
+	
 	public Individuo() {
 		// cout << "\nConstruindo individuo...";
 		genes = "";
@@ -157,4 +158,14 @@ public class Individuo {
 	public String getGenes() {
 		return genes;
 	}
+	
+	public double getAptidao() {
+		return aptidao;
+	}
+
+	public void setAptidao(double aptidao) {
+		this.aptidao = aptidao;
+	}
+	
+	
 }

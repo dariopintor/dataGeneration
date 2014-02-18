@@ -25,15 +25,18 @@ public class Teste {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
+
 		Central.interpretaArquivoConfiguracao();
-		// Populacao.geraPopulacaoInicialArquivo();
-		// System.out.println(Populacao.toPopulacao(0, "+34+25+25",
-		// Central.arquivoPopulacaoTemporario));
-		// System.out.println( Central.inicioTipo(1));
-		// prepareExecution();
+
+		Ferramenta.lerArquivo("Populacao.res", "todas-arestasS");
+		FileReader fr = new FileReader("gcd/vali_eval.out");
+		BufferedReader bf = new BufferedReader(fr);
 		
-			}
-
+		String linha = null; 
+		linha  = bf.readLine();
+		while ( linha != null){
+			System.out.println(linha);
+			linha  = bf.readLine();
+		}
+	}
 }
-
-

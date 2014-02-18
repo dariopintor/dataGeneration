@@ -50,16 +50,16 @@ public class Main {
 		System.out.print(" \nFim do processo de evolucao...");
 		Central.resultado();
 		
-//		if (Central.geracaoAtual > 1){
-//			Populacao.decodificaPopulacao(Central.arquivoMelhorPopulacao,
-//			"Populacao.res");
-//		}
-		
-		if (Central.ativaTabu==1){
-			Populacao
-					.decodificaPopulacao(Central.arquivoTabu, "Tabu.res");
+		if (Central.geracaoAtual > 1){
+			Populacao.decodificaPopulacao(Central.arquivoMelhorPopulacao,
+			"Populacao.res");
 		}
 		
+     		if (Central.ativaTabu==1){
+    			Populacao
+    					.decodificaPopulacao(Central.arquivoTabu, "Tabu.res");
+    		}
+	
 		System.out.print("\nFim de execução...\n");
 
 	}

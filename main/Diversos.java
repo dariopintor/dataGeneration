@@ -77,7 +77,7 @@ public class Diversos {
 		
 		Calendar dataFinal = Calendar.getInstance();
 		long hora = dataFinal.getTimeInMillis();
-		DateFormat formato = new SimpleDateFormat("HH:mm:ss");
+		DateFormat formato = new SimpleDateFormat("HH:mm:ss:");
 		String formattedDate = formato.format(hora);
 		
 		File arquivo = new File(caminho);	
@@ -245,6 +245,10 @@ public class Diversos {
 
 	public static boolean cobre(String cobertura1, String cobertura2) {
 		int tam = cobertura2.length();
+		
+		if (cobertura2 == null)
+			return true;
+		
 		for (int i = 0; i < tam; i++) {
 			if ((cobertura2.charAt(i) == 'X') && (cobertura1.charAt(i) != 'X'))
 				return false;

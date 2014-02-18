@@ -19,7 +19,6 @@ public class Tabu {
 
 		int tamGene = Diversos.nroEspacos((int) Central.tamanhoPopulacao)
 				+ (int) Central.tamanhoIndividuo + 5;
-		int tamLinhaCob = (int) Central.quantidadeElemento + 5;
 
 		FileReader arq = new FileReader(Central.arquivoRepositorio);
 		BufferedReader ptrTabu = new BufferedReader(arq);
@@ -39,7 +38,8 @@ public class Tabu {
 					System.out.println("susbstituiu");
 			} // fim if strcmp
 		} // fim if for
-
+		
+		ptrTabu.close();
 	}
 
 	/**
@@ -79,8 +79,12 @@ public class Tabu {
 	public static boolean melhora(String coberturaAtual) {
 		int i = 0, tam = (int) Central.quantidadeElemento;
 
+		if (Central.coberturaGlobal == null){
+			return true;
+		}
 		char[] coberturaAtualLocal = coberturaAtual.toCharArray();
 		char[] coberturaGlobalLocal = Central.coberturaGlobal.toCharArray();
+		
 
 		for (i = 0; i < tam; i++){
 			if ((coberturaAtualLocal[i] == 'X')
@@ -98,14 +102,8 @@ public class Tabu {
 
 		String gene = null, geneAux = null;
 		String coberturaIndTabu = null;
-		int pos2 = 0, contador = 0;
-		int tamGene = Diversos.nroEspacos((int) Central.tamanhoPopulacao)
-				+ (int) Central.tamanhoIndividuo + 5;
-
-		// sprintf( Comando, TDS_PATH"removeFile.sh %s -rf",
-		// Central.arquivoTabuAux );
-		// Central.setComandPath(Comando);
-		// system ( Central.comandPath );
+		String [] quebra = null;
+		int contador = 0;
 
 		String indiv = Populacao.individuos[pos].getGenes();
 		String linha = null;
@@ -115,24 +113,25 @@ public class Tabu {
 		linha = ptrTabu.readLine();
 		for (contador = 0; linha != null;) {
 
-			gene = linha.substring(tamGene);
-			pos2 = Diversos.indexOf(gene, ':') + 1;
-			geneAux = gene + pos2;
+			quebra = linha.split(":");
+			geneAux = quebra[1].trim();
 
 			if (geneAux == "")
 				continue;
 
 			// Recuperando cobertura dos individuos da lista tabu e armazenando
 			// em coberturaindTabu
-			// if ( Central.inRepositorio(geneAux, coberturaIndTabu ) == false )
-			// erro(" atualizaTabu - Nao recuperou o desempenho do Individuo, Executa de novo ou força armazenar no repositorio...",1);
+			coberturaIndTabu = Central.inRepositorio(geneAux, coberturaIndTabu );
 			// //Se cobertura em avaliação cobre cobertura de algum individuo
 			// que ja esta na
 			// lista tabu, este nao sera inserido em Central.arquivoTabuAux
 			if (!Diversos.cobre(coberturaIndividuo, coberturaIndTabu))
 				toFileTabu(contador++, geneAux, Central.arquivoTabuAux);
+			
+			linha = ptrTabu.readLine();
 		}// fim for
 
+		ptrTabu.close();
 		toFileTabu(contador++, indiv, Central.arquivoTabuAux);
 
 		Diversos.copyFile(Central.arquivoTabuAux.getPath(),

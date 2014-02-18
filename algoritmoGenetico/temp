@@ -1,0 +1,415 @@
+/**
+     * M�todo usado para obter a quantidade de elementos requeridos para
+     * crit�rios suportados pela ferramenta ValiMPI.
+     */
+    public double obtemElementosRequeridosValiMPI(){
+    System.out.println( "\n---obtemElementosValiMPI");
+    double res = 0;
+    File  arquivoElementos = new File("arquivoElementos.elen");
+    String dir_elem_req = "valimpi/res/";
+
+        
+    if(objCentral.criterioTeste.equals("Todos os Arcos"))                        // arcs
+    {
+        copyFile(arquivoElementos, (dir_elem_req + "todas-arestas.req"));
+        
+    sprintf(arquivoElementos, "%stodas-arestas.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todas-arestas");
+    } else
+    if(objCentral.criterioTeste.equals("Todos os Nos"))                               // nos
+    {
+    sprintf(arquivoElementos, "%stodos-nos.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todos-nos");
+    }/* else
+    if(objCentral.criterioTeste.equals("Todos os Potenciais Usos/du-Caminhos"))   // pudu
+    {
+    sprintf(arquivoElementos, "%stodos-p-usos.req", (*ctl)->diretorio);
+    objCentral.setCriterioTesteValiMPI ("pudu");
+    }*/ else
+    if(objCentral.criterioTeste.equals("Todos os Potenciais Usos"))            // pu
+    {
+    sprintf(arquivoElementos, "%stodos-p-usos.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todos-p-usos");
+    } /*else
+    if(objCentral.criterioTeste.equals("Todos os Potenciais du-Caminhos"))// pdu
+    {
+    sprintf(arquivoElementos, "%spdupaths.tes", (*ctl)->diretorio);
+    objCentral.setCriterioTesteValiMPI ("pdu");
+    }*/else
+    if(objCentral.criterioTeste.equals("Todos os Usos Computacionais"))           
+    {
+    sprintf(arquivoElementos, "%stodos-c-usos.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todos-c-usos");
+    }else
+    if(objCentral.criterioTeste.equals("Todos os Usos de Sincronismo"))           
+    {
+    sprintf(arquivoElementos, "%stodos-s-usos.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todos-s-usos");
+    }else
+    if(objCentral.criterioTeste.equals("Todos os Nos S"))           
+    {
+    sprintf(arquivoElementos, "%stodos-nosS.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todos-nosS");
+    }else
+    if(objCentral.criterioTeste.equals("Todos os Nos R"))           
+    {
+    sprintf(arquivoElementos, "%stodos-nosR.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todos-nosR");
+    }else
+    if(objCentral.criterioTeste.equals("Todos as Arestas S"))           
+    {
+    sprintf(arquivoElementos, "%stodas-arestasS.req", dir_elem_req);
+    objCentral.setCriterioTesteValiMPI ("todas-arestasS");
+    }
+
+    ptrArquivoElementos = fopen(arquivoElementos,"r");
+
+    if (ptrArquivoElementos == NULL)
+    {
+    sprintf(ErrorText,"nao abriu o arquivo dos elementos requeridos da ValiMPI corretamente : %s", arquivoElementos);
+    erro(ErrorText,1);
+    }
+
+    /*ate aqui beleza...*/
+    for (; ( !feof( ptrArquivoElementos ) ); )
+    {
+    strcpy(anterior, auxiliar);
+    memset(auxiliar, '\0', 500);
+    fgets(auxiliar, 500, ptrArquivoElementos);
+    trim( & auxiliar);
+    } // fim for
+
+    int carEspecial = -1;
+    
+    carEspecial = indexOf(anterior, ')');
+    anterior[carEspecial] = '\0';
+    //}  fim else
+    fclose(ptrArquivoElementos);
+    res = atof(anterior);
+    
+
+    printf("---Saindo de obtemElementosValiMPI");
+    return res;
+    }
+    
+    public void copyFile(File source, String target) throws IOException {
+        InputStream in = new FileInputStream(source);
+        OutputStream out = new FileOutputStream(target);           // Transferindo bytes de entrada para sa�da
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
+    }
+    ===================================================
+    Central.interpretaArquivoConfiguracao();
+		Populacao.geraPopulacaoInicialArquivo();
+//
+		for (int i = 0; i < Populacao.individuos.length; i++) {
+			System.out.println(Populacao.individuos[i].getGenes());
+		}
+//		
+		Populacao.geraCoberturaIndividuo();
+//	}
+========================================================================
+Central.quantidadeElemento = 62;
+		Central.criterioTeste = "Todos os Nos";
+		 Ferramenta.obtemCoberturaValiMPI(1);
+=======================================================================
+String[] vetor = new String[Central.quantidadeElemento];
+			String linhaArqElemcobertos = null;
+			int contLinhaElementos = 0;
+			String[] quebraLinha = null;
+			// permissoes de leitura do arquivo que contém os elem cobertos
+			FileReader arqElemCobertos = new FileReader("gcd/vali_eval.out");
+			BufferedReader lerElemCobertos = new BufferedReader(arqElemCobertos);
+
+			linhaArqElemcobertos = lerElemCobertos.readLine();
+			for (int i = 0; linhaArqElemcobertos != null;) {
+				contLinhaElementos++;
+								
+				if (linhaArqElemcobertos
+						.equals("-- ELEMENTOS REQUERIDOS NÃO COBERTOS --")) {
+					break;
+				}
+				if (contLinhaElementos > 1){
+						quebraLinha = linhaArqElemcobertos.split(",");
+						vetor[i] = quebraLinha[0].trim();
+						System.out.println(vetor[i]);
+						i++;
+				}
+						linhaArqElemcobertos = lerElemCobertos.readLine();
+				
+			}// fim while
+			
+			for (int i = 0; i<vetor.length; i++) {
+				 System.out.println(vetor[i] + " ");
+			}
+		 
+		
+			lerElemCobertos.close();
+======================================================================================
+for (String c : saida) {
+			linhaCobertura += c;
+		}			
+=============================================================================
+//
+		for (int i = 0; i < Populacao.individuos.length; i++) {
+			System.out.println(Populacao.individuos[i].getGenes());
+		}
+		String linhaCobertura = "";
+		String[] vetorPegaElementos;
+		vetorPegaElementos = Ferramenta.pegaElementos("arquivoElementos.elem");
+
+		String[] vetorPegaElementosCobertos;
+		vetorPegaElementosCobertos = Ferramenta.pegaElementosCobertos("gcd/vali_eval.out");
+		String[] saida = new String[vetorPegaElementos.length];
+
+		for (int i = 0; i < vetorPegaElementos.length; i++) {
+			for (int j = 0; j < vetorPegaElementosCobertos.length; j++) {
+				if (vetorPegaElementos[i].equals(vetorPegaElementosCobertos[j])) {
+					saida[i] = "X";
+				}
+				
+			}// termina for para i
+		}// termina for para j
+
+		
+		for (int i = 0; i<saida.length; i++){
+			if(saida[i] != "X"){
+				saida[i] = "-";
+			}
+			linhaCobertura += saida[i];
+		}
+		
+		String conteudo = 1 + ": " + linhaCobertura;
+		System.out.println(conteudo);
+		
+		Diversos.escreverArquivo("gcd/cobXIndividuo.cov", conteudo);
+		//	
+		
+=================================================================
+	Central.interpretaArquivoConfiguracao();
+		Populacao.geraPopulacaoInicialArquivo();
+		
+		String linha = null;
+		String [] quebra = null;
+		String [ ] [ ] matriz =  new String [ Central.quantidadeElemento] [(int) Central.tamanhoPopulacao];
+		int tamLinha = 0;
+		FileReader fr = new FileReader("gcd/cobXIndividuo.cov");
+		BufferedReader br = new BufferedReader(fr);
+		
+		linha = br.readLine();
+		while (linha != null){
+			quebra = linha.split(":");
+			tamLinha =  quebra[1].trim().length();
+			
+			for (int i = 0; i<Central.tamanhoPopulacao; i++){
+				for (int j = 0; j<Central.quantidadeElemento; j++){
+					matriz [j][i] = Character.toString(quebra[1].charAt(j));	
+				}
+			}
+			//System.out.println(quebra[1]);
+				linha = br.readLine();
+		}
+		System.out.print("\n");  
+		for(int i=0; i<62;  i++){ //valor da condição de i é igual a quantidade  de eleemntos requeridos  
+            for(int j=0; j<10; j++){  
+               
+                System.out.print(matriz[i][j]+"\t");  
+            }  
+            System.out.print("\n");  
+        } 
+=======================================================================================
+System.out.print("\n");  
+		for(int i=0; i<62;  i++){ //valor da condição de i é igual a quantidade  de eleemntos requeridos  
+            for(int j=0; j<10; j++){  
+               
+                System.out.print(matriz[i][j]+"\t");  
+            }  
+            System.out.print("\n");  
+        } 
+===========================================================================================
+public static Individuo [] evolucaoPorFitness(double tamPopulacao) throws IOException {
+		Individuo[] novosIndividuos = new Individuo[(int) tamPopulacao];
+		Diversos.toFile("log_erro.log", "------evolucaoFitness");
+		int cross = 0, mut = 0;
+		double sorteio = 0;
+		int contador = 0;
+		Individuo pai1;
+		Individuo pai2;
+		String filho1 = "";
+		String filho2="";
+		String [] quebra;
+		Diversos.toFile("evolucao.fil",
+				"##############################################################");
+		String saida = null;
+		Diversos.toFile("evolucao.fil", String.format("Evolucao Geracao :%d",
+				(int) Central.geracaoAtual));
+
+		Diversos.toFile("evolucao.fil",
+				"==============================================================");
+
+		saida = String.format(
+				"EVOLUCAO POR FITNESS (%f) / somatoriaFitness = %f",
+				Central.quantidadeFitness, Central.somatoriaFitness);
+		Diversos.toFile("evolucao.fil", saida);
+
+		for (contador = 0; contador < Central.tamanhoPopulacao;) {
+			
+			sorteio = Central.geraSorteio(Central.somatoriaFitness);
+			pai1 = individuos[indiceIndividuoSorteado(sorteio)];
+			Diversos.toFile("evolucao.fil",
+					"--------------------------------------------------------------");
+			saida = String.format("1º Sorteio : %f : %s", sorteio,
+					pai1.getGenes());
+			Diversos.toFile("evolucao.fil", saida);
+
+			sorteio = Central.geraSorteio(Central.somatoriaFitness);
+			pai2 = individuos[indiceIndividuoSorteado(sorteio)];
+			saida = String.format("2 Sorteio : %f : %s", sorteio,
+					pai2.getGenes());
+			Diversos.toFile("evolucao.fil", saida);
+
+			// aplica a taxa de crossover
+			cross = Mersenne.genrand() % 100;
+			if (cross <= Central.taxaCrossover * 100) {
+				quebra = crossover(pai1.getGenes(), pai2.getGenes()).trim().split("\\&");
+				filho1=quebra[0]; 
+				filho2=quebra[1];
+				saida = String.format("  op CROSSOVER : %s / %s",
+						pai1.getGenes(), pai2.getGenes());
+
+				Diversos.toFile("evolucao.fil", saida);
+			}
+
+			// aplica a taxa de mutacao
+			mut = (int) Math.random() * 100;
+			if (mut <= Central.taxaMutacao * 100) {
+				filho1 = mutacao(filho1);
+				saida = String.format(" op MUTACAO 1  : %s", filho1);
+				Diversos.toFile("evolucao.fil", saida);
+			}
+
+			if (toPopulacao(contador, filho1,
+					Central.arquivoPopulacaoTemporario) == true) {
+				contador++;
+				
+					novosIndividuos[contador] = new Individuo(filho1);
+				saida = String.format(" ** %d INDIVIDUO   : %s", contador,
+						pai1.getGenes());
+				Diversos.toFile("evolucao.fil", saida);
+			} else {
+				contador++;
+			}
+
+			if (contador < Central.quantidadeFitness) {
+				mut = (int) Math.random() * 100;
+				if (mut <= Central.taxaMutacao * 100) {
+					filho2= mutacao(pai2.getGenes());
+					saida = String.format("    op MUTACAO 2  : %s",
+							filho2);
+					Diversos.toFile("evolucao.fil", saida);
+				}
+
+				if (toPopulacao(contador, filho2,
+						Central.arquivoPopulacaoTemporario) == true) {
+					contador++;
+					//if (novosIndividuos[contador] == null){
+					//novosIndividuos[contador] = new Individuo(filho2);
+					//}
+					saida = String.format(" ** %d INDIVIDUO   : %s", contador,
+							filho2);
+					Diversos.toFile("evolucao.fil", saida);
+
+				} else {
+					contador++;
+				}
+			}// fim if
+		} // fim for fitness
+		for(int i = 0; i<novosIndividuos.length; i++){
+			 System.out.println(novosIndividuos[i].genes);
+		}
+		if (Central.geraLog != 0)
+			Diversos.toFile("log_erro.log", "------saindo evolucaoFitness");
+		return novosIndividuos;
+
+	}
+	
+	==============================================================================
+	public static String crossover( String indiv1, String indiv2 ){
+	  int ocorre=0, posCross=0, tamTipo=0, inicTipo=0, tamFormat = 0;
+	  String block = null, indivAux = null;
+
+
+	  indivAux = indiv1;
+      String geneFilho1 = "";
+      String geneFilho2 = "";
+      String genePai1 = indiv1;
+      String genePai2 = indiv2;
+      
+	  tamFormat = Central.formatoIndividuo.length();
+	  for(int i=0; i<tamFormat;  i++ ) {
+		  
+		    inicTipo = Central.inicioTipo(i);
+	        tamTipo =  Central.tamanhoTipo(i);
+	        posCross = (int) (Math.random() * tamTipo)+1;
+	       	       
+	       geneFilho1 += genePai2.substring(inicTipo, (posCross+inicTipo));
+	       geneFilho1 += indivAux.substring((posCross+inicTipo), (tamTipo+inicTipo));
+	       geneFilho2 += indivAux.substring(inicTipo, (posCross+inicTipo));
+	       geneFilho2 += genePai2.substring((posCross+inicTipo), (tamTipo+inicTipo));	
+	     
+	    }// fim for
+	  
+	  return geneFilho1 +"&" + geneFilho2; 
+	}
+	=======================================================================================
+	Process proc1 = Runtime.getRuntime().exec(
+				ValiMPI.exeVali_exec("1", "4", "00164 00035 00154"));
+		proc1.waitFor();
+		
+		Process proc2 = Runtime.getRuntime().exec(
+				ValiMPI.exeVali_exec("2", "4", "00069 00071 00155"));
+		proc2.waitFor();
+		
+		Process proc3 = Runtime.getRuntime().exec(
+				ValiMPI.exeVali_exec("3", "4", "00169 00031 00155"));
+		proc3.waitFor();
+		
+		
+		Process proc4 = Runtime.getRuntime().exec(
+				ValiMPI.exeVali_eval("todos-s-usos", "4","\"Master(0)\" \"Slave(1,2,3)\""));
+		proc4.waitFor();
+
+==============================================================================================
+Central.interpretaArquivoConfiguracao();
+		
+		Ferramenta.lerArquivo("Populacao.res");
+		
+		FileReader fr = new FileReader("gcd/vali_eval.out");
+		BufferedReader bf = new BufferedReader(fr);
+		
+		String linha = null; 
+		linha  = bf.readLine();
+		while ( linha != null){
+			System.out.println(linha);
+			linha  = bf.readLine();
+		}
+			
+============================================================================================
+Central.atualizaLinhaCoberturas(linhaCoberturaCriterio);
+			Central.setCoberturaAtual(Diversos.numberOf(
+					Central.linhaCoberturaAtual, 'X')
+					* 100
+					/ Central.quantidadeElemento);
+
+			Central.coberturaGlobal = Populacao
+					.sobrepoe(Central.linhaCoberturaAnterior,
+							Central.coberturaGlobal);
+
+			String conteudo = (contador) + 1 + ": " + linhaCobertura;
+			Diversos.escreverArquivo(
+					Central.arquivoCoberturaIndividuo.getPath(), conteudo);

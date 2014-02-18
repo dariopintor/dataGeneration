@@ -111,7 +111,7 @@ public class ValiMPI {
 				"-c",
 				"/home/labs/Software/ValiMPI_mmr_tds/vali_exec/vali_exec " + ndadoTeste
 						+ " run " + nProcessos + " exe " +  " \""
-						+ dadoTeste + "\"" + ">> valimpi.log; exit echo '<enter>'; read" };
+						+ dadoTeste + "\"" + ">> valimpi.log; exit  echo '<enter>'; read" };
 		
 		return cmd;
 	}

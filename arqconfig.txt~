@@ -1,29 +1,38 @@
 #Log = 1;
+#Criterio = Todos os Nos;
+//#Criterio = Todos os Potenciais du-Caminhos;
+//#Criterio = Todos os Potenciais Usos/du-Caminhos;
 //#Criterio = Todos os Nos;
-//#Criterio = Todos os Nos S;
-//#Criterio = Todos os Nos R;
-//#Criterio = Todas as Arestas;
-//Criterio = Todas as Arestas S;
-#Criterio = Todos os Usos de Sincronismo;
-//#Criterio = Todos os Usos Computacionais;
-//#Criterio = Todos os Potenciais Usos; 
+//#Criterio = Todos os Arcos;
+//#Criterio = Analise de Mutantes; 
 #NumeroArgumentos = 3;
 #FormatoEntrada = III;
 #ArquivoFonte = gcd.c;
 #NomeFuncao = gcd;
 #CoberturaCriterio = -1;
-#VariacaoInt = 0/100;
+#VariacaoInt = 1/100;
 #TipoString = lL;
 #TaxaCrossover = 0.9;
 #TaxaMutacao = 0.01;
 #TamanhoPopulacao = 5;
-#NumeroGeracoes = 1;
+#NumeroGeracoes = 10;
 #Elitismo = 1;
 #Ineditismo = 0;
 #Fitness = 9;
 #PausaGeracao = 1;
 #AtivaTabu = sim;
-#GeracoesComRepositorio = 90;
+#GeracoesComRepositorio = 10;
 //#ArquivoPopulacao = Populacao.res;
 #NumeroProcessos = 4;
 #Funcoes = "Master(0)" "Slave(1,2,3)";
+
+1 : +00105+00061+00192
+2 : +00044+00031+00051
+3 : +00041+00051+00051
+4 : +00063+00069+00051
+5 : +00061+00160+00051
+6 : +00042+00054+00056
+7 : +00149+00011+00091
+8 : +00005+00041+00092
+9 : +00001+00169+00011
+10 : +00063+00054+00050
